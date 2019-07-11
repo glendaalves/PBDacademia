@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence version="2.1" xmlns="http://xmlns.jcp.org/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd">
+  <persistence-unit name="PBD2019" transaction-type="RESOURCE_LOCAL">
+    <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
+    <class>br.com.pbd.modelos.Academia</class>
+    <class>br.com.pbd.modelos.Acompanhamento</class>
+    <class>br.com.pbd.modelos.Administrador</class>
+    <class>br.com.pbd.modelos.Agenda</class>
+    <class>br.com.pbd.modelos.Aluno</class>
+    <class>br.com.pbd.modelos.Caixa</class>
+    <class>br.com.pbd.modelos.ContaaPagar</class>
+    <class>br.com.pbd.modelos.Dados</class>
+    <class>br.com.pbd.modelos.Estoque</class>
+    <class>br.com.pbd.modelos.Exercicio</class>
+    <class>br.com.pbd.modelos.Fornecedor</class>
+    <class>br.com.pbd.modelos.Funcionario</class>
+    <class>br.com.pbd.modelos.ItemVenda</class>
+    <class>br.com.pbd.modelos.Login</class>
+    <class>br.com.pbd.modelos.Mensalidade</class>
+    <class>br.com.pbd.modelos.Produto</class>
+    <class>br.com.pbd.modelos.Professor</class>
+    <class>br.com.pbd.modelos.Tarefa</class>
+    <class>br.com.pbd.modelos.Venda</class>
+    <properties>
+      <property name="javax.persistence.jdbc.url" value="jdbc:postgresql://localhost:5432/PBD"/>
+      <property name="javax.persistence.jdbc.user" value="postgres"/>
+      <property name="javax.persistence.jdbc.driver" value="org.postgresql.Driver"/>
+      <property name="javax.persistence.jdbc.password" value="123"/>
+      <property name="javax.persistence.schema-generation.database.action" value="create"/>
+    </properties>
+  </persistence-unit>
+</persistence>
