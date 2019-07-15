@@ -127,6 +127,13 @@ public class ControleProduto extends MouseAdapter implements ActionListener {
 
             }
             if (escolha == excluir) {
+                if (fachada.ativarDesativar(p)) {
+                    produtos = fachada.getAllP();
+                    preencherTabela(produtos);
+                    mensagens.mensagens("Exclusão Realizada", "info");
+                } else {
+                    mensagens.mensagens("Exclusão Não Permitida ", "advertencia");
+                }
 
             }
 
@@ -195,8 +202,6 @@ public class ControleProduto extends MouseAdapter implements ActionListener {
             preencherEntradaProduto();
             dia.setVisible(true);
 
-            //  dia.setDefaultLookAndFeelDecorated(false);
-            //   dia.setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
         }
         if (e.getSource() == dia.getBotaosalvar()) {
             entradaProduto();

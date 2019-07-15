@@ -7,28 +7,30 @@ package br.com.pbd.Business;
 
 import br.com.pbd.Daos.DaoFuncionario;
 import br.com.pbd.Daos.DaoGenerico;
+import br.com.pbd.Daos.DaoTarefa;
 import br.com.pbd.modelos.Funcionario;
+import br.com.pbd.modelos.Tarefa;
 import java.util.List;
 
 /**
  *
  * @author Glenda Alves de Lima
  */
-public class BusinessFuncionario implements IBusinessFuncionario {
+public class BusinessFuncionario extends DaoGenerico<Funcionario>implements IBusinessFuncionario {
 
     @Override
     public void salvar(Funcionario funcionario) {
-        new DaoGenerico<Funcionario>().salvar_ou_atualizar(funcionario);
+      salvar_ou_atualizar(funcionario);
     }
 
     @Override
     public List<Funcionario> getAllFor() {
-        return new DaoGenerico<Funcionario>().getAll(Funcionario.class);
+        return getAll(Funcionario.class);
     }
 
     @Override
     public void ativarDesativar(Funcionario funcionario) {
-        new DaoGenerico<Funcionario>().salvar_ou_atualizar(funcionario);
+            remover(Funcionario.class,funcionario.getId());
     }
 
     @Override

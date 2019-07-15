@@ -1,0 +1,229 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="null" language="groovy" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="7ef7d95b-4a45-47b5-8784-07cc7f959110">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<style name="Title" forecolor="#FFFFFF" fontName="Times New Roman" fontSize="50" isBold="false" pdfFontName="Times-Bold"/>
+	<style name="SubTitle" forecolor="#CCCCCC" fontName="Times New Roman" fontSize="18" isBold="false" pdfFontName="Times-Roman"/>
+	<style name="Column header" forecolor="#666666" fontName="Times New Roman" fontSize="14" isBold="true" pdfFontName="Times-Roman"/>
+	<style name="Detail" mode="Transparent" fontName="Times New Roman" pdfFontName="Times-Roman"/>
+	<style name="Row" mode="Transparent" fontName="Times New Roman" pdfFontName="Times-Roman">
+		<conditionalStyle>
+			<conditionExpression><![CDATA[$V{REPORT_COUNT}%2 == 0]]></conditionExpression>
+			<style mode="Opaque" backcolor="#F0EFEF"/>
+		</conditionalStyle>
+	</style>
+	<parameter name="Professor" class="java.lang.String"/>
+	<queryString>
+		<![CDATA[SELECT
+     professor."id" AS professor_id,
+     professor."carteira_trabalho" AS professor_carteira_trabalho,
+     professor."cpf" AS professor_cpf,
+     professor."data_cadastro" AS professor_data_cadastro,
+     professor."data_nascimento" AS professor_data_nascimento,
+     professor."nome" AS professor_nome,
+     professor."rg" AS professor_rg,
+     professor."salario" AS professor_salario,
+     professor."sexo" AS professor_sexo,
+     professor."dados_id" AS professor_dados_id,
+     professor."login_id" AS professor_login_id,
+     agenda."id" AS agenda_id,
+     agenda."dia_semana" AS agenda_dia_semana,
+     agenda."horario" AS agenda_horario,
+     agenda."turno" AS agenda_turno,
+     agenda."aluno_id" AS agenda_aluno_id,
+     agenda."professor_id" AS agenda_professor_id,
+     aluno."id" AS aluno_id,
+     aluno."cpf" AS aluno_cpf,
+     aluno."data_matricula" AS aluno_data_matricula,
+     aluno."data_nascimento" AS aluno_data_nascimento,
+     aluno."estado_civil" AS aluno_estado_civil,
+     aluno."nivel" AS aluno_nivel,
+     aluno."nome" AS aluno_nome,
+     aluno."plano" AS aluno_plano,
+     aluno."rg" AS aluno_rg,
+     aluno."sexo" AS aluno_sexo,
+     aluno."situacao" AS aluno_situacao,
+     aluno."dados_id" AS aluno_dados_id
+FROM
+     "public"."professor" professor INNER JOIN "public"."agenda" agenda ON professor."id" = agenda."professor_id"
+     INNER JOIN "public"."aluno" aluno ON agenda."aluno_id" = aluno."id"
+
+where professor."nome" = $P{Professor}]]>
+	</queryString>
+	<field name="professor_id" class="java.lang.Long"/>
+	<field name="professor_carteira_trabalho" class="java.lang.String"/>
+	<field name="professor_cpf" class="java.lang.String"/>
+	<field name="professor_data_cadastro" class="java.sql.Date"/>
+	<field name="professor_data_nascimento" class="java.sql.Date"/>
+	<field name="professor_nome" class="java.lang.String"/>
+	<field name="professor_rg" class="java.lang.String"/>
+	<field name="professor_salario" class="java.lang.Double"/>
+	<field name="professor_sexo" class="java.lang.String"/>
+	<field name="professor_dados_id" class="java.lang.Long"/>
+	<field name="professor_login_id" class="java.lang.Long"/>
+	<field name="agenda_id" class="java.lang.Long"/>
+	<field name="agenda_dia_semana" class="java.lang.String"/>
+	<field name="agenda_horario" class="java.sql.Time"/>
+	<field name="agenda_turno" class="java.lang.String"/>
+	<field name="agenda_aluno_id" class="java.lang.Long"/>
+	<field name="agenda_professor_id" class="java.lang.Long"/>
+	<field name="aluno_id" class="java.lang.Long"/>
+	<field name="aluno_cpf" class="java.lang.String"/>
+	<field name="aluno_data_matricula" class="java.sql.Date"/>
+	<field name="aluno_data_nascimento" class="java.sql.Date"/>
+	<field name="aluno_estado_civil" class="java.lang.String"/>
+	<field name="aluno_nivel" class="java.lang.String"/>
+	<field name="aluno_nome" class="java.lang.String"/>
+	<field name="aluno_plano" class="java.lang.String"/>
+	<field name="aluno_rg" class="java.lang.String"/>
+	<field name="aluno_sexo" class="java.lang.String"/>
+	<field name="aluno_situacao" class="java.lang.String"/>
+	<field name="aluno_dados_id" class="java.lang.Long"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="310" splitType="Stretch">
+			<staticText>
+				<reportElement style="SubTitle" x="303" y="96" width="97" height="29" forecolor="#000000" uuid="16b5d7a3-f90f-4fca-b99d-960809c7a024"/>
+				<textElement>
+					<font size="22" isBold="false"/>
+				</textElement>
+				<text><![CDATA[Academia]]></text>
+			</staticText>
+			<image>
+				<reportElement x="422" y="30" width="70" height="85" uuid="0b46f02b-36f1-4093-9b8f-0094aefab5e7"/>
+				<imageExpression><![CDATA["C:\\Users\\Glenda Alves de Lima\\Documents\\NetBeansProjects\\PBDAcademia\\src\\br\\com\\pbd\\resource\\Use.png"]]></imageExpression>
+			</image>
+			<textField pattern="EEEEE dd MMMMM yyyy">
+				<reportElement x="400" y="137" width="144" height="20" forecolor="#000000" uuid="38153aea-3f25-41d6-9db4-a3b966492e9d"/>
+				<textElement textAlignment="Right">
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement style="Title" x="30" y="30" width="370" height="66" forecolor="#000000" backcolor="#FFFFFF" uuid="17509481-8654-487a-8a8e-aac986bc4d12"/>
+				<textElement>
+					<font size="48" isBold="false"/>
+				</textElement>
+				<text><![CDATA[Corpo Em Forma]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="SubTitle" x="19" y="195" width="343" height="29" forecolor="#000000" uuid="95577d5b-313b-4c5f-8429-563e90d10c1f"/>
+				<textElement>
+					<font fontName="SansSerif" size="20" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Relatorio da Agenda - Professor (a)]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="362" y="195" width="193" height="29" uuid="7e24b304-e17a-4914-b1bd-a416517b8d23"/>
+				<textElement>
+					<font fontName="SansSerif" size="20" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{professor_nome}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement style="Column header" x="406" y="244" width="130" height="19" forecolor="#000000" uuid="5989177d-cc99-48db-8a70-3778460a1ba9"/>
+				<textElement>
+					<font fontName="SansSerif" size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Cpf]]></text>
+			</staticText>
+			<textField isStretchWithOverflow="true">
+				<reportElement style="Detail" positionType="Float" x="406" y="273" width="130" height="18" uuid="584f23e9-3cc2-47ed-ac72-c753208ddea7"/>
+				<textElement>
+					<font size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{professor_cpf}]]></textFieldExpression>
+			</textField>
+		</band>
+	</title>
+	<pageHeader>
+		<band splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="26" splitType="Stretch">
+			<staticText>
+				<reportElement style="Column header" x="178" y="2" width="125" height="18" forecolor="#000000" uuid="d7641647-f632-4ef6-9cc5-e8bd41370ead"/>
+				<textElement>
+					<font fontName="SansSerif" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Dia ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Column header" x="484" y="0" width="52" height="18" forecolor="#000000" uuid="937be565-f330-4e52-a23a-20aa0ce2bd20"/>
+				<textElement>
+					<font fontName="SansSerif" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Horario]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Column header" x="351" y="0" width="98" height="18" forecolor="#000000" uuid="9ffc5393-4875-41b4-9cc4-c13ffd725d6c"/>
+				<textElement>
+					<font fontName="SansSerif" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Turno]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="2" width="124" height="20" uuid="b5aa7dde-7c58-4a88-ab7a-77d41f753eea"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="SansSerif" size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Aluno]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="28" splitType="Stretch">
+			<frame>
+				<reportElement style="Row" mode="Opaque" x="0" y="0" width="555" height="20" uuid="027e7f27-1294-4e53-8941-25d646ed82c5"/>
+				<textField isStretchWithOverflow="true">
+					<reportElement style="Detail" positionType="Float" x="351" y="1" width="98" height="18" uuid="c0fc5c55-aa32-4c4d-ba68-56a6811f0be0"/>
+					<textElement>
+						<font size="14"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{agenda_turno}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true">
+					<reportElement style="Detail" positionType="Float" x="178" y="1" width="125" height="18" uuid="05ac0a37-b6f7-4906-b9c7-08673b290a33"/>
+					<textElement>
+						<font size="14"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{agenda_dia_semana}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true">
+					<reportElement style="Detail" positionType="Float" x="484" y="1" width="52" height="19" uuid="d1915bb8-4ee9-4ec4-b16a-8d6a1b26f2ea"/>
+					<textElement>
+						<font size="14"/>
+					</textElement>
+					<textFieldExpression><![CDATA[new java.text.SimpleDateFormat("HH:mm:ss").format($F{agenda_horario})]]></textFieldExpression>
+				</textField>
+			</frame>
+			<textField>
+				<reportElement x="0" y="0" width="124" height="20" uuid="ee5d86cb-9166-4b0d-ad63-1d31f8b1c605"/>
+				<textElement>
+					<font fontName="Times New Roman" size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{aluno_nome}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="7" splitType="Stretch">
+			<line>
+				<reportElement positionType="FixRelativeToBottom" x="0" y="3" width="555" height="1" uuid="44dec407-877b-4fd0-b758-723572201569"/>
+				<graphicElement>
+					<pen lineWidth="0.5" lineColor="#999999"/>
+				</graphicElement>
+			</line>
+		</band>
+	</columnFooter>
+	<pageFooter>
+		<band height="25" splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band splitType="Stretch"/>
+	</summary>
+</jasperReport>

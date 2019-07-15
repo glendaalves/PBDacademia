@@ -1,30 +1,43 @@
 package br.com.pbd.controles;
 
+import br.com.pbd.DaoView.DaoViewAgenda;
+import br.com.pbd.Daos.DaoAgenda;
+import br.com.pbd.Daos.DaoCaixa;
 import br.com.pbd.Daos.DaoMensalidade;
 import br.com.pbd.Fachada.Fachada;
+import br.com.pbd.Visoes.ViewAgenda;
 import br.com.pbd.modelos.Acompanhamento;
 import br.com.pbd.modelos.Agenda;
 import br.com.pbd.modelos.Aluno;
+import br.com.pbd.modelos.Caixa;
 import br.com.pbd.modelos.Dados;
 import br.com.pbd.modelos.Exercicio;
 import br.com.pbd.modelos.Mensalidade;
+import br.com.pbd.modelos.Professor;
 import br.com.pbd.modelos.Render;
 import br.com.pbd.view.Mensagens;
 import br.com.pbd.view.Principal;
+import br.com.pbd.view.QuantidadeExercicio;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.io.InputStream;
+import java.sql.Connection;
 import java.sql.Date;
+import java.sql.DriverManager;
+import java.sql.SQLException;
 import java.sql.Time;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.Icon;
@@ -33,6 +46,12 @@ import javax.swing.JButton;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumnModel;
+import net.sf.jasperreports.engine.JRException;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.engine.JasperReport;
+import net.sf.jasperreports.engine.util.JRLoader;
+import net.sf.jasperreports.view.JasperViewer;
 
 /**
  *
@@ -48,7 +67,7 @@ public class ControleAlunos extends MouseAdapter implements ActionListener {
     private Acompanhamento acom;
     private Mensalidade m;
     private List<Mensalidade> mensalidades;
-    private List<Agenda> agendas;
+    private List<ViewAgenda> viewagendas;
     private Agenda agenda;
     private List<Exercicio> exercicios, Edicaoexercicio, AllExercicio;
     private Calendar ca = new GregorianCalendar();
@@ -58,6 +77,9 @@ public class ControleAlunos extends MouseAdapter implements ActionListener {
     private final int salvar = 0, editar = 1, excluir = 2, mensalidade = 3, agende = 4, acompanhamento = 5, pagar = 6, selecionar = 7;
     private ControleLogin controleLogin;
     private Mensagens mensagens;
+    private final QuantidadeExercicio quantidadeExercicio;
+    private List<Professor> professors;
+    private Caixa caixa;
 
     public ControleAlunos(Principal principal, Fachada fachada) {
         this.principal = principal;
@@ -65,20 +87,18 @@ public class ControleAlunos extends MouseAdapter implements ActionListener {
 
         principal.getCadastroAlunos().getBotaoSalvar().addActionListener(this);
         principal.getBotaoAluno().addActionListener(this);
-        principal.getListaAcompanhamento().getBotaoatualizar().addActionListener(this);
         principal.getCadastroAlunos().getBotaoCancelar().addActionListener(this);
         principal.getListaAcompanhamento().getBotaoAdicionar().addActionListener(this);
+        principal.getListaAcompanhamento().getTabelaAcompanhamento().addMouseListener(this);
         principal.getMensalidade().getBotaosalvar().addActionListener(this);
-        principal.getListaExercicio().getBotaocomfirmar().addActionListener(this);
         principal.getListaExercicio().getBotaoFechar().addActionListener(this);
         principal.getAgendaAluno().getCombodia().addActionListener(this);
         principal.getAgendaAluno().getBotaoadicionar().addActionListener(this);
         principal.getAcompanhamento().getBotaoSalvar().addActionListener(this);
         principal.getExercicio().getCombotreino().addActionListener(this);
         principal.getBuscarAlunos().getTabelaAlunos().addMouseListener(this);
-        principal.getListaAcompanhamento().getTabelaAcompanhamento().addMouseListener(this);
         principal.getListaExercicio().getTabelaexercicio().addMouseListener(this);
-        principal.getListaExercicio().getTabelaadicionados().addMouseListener(this);
+        principal.getAgendaAluno().getTabelaAgenda().addMouseListener(this);
         principal.getListaMensalidades().getTabelamensalidade().addMouseListener(this);
         principal.getBuscarAlunos().getBotaoAdicionar().addActionListener(this);
         principal.getAgendaAluno().getBotaoFechar().addActionListener(this);
@@ -86,6 +106,11 @@ public class ControleAlunos extends MouseAdapter implements ActionListener {
         principal.getBuscarAlunos().getBotaoFechar().addActionListener(this);
         principal.getListaMensalidades().getBotaoFechar().addActionListener(this);
         principal.getListaAcompanhamento().getBotaoFechar().addActionListener(this);
+        principal.getExerciciosTreino().getBotaocomfirmar().addActionListener(this);
+        principal.getListaExercicio().getBotaoFechar().addActionListener(this);
+        principal.getAgendaAluno().getTabelaAgenda().addMouseListener(this);
+        quantidadeExercicio = new QuantidadeExercicio(principal, true);
+        quantidadeExercicio.getBotaook().addActionListener(this);
 
         mensagens = new Mensagens(principal, true);
         Edicaoexercicio = new ArrayList<Exercicio>();
@@ -108,6 +133,13 @@ public class ControleAlunos extends MouseAdapter implements ActionListener {
 
         });
 
+        quantidadeExercicio.getComboturno1().addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                quantidadeExercicio.getComboHorario().removeAllItems();
+                preencherHorario();
+            }
+        });
     }
 
     @Override
@@ -116,29 +148,49 @@ public class ControleAlunos extends MouseAdapter implements ActionListener {
             int ro = retornaIndice(principal.getListaMensalidades().getTabelamensalidade(), e);
             if (escolha == pagar) {
                 try {
+                    java.util.Date dt = new java.util.Date();
+                    caixa = new DaoCaixa().BuscarCaixa(ConverterData(dt));
                     Date d = new Date(System.currentTimeMillis());
                     mensalidades.get(ro).setPagamento(d);
                     mensalidades.get(ro).setStatus("Pago");
+                    double soma = caixa.getValor_fechamento() +  mensalidades.get(ro).getValor();
                     a.setMensalidades(mensalidades);
                     fachada.salvar(a);
-                    preencherTabelaMensalidade();
+                    caixa.setValor_fechamento(soma);
+                    fachada.salvar(caixa);
                     mensagens.mensagens("Pago com Sucesso", "info");
+                    exibirRelatorio(a.getNome(), mensalidades.get(ro).getVencimento(), mensalidades.get(ro).getValor());
+                    preencherTabelaMensalidade();
                 } catch (java.lang.IllegalStateException n) {
                     mensagens.mensagens("Voce precisa preencher todos os campos !", "advertencia");
                 } catch (javax.persistence.RollbackException roll) {
                     mensagens.mensagens("Erro !!!", "erro");
+                } catch (SQLException ex) {
+                    Logger.getLogger(ControleAlunos.class.getName()).log(Level.SEVERE, null, ex);
+                } catch (JRException ex) {
+                    Logger.getLogger(ControleAlunos.class.getName()).log(Level.SEVERE, null, ex);
                 }
             }
 
         }
-        if (e.getSource() == principal.getListaExercicio().getTabelaadicionados()) {
-            int ro = retornaIndice(principal.getListaExercicio().getTabelaadicionados(), e);
+        if (e.getSource() == principal.getAgendaAluno().getTabelaAgenda()) {
+            int ro = retornaIndice(principal.getAgendaAluno().getTabelaAgenda(), e);
             if (escolha == excluir) {
                 Exercicio u = Edicaoexercicio.get(ro);
                 exercicios.add(u);
                 Edicaoexercicio.remove(u);
                 preencherTabelaExercicios(exercicios);
-                preencherTabelaExercicioAdicionado();
+
+            }
+
+        }
+        if (e.getSource() == principal.getListaAcompanhamento().getTabelaAcompanhamento()) {
+            int ro = retornaIndice(principal.getListaAcompanhamento().getTabelaAcompanhamento(), e);
+            acom = acompanhamentos.get(ro);
+            if (escolha == excluir) {
+                fachada.ativarDesativar(acom);
+                mensagens.mensagens("Exclusão Realizada", "info");
+                preencherTabelaAcompanhamento();
 
             }
 
@@ -151,20 +203,12 @@ public class ControleAlunos extends MouseAdapter implements ActionListener {
                 removerExercicio(u);
                 preencherTabelaExercicios(exercicios);
                 Edicaoexercicio.add(u);
-                preencherTabelaExercicioAdicionado();
+                agenda.setExercicios(Edicaoexercicio);
+                fachada.salvar(agenda);
+                principal.getListaExercicio().setVisible(false);
+                preencherTabelaExercicio();
 
             }
-        }
-
-        if (e.getSource() == principal.getListaAcompanhamento().getTabelaAcompanhamento()) {
-            int ro = retornaIndice(principal.getListaAcompanhamento().getTabelaAcompanhamento(), e);
-            if (escolha == editar) {
-                principal.getListaAcompanhamento().getPanelEdicao().setVisible(true);
-                acom = acompanhamentos.get(ro);
-                principal.getListaAcompanhamento().preencherAconpanhamento(acom);
-
-            }
-
         }
 
         if (e.getSource() == principal.getBuscarAlunos().getTabelaAlunos()) {
@@ -181,6 +225,10 @@ public class ControleAlunos extends MouseAdapter implements ActionListener {
             }
             if (escolha == excluir) {
                 principal.getBuscarAlunos().getTxtpesquisa().grabFocus();
+                fachada.ativarDesativar(a);
+                mensagens.mensagens("Exclusão Realizada", "info");
+                alunos = fachada.getAll();
+                preencherTabelaAluno(alunos);
 
             }
             if (escolha == agende) {
@@ -214,7 +262,6 @@ public class ControleAlunos extends MouseAdapter implements ActionListener {
             if (escolha == acompanhamento) {
 
                 principal.getListaAcompanhamento().setVisible(true);
-                principal.getListaAcompanhamento().getPanelEdicao().setVisible(false);
                 preencherTabelaAcompanhamento();
                 principal.getListaAcompanhamento().getTxtaluno().setText(a.getNome());
                 principal.getBuscarAlunos().getTxtpesquisa().setText("");
@@ -232,6 +279,20 @@ public class ControleAlunos extends MouseAdapter implements ActionListener {
             escolha = salvar;
 
         }
+        if (e.getSource() == principal.getListaExercicio().getBotaoFechar()) {
+            principal.getListaExercicio().setVisible(false);
+
+        }
+        if (e.getSource() == principal.getExerciciosTreino().getBotaocomfirmar()) {
+            preencherProfessor();
+            preencherHorario();
+            quantidadeExercicio.setVisible(true);
+
+        }
+        if (e.getSource() == quantidadeExercicio.getBotaook()) {
+            salvarExercicioAgenda(a, exercicios);
+        }
+
         if (e.getSource() == principal.getListaMensalidades().getBotaoFechar()) {
             principal.getBuscarAlunos().getTxtpesquisa().grabFocus();
 
@@ -259,39 +320,31 @@ public class ControleAlunos extends MouseAdapter implements ActionListener {
             preencherTabelaExercicio();
 
         }
-
-        if (e.getSource() == principal.getListaExercicio().getBotaocomfirmar()) {
-            agenda.setExercicios(Edicaoexercicio);
-            fachada.salvar(agenda);
-            principal.getListaExercicio().setVisible(false);
-            preencherTabelaExercicio();
-
-        }
         if (e.getSource() == principal.getBuscarAlunos().getBotaoFechar()) {
 
             principal.getBuscarAlunos().getTxtpesquisa().setText("");
 
             if (controleLogin.getProfessor() != null) {
                 principal.AtivarP();
-              
-            }else
+
+            } else {
                 principal.Ativar();
-   
+            }
+
         }
 
         if (e.getSource() == principal.getAgendaAluno().getBotaoadicionar()) {
 
-            if (!agendas.isEmpty()) {
+            if (!viewagendas.isEmpty()) {
 
                 int indice = principal.getAgendaAluno().getCombodia().getSelectedIndex();
 
-                agenda = agendas.get(indice);
+                agenda = new DaoAgenda().bucarPorId(viewagendas.get(indice).getId());
                 if (agenda.getProfessor() != null) {
                     principal.getListaExercicio().setVisible(true);
                     AllExercicio = fachada.getAllE();
                     Edicaoexercicio = agenda.getExercicios();
                     preencherTabelaExercicios(separarExercicio());
-                    preencherTabelaExercicioAdicionado();
                 } else {
                     mensagens.mensagens("Realize o Agendamento", "info");
                 }
@@ -320,10 +373,6 @@ public class ControleAlunos extends MouseAdapter implements ActionListener {
         }
         if (e.getSource() == principal.getAcompanhamento().getBotaoSalvar()) {
             salvarAcompanhamento();
-
-        }
-        if (e.getSource() == principal.getListaAcompanhamento().getBotaoatualizar()) {
-            EditarAcompanahemento(acom);
 
         }
 
@@ -479,6 +528,16 @@ public class ControleAlunos extends MouseAdapter implements ActionListener {
         }
     }
 
+    public void preencherProfessor() {
+        professors = fachada.getAllPro();
+        quantidadeExercicio.getComboprofessor().removeAllItems();
+        for (Professor pro : professors) {
+            quantidadeExercicio.getComboprofessor().addItem(pro.getNome());
+
+        }
+
+    }
+
     public void editarAluno(Aluno aluno) {
 
         try {
@@ -547,7 +606,9 @@ public class ControleAlunos extends MouseAdapter implements ActionListener {
             String panturrilha = principal.getAcompanhamento().getPanturrilha().getText();
             String braco = principal.getAcompanhamento().getBraco().getText();
             String antebraco = principal.getAcompanhamento().getAntebraco().getText();
-            Double peit = 0.0, ombr = 0.0, cintur = 0.0, quadri = 0.0, cox = 0.0, panturrilh = 0.0, brac = 0.0, antebrac = 0.0;
+            String peso = principal.getAcompanhamento().getPeso().getText();
+            String altura = principal.getAcompanhamento().getAltura().getText();
+            Double altur = 0.0, pes = 0.0, peit = 0.0, ombr = 0.0, cintur = 0.0, quadri = 0.0, cox = 0.0, panturrilh = 0.0, brac = 0.0, antebrac = 0.0;
 
             acompanhamento.setAluno(a);
             Date d = new Date(System.currentTimeMillis());
@@ -562,6 +623,10 @@ public class ControleAlunos extends MouseAdapter implements ActionListener {
             brac = Double.parseDouble(braco);
             antebrac = Double.parseDouble(antebraco);
 
+            pes = Double.parseDouble(peso);
+
+            altur = Double.parseDouble(altura);
+
             acompanhamento.setPeito(peit);
             acompanhamento.setOmbro(ombr);
             acompanhamento.setCintura(cintur);
@@ -570,15 +635,15 @@ public class ControleAlunos extends MouseAdapter implements ActionListener {
             acompanhamento.setPanturrilha(panturrilh);
             acompanhamento.setBraco(brac);
             acompanhamento.setAntebraco(antebrac);
+            acompanhamento.setPeso(pes);
+            acompanhamento.setAltura(altur);
 
             fachada.salvar(acompanhamento);
             mensagens.mensagens("Cadastrado com Sucesso", "info");
             principal.getAcompanhamento().setVisible(false);
             preencherTabelaAcompanhamento();
             principal.getAcompanhamento().limpar();
-            exercicios = fachada.usandoAluno(a);
-            preencherTabelaExercicioSugeridos(exercicios);
-            principal.getExerciciosTreino().setVisible(true);
+            ExerciciosRecomendados(acompanhamento);
 
         } catch (java.lang.IllegalStateException n) {
             mensagens.mensagens("Voce precisa preencher todos os campos ", "advertencia");
@@ -599,8 +664,8 @@ public class ControleAlunos extends MouseAdapter implements ActionListener {
             principal.getListaAcompanhamento().getTabelaAcompanhamento().setDefaultRenderer(Object.class, new Render());
 
             try {
-                String[] colunas = new String[]{"Data", "Peito", "Ombro", "Cintura", "Quadril", "Coxa", "Panturrilha", "Braco", "AnteBraco", "Editar"};
-                Object[][] dados = new Object[acompanhamentos.size()][10];
+                String[] colunas = new String[]{"Data", "Peito", "Ombro", "Cintura", "Quadril", "Coxa", "Panturrilha", "Braco", "AnteBraco", "Peso", "altura", "Excluir"};
+                Object[][] dados = new Object[acompanhamentos.size()][12];
                 for (int i = 0; i < acompanhamentos.size(); i++) {
 
                     Acompanhamento acompanhamento = acompanhamentos.get(i);
@@ -613,7 +678,9 @@ public class ControleAlunos extends MouseAdapter implements ActionListener {
                     dados[i][6] = acompanhamento.getPanturrilha();
                     dados[i][7] = acompanhamento.getBraco();
                     dados[i][8] = acompanhamento.getAntebraco();
-                    dados[i][9] = principal.getListaAcompanhamento().getBtnEd();
+                    dados[i][9] = acompanhamento.getPeso();
+                    dados[i][10] = acompanhamento.getAltura();
+                    dados[i][11] = principal.getAcompanhamento().getBtnEx();
 
                 }
                 DefaultTableModel dataModel = new DefaultTableModel(dados, colunas) {
@@ -631,54 +698,6 @@ public class ControleAlunos extends MouseAdapter implements ActionListener {
 
     }
 
-    public void EditarAcompanahemento(Acompanhamento acom) {
-
-        try {
-            String peito = principal.getListaAcompanhamento().getTxtpeito().getText();
-            String ombro = principal.getListaAcompanhamento().getTxtombro().getText();
-            String cintura = principal.getListaAcompanhamento().getTxtcintura().getText();
-            String quadril = principal.getListaAcompanhamento().getTxtquadril().getText();
-            String coxa = principal.getListaAcompanhamento().getTxtcoxa().getText();
-            String panturrilha = principal.getListaAcompanhamento().getTxtpanturrilha().getText();
-            String braco = principal.getListaAcompanhamento().getTxtbraco().getText();
-            String antebraco = principal.getListaAcompanhamento().getTxtantebraco().getText();
-            Double peit = 0.0, ombr = 0.0, cintur = 0.0, quadri = 0.0, cox = 0.0, panturrilh = 0.0, brac = 0.0, antebrac = 0.0;
-
-            peit = Double.parseDouble(peito);
-            ombr = Double.parseDouble(ombro);
-            cintur = Double.parseDouble(cintura);
-            quadri = Double.parseDouble(quadril);
-            cox = Double.parseDouble(coxa);
-            panturrilh = Double.parseDouble(panturrilha);
-            brac = Double.parseDouble(braco);
-            antebrac = Double.parseDouble(antebraco);
-
-            acom.setPeito(peit);
-            acom.setOmbro(ombr);
-            acom.setCintura(cintur);
-            acom.setQuadril(quadri);
-            acom.setCoxa(cox);
-            acom.setPanturrilha(panturrilh);
-            acom.setBraco(brac);
-            acom.setAntebraco(antebrac);
-            Date d = new Date(System.currentTimeMillis());
-            acom.setData(d);
-            fachada.salvar(acom);
-            mensagens.mensagens("Editado com Sucesso", "info");
-            principal.getListaAcompanhamento().getPanelEdicao().setVisible(false);
-            preencherTabelaAcompanhamento();
-            principal.getAcompanhamento().limpar();
-
-        } catch (java.lang.IllegalStateException n) {
-            mensagens.mensagens("Voce precisa preencher todos os campos ", "advertencia");
-        } catch (javax.persistence.RollbackException roll) {
-            mensagens.mensagens("Erro !!!", "erro");
-        } catch (NumberFormatException erro) {
-            mensagens.mensagens("Erro!!! Valores Invalidos", "erro");
-        }
-
-    }
-
     public void preencherTabelaMensalidade() {
 
         mensalidades = fachada.usandoIDM(a);
@@ -686,7 +705,7 @@ public class ControleAlunos extends MouseAdapter implements ActionListener {
         principal.getListaMensalidades().getTabelamensalidade().setDefaultRenderer(Object.class, new Render());
 
         try {
-            String[] colunas = new String[]{"Numero", "Valor", "Data Vencimento", "Forma Pagamento", "Tipo", "Plano", "Data Pagamento", "Status", "Pagar"};
+            String[] colunas = new String[]{"Numero", "Valor", "Data Vencimento", "Forma Pagamento", "Tipo", "Plano", "Data Pagamento", "Paga"};
             Object[][] dados = new Object[mensalidades.size()][9];
             for (int i = 0; i < mensalidades.size(); i++) {
 
@@ -698,8 +717,11 @@ public class ControleAlunos extends MouseAdapter implements ActionListener {
                 dados[i][4] = m.getTipo();
                 dados[i][5] = m.getPlano();
                 dados[i][6] = m.getPagamento();
-                dados[i][7] = m.getStatus();
-                dados[i][8] = principal.getListaMensalidades().getBtnPag();
+                if (mensalidades.get(i).getStatus().equals("Pago")) {
+                    dados[i][7] = m.getStatus();
+                } else {
+                    dados[i][7] = principal.getListaMensalidades().getBtnPag();
+                }
 
             }
             DefaultTableModel dataModel = new DefaultTableModel(dados, colunas) {
@@ -729,10 +751,9 @@ public class ControleAlunos extends MouseAdapter implements ActionListener {
     }
 
     public void preencherDia() {
-        agendas = fachada.usandoID(a);
+        viewagendas = new DaoViewAgenda().BuscaPorAluno(a);
         principal.getAgendaAluno().getCombodia().removeAllItems();
-        for (Agenda p : agendas) {
-
+        for (ViewAgenda p : viewagendas) {
             principal.getAgendaAluno().getCombodia().addItem(p.getDia_semana());
 
         }
@@ -742,16 +763,16 @@ public class ControleAlunos extends MouseAdapter implements ActionListener {
     public void preencherTabelaExercicio() {
 
         int indice = principal.getAgendaAluno().getCombodia().getSelectedIndex();
-        if (!agendas.isEmpty() && indice > -1) {
-            agenda = agendas.get(indice);
+        if (!viewagendas.isEmpty() && indice > -1) {
+            agenda = new DaoAgenda().bucarPorId(viewagendas.get(indice).getId());
             principal.getAgendaAluno().getLabeldia_semana().setText(agenda.getDia_semana());
             exercicios = agenda.getExercicios();
             principal.getAgendaAluno().getTabelaAgenda().setDefaultRenderer(Object.class, new Render());
 
             int i = 0;
             try {
-                String[] colunas = new String[]{"Descricao", "Peso (Kg)", "Serie", "Repetiçao", "Intervalo", "Objetivo", "Nivel"};
-                Object[][] dados = new Object[exercicios.size()][7];
+                String[] colunas = new String[]{"Descricao", "Peso (Kg)", "Serie", "Repetiçao", "Intervalo", "Objetivo", "Nivel", "Excluir"};
+                Object[][] dados = new Object[exercicios.size()][8];
                 for (Exercicio m : exercicios) {
                     dados[i][0] = m.getDescricao();
                     dados[i][1] = m.getPeso();
@@ -760,6 +781,7 @@ public class ControleAlunos extends MouseAdapter implements ActionListener {
                     dados[i][4] = m.getIntervalo();
                     dados[i][5] = m.getTreino();
                     dados[i][6] = m.getNivel();
+                    dados[i][7] = principal.getListaExercicio().getBtnEx();
                     i++;
 
                 }
@@ -780,7 +802,7 @@ public class ControleAlunos extends MouseAdapter implements ActionListener {
     public void preencherTabelaExercicios(List<Exercicio> ex) {
 
         principal.getListaExercicio().getTabelaexercicio().setDefaultRenderer(Object.class, new Render());
-        
+
         try {
             String[] colunas = new String[]{"Descricao", "Serie", "Repeticao", "Intervalo", "Peso (Kg)", "Objetivo", "Nivel", "Selecionar"};
             Object[][] dados = new Object[ex.size()][8];
@@ -806,40 +828,6 @@ public class ControleAlunos extends MouseAdapter implements ActionListener {
             principal.getListaExercicio().getTabelaexercicio().setModel(dataModel);
 
         } catch (Exception erro) {
-
-        }
-
-    }
-
-    public void preencherTabelaExercicioAdicionado() {
-
-        principal.getListaExercicio().getTabelaadicionados().setDefaultRenderer(Object.class, new Render());
-
-        try {
-            String[] colunas = new String[]{"Descricao", "Serie", "Repeticao", "Intervalo", "Peso (Kg)", "Objetivo", "Nivel", "Excluir"};
-            Object[][] dados = new Object[Edicaoexercicio.size()][8];
-            for (int i = 0; i < Edicaoexercicio.size(); i++) {
-
-                Exercicio e = Edicaoexercicio.get(i);
-                dados[i][0] = e.getDescricao();
-                dados[i][1] = e.getSerie();
-                dados[i][2] = e.getRepeticao();
-                dados[i][3] = e.getIntervalo();
-                dados[i][4] = e.getPeso();
-                dados[i][5] = e.getTreino();
-                dados[i][6] = e.getNivel();
-                dados[i][7] = principal.getListaExercicio().getBtnEx();
-
-            }
-            DefaultTableModel dataModel = new DefaultTableModel(dados, colunas) {
-                public boolean isCellEditable(int row, int column) {
-                    return false;
-                }
-            };
-            TableColumnModel columnModel = principal.getListaExercicio().getTabelaadicionados().getColumnModel();
-            principal.getListaExercicio().getTabelaadicionados().setModel(dataModel);
-
-        } catch (Exception ex) {
 
         }
 
@@ -967,13 +955,62 @@ public class ControleAlunos extends MouseAdapter implements ActionListener {
         return ro;
     }
 
+    public void preencherHorario() {
+
+        if (quantidadeExercicio.getComboturno1().getSelectedItem().equals("MANHÃ")) {
+            manha();
+
+        } else if (quantidadeExercicio.getComboturno1().getSelectedItem().equals("TARDE")) {
+            tarde();
+
+        } else if (quantidadeExercicio.getComboturno1().getSelectedItem().equals("NOITE")) {
+            noite();
+
+        }
+
+    }
+
+    public void manha() {
+
+        quantidadeExercicio.getComboHorario().addItem("05:00");
+        quantidadeExercicio.getComboHorario().addItem("06:00");
+        quantidadeExercicio.getComboHorario().addItem("07:00");
+        quantidadeExercicio.getComboHorario().addItem("08:00");
+        quantidadeExercicio.getComboHorario().addItem("09:00");
+        quantidadeExercicio.getComboHorario().addItem("10:00");
+        quantidadeExercicio.getComboHorario().addItem("11:00");
+
+    }
+
+    public void tarde() {
+        quantidadeExercicio.getComboHorario().addItem("12:00");
+        quantidadeExercicio.getComboHorario().addItem("13:00");
+        quantidadeExercicio.getComboHorario().addItem("14:00");
+        quantidadeExercicio.getComboHorario().addItem("15:00");
+        quantidadeExercicio.getComboHorario().addItem("16:00");
+        quantidadeExercicio.getComboHorario().addItem("17:00");
+
+    }
+
+    public void noite() {
+
+        quantidadeExercicio.getComboHorario().addItem("18:00");
+        quantidadeExercicio.getComboHorario().addItem("19:00");
+        quantidadeExercicio.getComboHorario().addItem("20:00");
+        quantidadeExercicio.getComboHorario().addItem("21:00");
+        quantidadeExercicio.getComboHorario().addItem("22:00");
+        quantidadeExercicio.getComboHorario().addItem("23:00");
+        quantidadeExercicio.getComboHorario().addItem("00:00");
+
+    }
+
     public void preencherTabelaExercicioSugeridos(List<Exercicio> ex) {
 
         principal.getExerciciosTreino().getTabelaexercicio().setDefaultRenderer(Object.class, new Render());
 
         try {
-            String[] colunas = new String[]{"Descricao", "Serie", "Repeticao", "Intervalo", "Peso (Kg)"};
-            Object[][] dados = new Object[ex.size()][5];
+            String[] colunas = new String[]{"Descricao", "Serie", "Repeticao", "Intervalo", "Peso (Kg)", "Avaliação"};
+            Object[][] dados = new Object[ex.size()][6];
             for (int i = 0; i < ex.size(); i++) {
 
                 Exercicio e = ex.get(i);
@@ -982,6 +1019,7 @@ public class ControleAlunos extends MouseAdapter implements ActionListener {
                 dados[i][2] = e.getRepeticao();
                 dados[i][3] = e.getIntervalo();
                 dados[i][4] = e.getPeso();
+                dados[i][5] = e.getTreino();
 
             }
             DefaultTableModel dataModel = new DefaultTableModel(dados, colunas) {
@@ -998,4 +1036,114 @@ public class ControleAlunos extends MouseAdapter implements ActionListener {
 
     }
 
+    private void ExerciciosRecomendados(Acompanhamento a) {
+
+        Double imc = a.getPeso() / (a.getAltura() * a.getAltura());
+
+        if (imc < 18.5) {
+            exercicios = fachada.BuscaImc("BAIXO PESO");
+        }
+        if (imc > 18.4 && imc < 24.9) {
+            exercicios = fachada.BuscaImc("NORMAL");
+        }
+        if (imc > 24.8 && imc < 29.9) {
+            exercicios = fachada.BuscaImc("SOBREPESO");
+        }
+        if (imc > 29.8 && imc < 34.9) {
+            exercicios = fachada.BuscaImc("OBESO I");
+        }
+
+        if (imc > 34.8 && imc < 39.9) {
+            exercicios = fachada.BuscaImc("OBESO II");
+        }
+
+        if (imc > 39.8) {
+            exercicios = fachada.BuscaImc("OBESO III");
+        }
+
+        preencherTabelaExercicioSugeridos(exercicios);
+        principal.getExerciciosTreino().setVisible(true);
+
+    }
+
+    private void salvarExercicioAgenda(Aluno a, List<Exercicio> list) {
+        try {
+
+            String quantidadeExer = quantidadeExercicio.getTxtquantidade().getText();
+            int quanti = 0;
+            quanti = Integer.parseInt(quantidadeExer);
+            int tamanho = list.size();
+
+            int indicep = quantidadeExercicio.getComboprofessor().getSelectedIndex();
+            Professor professor = professors.get(indicep);
+            Time time = ConverterTime(quantidadeExercicio.getComboHorario().getSelectedItem().toString());
+            List<Exercicio> aux = new ArrayList<Exercicio>();
+            int i = 0, j = 0;
+            if (tamanho >= (quanti * 7)) {
+                for (Exercicio e : list) {
+                    aux.add(e);
+                    i++;
+                    if (i == quanti) {
+                        a.getAgendas().get(j).setExercicios(aux);
+                        a.getAgendas().get(j).setAluno(a);
+                        a.getAgendas().get(j).setProfessor(professor);
+                        a.getAgendas().get(j).setTurno(quantidadeExercicio.getComboturno().getSelectedItem().toString());
+                        a.getAgendas().get(j).setHorario(time);
+                        fachada.salvar(a.getAgendas().get(j));
+
+                        aux.clear();
+                        j++;
+                        i = 0;
+                    }
+                }
+                quantidadeExercicio.setVisible(false);
+                principal.getExerciciosTreino().setVisible(false);
+
+            } else {
+                int resto = tamanho % 7;
+                int valor = tamanho - resto;
+                int divisao = valor / 7;
+                int sugestao = divisao;
+                mensagens.mensagens(" So é permitido ate" + sugestao + " exercicio por dia", "advertencia");
+            }
+        } catch (NumberFormatException erro) {
+            mensagens.mensagens("Erro!!! Numero Invalido", "erro");
+        } catch (java.lang.NullPointerException erro) {
+            mensagens.mensagens("Erro !!!", "erro");
+
+        }
+    }
+
+    public void exibirRelatorio(String nome, Date data, Double valor) throws SQLException, JRException {
+
+        try {
+            Connection conn = DriverManager.getConnection("jdbc:postgresql://localhost:5432/PBD", "postgres", "123");
+            InputStream fonte = ControleRelatorios.class.getResourceAsStream("/br/com/pbd/RelatoriosView/Recibo.jasper");
+            Map<String, Object> map = new HashMap<String, Object>();
+            map.put("aluno", nome);
+            map.put("data", data);
+            map.put("valor", valor);
+            JasperReport jasperReport = (JasperReport) JRLoader.loadObject(fonte);
+            JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, map, conn);
+            JasperViewer jrviewer = new JasperViewer(jasperPrint, false);
+            jrviewer.setVisible(true);
+            jrviewer.toFront();
+
+        } catch (SQLException | JRException e) {
+
+        }
+
+    }
+
+    public void preencherVazio(JTable tabela) {
+
+        String[] colunas = new String[]{"Descricao", "Serie", "Repeticao", "Intervalo", "Peso (Kg)", "Objetivo", "Nivel", "Excluir"};
+        Object[][] dados = new Object[0][8];
+        DefaultTableModel dataModel = new DefaultTableModel(dados, colunas) {
+            public boolean isCellEditable(int row, int column) {
+                return false;
+            }
+        };
+        tabela.setModel(dataModel);
+    }
 }

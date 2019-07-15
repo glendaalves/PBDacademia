@@ -17,10 +17,18 @@ import javax.swing.plaf.basic.BasicInternalFrameUI;
 public class Relatorios extends javax.swing.JInternalFrame {
 
     private RelatorioAluno relatorioAluno = new RelatorioAluno();
+    private  RelatorioFornecedor  relatorioFornecedor = new RelatorioFornecedor();
+    private RelatorioProfessor relatorioProfessor = new RelatorioProfessor();
+    private RelatorioFuncionario relatorioFuncionario = new RelatorioFuncionario();
+    private RelatorioContas relatorioContas = new RelatorioContas();
 
     public Relatorios() {
         initComponents();
         fundos(relatorioAluno);
+        fundos(relatorioFornecedor);
+        fundos(relatorioProfessor);
+        fundos(relatorioFuncionario);
+        fundos(relatorioContas);
 
     }
 
@@ -41,10 +49,12 @@ public class Relatorios extends javax.swing.JInternalFrame {
         BotaoRcaixa = new javax.swing.JButton();
         BotaoRproduto = new javax.swing.JButton();
         BotaoRprofessor = new javax.swing.JButton();
-        BotaoRtarefa = new javax.swing.JButton();
+        BotaoRconta = new javax.swing.JButton();
         BotaoRfornecedor = new javax.swing.JButton();
         BotaoRfuncionario = new javax.swing.JButton();
         AreaPanel = new javax.swing.JDesktopPane();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
 
         setPreferredSize(new java.awt.Dimension(962, 739));
 
@@ -190,26 +200,26 @@ public class Relatorios extends javax.swing.JInternalFrame {
             }
         });
 
-        BotaoRtarefa.setBackground(new java.awt.Color(255, 255, 255));
-        BotaoRtarefa.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        BotaoRtarefa.setForeground(new java.awt.Color(0, 102, 102));
-        BotaoRtarefa.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/pbd/resource/browser.png"))); // NOI18N
-        BotaoRtarefa.setText("Tarefa");
-        BotaoRtarefa.setBorderPainted(false);
-        BotaoRtarefa.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        BotaoRtarefa.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        BotaoRtarefa.setVerticalTextPosition(javax.swing.SwingConstants.TOP);
-        BotaoRtarefa.addMouseListener(new java.awt.event.MouseAdapter() {
+        BotaoRconta.setBackground(new java.awt.Color(255, 255, 255));
+        BotaoRconta.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        BotaoRconta.setForeground(new java.awt.Color(0, 102, 102));
+        BotaoRconta.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/pbd/resource/browser.png"))); // NOI18N
+        BotaoRconta.setText("Conta a Pagar");
+        BotaoRconta.setBorderPainted(false);
+        BotaoRconta.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        BotaoRconta.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        BotaoRconta.setVerticalTextPosition(javax.swing.SwingConstants.TOP);
+        BotaoRconta.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
-                BotaoRtarefaMouseEntered(evt);
+                BotaoRcontaMouseEntered(evt);
             }
             public void mouseExited(java.awt.event.MouseEvent evt) {
-                BotaoRtarefaMouseExited(evt);
+                BotaoRcontaMouseExited(evt);
             }
         });
-        BotaoRtarefa.addActionListener(new java.awt.event.ActionListener() {
+        BotaoRconta.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                BotaoRtarefaActionPerformed(evt);
+                BotaoRcontaActionPerformed(evt);
             }
         });
 
@@ -272,7 +282,7 @@ public class Relatorios extends javax.swing.JInternalFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(BotaoRfuncionario)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(BotaoRtarefa)
+                .addComponent(BotaoRconta)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(BotaoRexercicio)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -290,20 +300,36 @@ public class Relatorios extends javax.swing.JInternalFrame {
             .addComponent(BotaoSair, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(BotaoRproduto, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(BotaoRprofessor, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(BotaoRtarefa, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(BotaoRconta, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(BotaoRfornecedor, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(BotaoRfuncionario, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
+
+        AreaPanel.setLayer(jLabel1, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        AreaPanel.setLayer(jLabel2, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         javax.swing.GroupLayout AreaPanelLayout = new javax.swing.GroupLayout(AreaPanel);
         AreaPanel.setLayout(AreaPanelLayout);
         AreaPanelLayout.setHorizontalGroup(
             AreaPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
+            .addGroup(AreaPanelLayout.createSequentialGroup()
+                .addGroup(AreaPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(AreaPanelLayout.createSequentialGroup()
+                        .addGap(129, 129, 129)
+                        .addComponent(jLabel1))
+                    .addGroup(AreaPanelLayout.createSequentialGroup()
+                        .addGap(119, 119, 119)
+                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 702, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         AreaPanelLayout.setVerticalGroup(
             AreaPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 619, Short.MAX_VALUE)
+            .addGroup(AreaPanelLayout.createSequentialGroup()
+                .addGap(72, 72, 72)
+                .addComponent(jLabel1)
+                .addGap(72, 72, 72)
+                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 336, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(125, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -331,7 +357,7 @@ public class Relatorios extends javax.swing.JInternalFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 739, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();
@@ -361,9 +387,9 @@ public class Relatorios extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_BotaoRprofessorActionPerformed
 
-    private void BotaoRtarefaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotaoRtarefaActionPerformed
+    private void BotaoRcontaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotaoRcontaActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_BotaoRtarefaActionPerformed
+    }//GEN-LAST:event_BotaoRcontaActionPerformed
 
     private void BotaoRfornecedorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotaoRfornecedorActionPerformed
         // TODO add your handling code here:
@@ -393,10 +419,10 @@ public class Relatorios extends javax.swing.JInternalFrame {
         getBotaoRfuncionario().setForeground(new Color(255, 255, 255)); // cor da letra quando aparece:
     }//GEN-LAST:event_BotaoRfuncionarioMouseEntered
 
-    private void BotaoRtarefaMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BotaoRtarefaMouseEntered
-        getBotaoRtarefa().setBackground(new Color(204, 204, 204)); // cor de fundo quando aparece
-        getBotaoRtarefa().setForeground(new Color(255, 255, 255)); // cor da letra quando aparece
-    }//GEN-LAST:event_BotaoRtarefaMouseEntered
+    private void BotaoRcontaMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BotaoRcontaMouseEntered
+        getBotaoRconta().setBackground(new Color(204, 204, 204)); // cor de fundo quando aparece
+        getBotaoRconta().setForeground(new Color(255, 255, 255)); // cor da letra quando aparece
+    }//GEN-LAST:event_BotaoRcontaMouseEntered
 
     private void BotaoRexercicioMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BotaoRexercicioMouseEntered
         getBotaoRexercicio().setBackground(new Color(204, 204, 204)); // cor de fundo quando aparece
@@ -438,10 +464,10 @@ public class Relatorios extends javax.swing.JInternalFrame {
         getBotaoRfuncionario().setForeground(new Color(0, 102, 102));// letra quando solta cor
     }//GEN-LAST:event_BotaoRfuncionarioMouseExited
 
-    private void BotaoRtarefaMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BotaoRtarefaMouseExited
-        getBotaoRtarefa().setBackground(new Color(255, 255, 255));// Fundo Quando Solta
-        getBotaoRtarefa().setForeground(new Color(0, 102, 102));// letra quando solta cor
-    }//GEN-LAST:event_BotaoRtarefaMouseExited
+    private void BotaoRcontaMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BotaoRcontaMouseExited
+        getBotaoRconta().setBackground(new Color(255, 255, 255));// Fundo Quando Solta
+        getBotaoRconta().setForeground(new Color(0, 102, 102));// letra quando solta cor
+    }//GEN-LAST:event_BotaoRcontaMouseExited
 
     private void BotaoRexercicioMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BotaoRexercicioMouseExited
         getBotaoRexercicio().setBackground(new Color(255, 255, 255));// Fundo Quando Solta
@@ -472,14 +498,16 @@ public class Relatorios extends javax.swing.JInternalFrame {
     private javax.swing.JDesktopPane AreaPanel;
     private javax.swing.JButton BotaoRaluno;
     private javax.swing.JButton BotaoRcaixa;
+    private javax.swing.JButton BotaoRconta;
     private javax.swing.JButton BotaoRexercicio;
     private javax.swing.JButton BotaoRfornecedor;
     private javax.swing.JButton BotaoRfuncionario;
     private javax.swing.JButton BotaoRproduto;
     private javax.swing.JButton BotaoRprofessor;
-    private javax.swing.JButton BotaoRtarefa;
     private javax.swing.JButton BotaoSair;
     private javax.swing.JPanel PanelPrincipal;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
     // End of variables declaration//GEN-END:variables
 
@@ -507,6 +535,62 @@ public class Relatorios extends javax.swing.JInternalFrame {
      */
     public void setRelatorioAluno(RelatorioAluno relatorioAluno) {
         this.relatorioAluno = relatorioAluno;
+    }
+
+    /**
+     * @return the relatorioFornecedor
+     */
+    public RelatorioFornecedor getRelatorioFornecedor() {
+        return relatorioFornecedor;
+    }
+
+    /**
+     * @param relatorioFornecedor the relatorioFornecedor to set
+     */
+    public void setRelatorioFornecedor(RelatorioFornecedor relatorioFornecedor) {
+        this.relatorioFornecedor = relatorioFornecedor;
+    }
+
+    /**
+     * @return the relatorioProfessor
+     */
+    public RelatorioProfessor getRelatorioProfessor() {
+        return relatorioProfessor;
+    }
+
+    /**
+     * @param relatorioProfessor the relatorioProfessor to set
+     */
+    public void setRelatorioProfessor(RelatorioProfessor relatorioProfessor) {
+        this.relatorioProfessor = relatorioProfessor;
+    }
+
+    /**
+     * @return the relatorioFuncionario
+     */
+    public RelatorioFuncionario getRelatorioFuncionario() {
+        return relatorioFuncionario;
+    }
+
+    /**
+     * @param relatorioFuncionario the relatorioFuncionario to set
+     */
+    public void setRelatorioFuncionario(RelatorioFuncionario relatorioFuncionario) {
+        this.relatorioFuncionario = relatorioFuncionario;
+    }
+
+    /**
+     * @return the relatorioContas
+     */
+    public RelatorioContas getRelatorioContas() {
+        return relatorioContas;
+    }
+
+    /**
+     * @param relatorioContas the relatorioContas to set
+     */
+    public void setRelatorioContas(RelatorioContas relatorioContas) {
+        this.relatorioContas = relatorioContas;
     }
 
     /**
@@ -549,6 +633,20 @@ public class Relatorios extends javax.swing.JInternalFrame {
      */
     public void setBotaoRcaixa(javax.swing.JButton BotaoRcaixa) {
         this.BotaoRcaixa = BotaoRcaixa;
+    }
+
+    /**
+     * @return the BotaoRconta
+     */
+    public javax.swing.JButton getBotaoRconta() {
+        return BotaoRconta;
+    }
+
+    /**
+     * @param BotaoRconta the BotaoRconta to set
+     */
+    public void setBotaoRconta(javax.swing.JButton BotaoRconta) {
+        this.BotaoRconta = BotaoRconta;
     }
 
     /**
@@ -622,20 +720,6 @@ public class Relatorios extends javax.swing.JInternalFrame {
     }
 
     /**
-     * @return the BotaoRtarefa
-     */
-    public javax.swing.JButton getBotaoRtarefa() {
-        return BotaoRtarefa;
-    }
-
-    /**
-     * @param BotaoRtarefa the BotaoRtarefa to set
-     */
-    public void setBotaoRtarefa(javax.swing.JButton BotaoRtarefa) {
-        this.BotaoRtarefa = BotaoRtarefa;
-    }
-
-    /**
      * @return the BotaoSair
      */
     public javax.swing.JButton getBotaoSair() {
@@ -676,7 +760,8 @@ public class Relatorios extends javax.swing.JInternalFrame {
     public void setjPanel1(javax.swing.JPanel jPanel1) {
         this.jPanel1 = jPanel1;
     }
-    
+
+   
     
    
 }

@@ -32,7 +32,7 @@ public class FundoPrincipal extends javax.swing.JInternalFrame {
 
         setPreferredSize(new java.awt.Dimension(962, 739));
 
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/pbd/resource/uuu.jpg"))); // NOI18N
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/pbd/resource/WhatsApp Image 2019-07-12 at 00.00.28.jpeg"))); // NOI18N
         jLabel1.setRequestFocusEnabled(false);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);

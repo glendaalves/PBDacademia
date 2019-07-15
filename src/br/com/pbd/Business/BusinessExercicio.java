@@ -15,21 +15,21 @@ import java.util.List;
  *
  * @author Glenda Alves de Lima
  */
-public class BusinessExercicio implements IBusinessExercicio {
+public class BusinessExercicio extends DaoGenerico<Exercicio>implements IBusinessExercicio {
 
     @Override
     public void salvar(Exercicio exercicio) {
-        new DaoGenerico<Exercicio>().salvar_ou_atualizar(exercicio);
+       salvar_ou_atualizar(exercicio);
     }
 
     @Override
     public List<Exercicio> getAll() {
-        return new DaoGenerico<Exercicio>().getAll(Exercicio.class);
+        return getAll(Exercicio.class);
     }
 
     @Override
     public void ativarDesativar(Exercicio exercicio) {
-        new DaoGenerico<Exercicio>().salvar_ou_atualizar(exercicio);
+        remover(Exercicio.class, exercicio.getId());
     }
 
     @Override
@@ -45,6 +45,11 @@ public class BusinessExercicio implements IBusinessExercicio {
     @Override
     public List<Exercicio> usandoID(Aluno aluno) {
         return new DaoExercicio().usandoID(aluno);
+    }
+
+    @Override
+    public List<Exercicio> BuscaImc(String nome) {
+        return new DaoExercicio().BuscaImc(nome);
     }
 
 }

@@ -25,7 +25,8 @@ import br.com.pbd.controles.ControleVendas;
 import br.com.pbd.view.TelaAdministrador;
 import br.com.pbd.view.Principal;
 import br.com.pbd.view.TelaLogin;
-import br.com.pbd.modelos.ViewProduto;
+import br.com.pbd.Visoes.ViewProduto;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -35,20 +36,20 @@ import java.util.List;
  */
 public class main {
 
-    public static void main(String[] a) {
-        
+    public static void main(String[] a) throws SQLException {
+
         Fachada fachada = Fachada.getInstance();
-        
+
         Principal principal = new Principal();
 
         TelaLogin telaLogin = new TelaLogin();
-        
+
         TelaAdministrador administrador = new TelaAdministrador();
 
         ControleCaixa controleCaixa = new ControleCaixa(principal, fachada);
 
         ControleAcademia controleAcademia = new ControleAcademia(principal, fachada);
-        
+
         ControleFuncionario controleFuncionario = new ControleFuncionario(principal, fachada);
 
         ControleFornecedor controleFornecedor = new ControleFornecedor(principal, fachada);
@@ -66,13 +67,16 @@ public class main {
         ControleDespesas controleDespesas = new ControleDespesas(principal, fachada);
 
         ControleLogin controleLogin = new ControleLogin(principal, telaLogin, administrador, fachada);
-        ControleRelatorios  controleRelatorios = new ControleRelatorios(principal);
+        
+        ControleRelatorios controleRelatorios = new ControleRelatorios(principal, fachada);
 
         ControleVendas controleVendas = new ControleVendas(principal, fachada);
 
+        ControleTarefa controleTarefa = new ControleTarefa(principal, fachada);
+//        List<ViewProduto> l = new DaoViewProduto().Buscaa("camisas");
+//        System.out.println(l.get(0).getDescricao());
 
-   
-
+       
 
     }
 }

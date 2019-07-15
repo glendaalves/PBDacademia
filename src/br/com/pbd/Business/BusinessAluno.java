@@ -14,21 +14,21 @@ import java.util.List;
  *
  * @author Glenda Alves de Lima
  */
-public class BusinessAluno implements IBusinessAluno {
+public class BusinessAluno extends  DaoGenerico<Aluno>implements IBusinessAluno {
 
     @Override
     public void salvar(Aluno aluno) {
-        new DaoGenerico<Aluno>().salvar_ou_atualizar(aluno);
+        salvar_ou_atualizar(aluno);
     }
 
     @Override
     public List<Aluno> getAll() {
-        return (new DaoGenerico<Aluno>().getAll(Aluno.class));
+        return getAll(Aluno.class);
     }
 
     @Override
     public void ativarDesativar(Aluno aluno) {
-        new DaoGenerico<Aluno>().salvar_ou_atualizar(aluno);
+        remover(Aluno.class,aluno.getId());
     }
 
     @Override

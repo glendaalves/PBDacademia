@@ -55,7 +55,7 @@
         <Component class="javax.swing.JLabel" name="jLabel1">
           <Properties>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/br/com/pbd/resource/uuu.jpg"/>
+              <Image iconType="3" name="/br/com/pbd/resource/WhatsApp Image 2019-07-12 at 00.00.28.jpeg"/>
             </Property>
             <Property name="requestFocusEnabled" type="boolean" value="false"/>
           </Properties>

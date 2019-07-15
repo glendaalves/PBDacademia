@@ -93,6 +93,10 @@ public class ControleExercicio extends MouseAdapter implements ActionListener {
 
             }
             if (escolha == excluir) {
+                fachada.ativarDesativar(ex);
+                mensagens.mensagens("Exclusão Realizada", "info");
+                exercicios = fachada.getAllE();
+                preencherTabela(exercicios);
 
             }
         }

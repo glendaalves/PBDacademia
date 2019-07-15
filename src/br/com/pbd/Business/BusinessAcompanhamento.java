@@ -15,21 +15,21 @@ import java.util.List;
  *
  * @author Glenda Alves de Lima
  */
-public class BusinessAcompanhamento implements IBusinessAcompanhamento {
+public class BusinessAcompanhamento extends DaoGenerico<Acompanhamento>implements IBusinessAcompanhamento {
 
     @Override
     public void salvar(Acompanhamento acompanhamento) {
-        new DaoGenerico<Acompanhamento>().salvar_ou_atualizar(acompanhamento);
+       salvar_ou_atualizar(acompanhamento);
     }
 
     @Override
     public void ativarDesativar(Acompanhamento acompanhamento) {
-        new DaoGenerico<Acompanhamento>().salvar_ou_atualizar(acompanhamento);
+        remover(Acompanhamento.class, acompanhamento.getId());
     }
 
     @Override
     public List<Acompanhamento> getAll() {
-        return new DaoGenerico<Acompanhamento>().getAll(Acompanhamento.class);
+        return getAll(Acompanhamento.class);
     }
 
     @Override

@@ -6,29 +6,42 @@
 package br.com.pbd.Business;
 
 import br.com.pbd.Daos.DaoGenerico;
+import br.com.pbd.Daos.DaoItemVenda;
 import br.com.pbd.Daos.DaoProduto;
+import br.com.pbd.modelos.EntidadeBase;
+import br.com.pbd.modelos.ItemVenda;
 import br.com.pbd.modelos.Produto;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
  *
  * @author Glenda Alves de Lima
  */
-public class BusinessProduto implements IBusinessProduto {
+public class BusinessProduto extends DaoGenerico<Produto> implements IBusinessProduto {
 
     @Override
     public void salvar(Produto produto) {
-        new DaoGenerico<Produto>().salvar_ou_atualizar(produto);
+        salvar_ou_atualizar(produto);
     }
 
     @Override
     public List<Produto> getAll() {
-        return new DaoGenerico<Produto>().getAll(Produto.class);
+        return getAll(Produto.class);
     }
 
     @Override
-    public void ativarDesativar(Produto produto) {
-        new DaoGenerico<Produto>().salvar_ou_atualizar(produto);
+    public boolean ativarDesativar(Produto produto) {
+
+        List<ItemVenda> itemVendas = new DaoItemVenda().BuscaItemvenda(produto);
+        
+        if (itemVendas.isEmpty()) {
+            
+            remover(Produto.class, produto.getId());
+            return true;
+        }else{
+            return false;
+        }
     }
 
     @Override

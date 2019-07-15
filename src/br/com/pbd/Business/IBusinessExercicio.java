@@ -21,5 +21,6 @@ public interface IBusinessExercicio {
     public List<Exercicio> Busca(String nome);
     public List<Exercicio> usandoAluno(Aluno aluno);
     public List<Exercicio> usandoID(Aluno aluno) ;
+    public List<Exercicio> BuscaImc(String nome);
 
 }

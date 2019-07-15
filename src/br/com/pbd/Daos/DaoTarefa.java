@@ -5,6 +5,7 @@
  */
 package br.com.pbd.Daos;
 
+import br.com.pbd.modelos.Funcionario;
 import br.com.pbd.modelos.Tarefa;
 import br.com.pbd.sql.SQLconexao;
 import java.util.List;
@@ -28,6 +29,7 @@ public class DaoTarefa {
             System.out.println("erro ao realizar a buscar");
         }
         return query.getResultList();
+    
     }
 
 }

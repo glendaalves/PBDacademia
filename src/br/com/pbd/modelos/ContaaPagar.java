@@ -27,26 +27,28 @@ public class ContaaPagar implements EntidadeBase {
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "contapagar_seq")
-    private Long id;  
-    @Column (name = "descricao", length = 30, nullable = false)
+    private Long id;
+    @Column(name = "descricao", length = 30, nullable = false)
     private String descricao;
-    @Column (name = "data_emissao", columnDefinition = "DATE DEFAULT CURRENT_DATE", nullable = false)
-    private Date data_emissao;
-    @Column (name = "data_vencimento", columnDefinition = "DATE DEFAULT CURRENT_DATE", nullable = false)
+    @Column(name = "data_pagamento", columnDefinition = "DATE DEFAULT CURRENT_DATE")
+    private Date data_pagamento;
+    @Column(name = "data_vencimento", columnDefinition = "DATE DEFAULT CURRENT_DATE", nullable = false)
     private Date data_vencimento;
-    @Column (name = "tipo", length=20, nullable = false)
+    @Column(name = "tipo", length = 20)
     private String tipo;
-    @Column (name = "forma_pagamento", length=20, nullable = false)
+    @Column(name = "forma_pagamento", length = 20)
     private String forma_pagamento;
-    @Column (name="valor",precision = 6,scale = 2,nullable = false)
+    @Column(name = "valor", precision = 6, scale = 2, nullable = false)
     private Double valor;
-    
+    @Column(name = "status", length = 10, nullable = false)
+    private String status;
+
     @ManyToOne
     private Academia academia;
 
     @Override
     public Long getId() {
-   return id ;
+        return id;
     }
 
     /**
@@ -54,34 +56,6 @@ public class ContaaPagar implements EntidadeBase {
      */
     public void setId(Long id) {
         this.id = id;
-    }
-
-    /**
-     * @return the data_emissao
-     */
-    public Date getData_emissao() {
-        return data_emissao;
-    }
-
-    /**
-     * @param data_emissao the data_emissao to set
-     */
-    public void setData_emissao(Date data_emissao) {
-        this.data_emissao = data_emissao;
-    }
-
-    /**
-     * @return the data_vencimento
-     */
-    public Date getData_vencimento() {
-        return data_vencimento;
-    }
-
-    /**
-     * @param data_vencimento the data_vencimento to set
-     */
-    public void setData_vencimento(Date data_vencimento) {
-        this.data_vencimento = data_vencimento;
     }
 
     /**
@@ -96,6 +70,34 @@ public class ContaaPagar implements EntidadeBase {
      */
     public void setDescricao(String descricao) {
         this.descricao = descricao;
+    }
+
+    /**
+     * @return the data_pagamento
+     */
+    public Date getData_pagamento() {
+        return data_pagamento;
+    }
+
+    /**
+     * @param data_pagamento the data_pagamento to set
+     */
+    public void setData_pagamento(Date data_pagamento) {
+        this.data_pagamento = data_pagamento;
+    }
+
+    /**
+     * @return the data_vencimento
+     */
+    public Date getData_vencimento() {
+        return data_vencimento;
+    }
+
+    /**
+     * @param data_vencimento the data_vencimento to set
+     */
+    public void setData_vencimento(Date data_vencimento) {
+        this.data_vencimento = data_vencimento;
     }
 
     /**
@@ -141,6 +143,20 @@ public class ContaaPagar implements EntidadeBase {
     }
 
     /**
+     * @return the status
+     */
+    public String getStatus() {
+        return status;
+    }
+
+    /**
+     * @param status the status to set
+     */
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
+    /**
      * @return the academia
      */
     public Academia getAcademia() {
@@ -153,8 +169,5 @@ public class ContaaPagar implements EntidadeBase {
     public void setAcademia(Academia academia) {
         this.academia = academia;
     }
-
-  
-    
 
 }

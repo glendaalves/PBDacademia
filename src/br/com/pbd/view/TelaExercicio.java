@@ -214,9 +214,9 @@ public class TelaExercicio extends javax.swing.JInternalFrame {
 
         label8.setText("Intervalo :");
 
-        combotreino.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "EMAGRECIMENTO", "DEFINICAO DE MUSCULO", "GANHO DE MASSA" }));
+        combotreino.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "BAIXO PESO", "NORMAL", "SOBREPESO", "OBESO I", "OBESO II", "OBESO III" }));
 
-        label7.setText("Objetivo :");
+        label7.setText("Recomendação:");
 
         combonivel.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "INICIANTE", "INTERMEDIARIO", "AVANCADO" }));
 

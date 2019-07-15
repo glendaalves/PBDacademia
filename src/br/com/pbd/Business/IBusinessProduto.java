@@ -16,7 +16,7 @@ public interface IBusinessProduto {
     
     public void salvar(Produto produto);
     public List<Produto> getAll();
-    public void ativarDesativar(Produto produto);
+    public boolean ativarDesativar(Produto produto);
     public List<Produto> Busca(String nome);
     public List<Produto> BuscaP(String nome) ;
     public List<Produto> BuscarQuantidade() ;

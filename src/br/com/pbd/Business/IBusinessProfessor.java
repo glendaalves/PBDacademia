@@ -16,7 +16,7 @@ public interface IBusinessProfessor {
     
     public void salvar(Professor professor);
     public List<Professor> getAll();
-    public void ativarDesativar(Professor professor);
+    public boolean ativarDesativar(Professor professor);
     public List<Professor> busca(String nome);
     
 }

@@ -5,37 +5,46 @@
  */
 package br.com.pbd.DaoView;
 
-import br.com.pbd.modelos.Produto;
+import br.com.pbd.Visoes.ViewProduto;
 import br.com.pbd.sql.SQLconexao;
-import br.com.pbd.modelos.ViewProduto;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.TypedQuery;
 
 /**
  *
- * @author Glenda Alves de Lima
+ * @author Andre-Coude
  */
 public class DaoViewProduto {
-    
-    
+
     private static final EntityManager manager = SQLconexao.getEntityManager();
-    
-    public List<ViewProduto> Busca(String nome) {
+
+    public List<ViewProduto> Getall() {
 
         manager.getTransaction().begin();
-	TypedQuery<ViewProduto> vp = (TypedQuery<ViewProduto>) manager.createNativeQuery("select * from public.viewprodutos",Produto.class);
-	manager.getTransaction().commit();
-       
+        TypedQuery<ViewProduto> vp = (TypedQuery<ViewProduto>) manager.createNativeQuery("select * from public.viewprodutos", ViewProduto.class);
+        manager.getTransaction().commit();
         return vp.getResultList();
     }
-    
-     public List<ViewProduto> Buscaa(String nome) {
+
+    public List<ViewProduto> BuscaP(String nome) {
 
         manager.getTransaction().begin();
-	TypedQuery<ViewProduto> vp = (TypedQuery<ViewProduto>) manager.createNativeQuery("select * from public.viewprodutos v where v.descricao like '%" + nome + "%' ");
-	manager.getTransaction().commit();
-       
+        TypedQuery<ViewProduto> vp = (TypedQuery<ViewProduto>) manager.createNativeQuery("select * from viewprodutos  where descricao like '%" + nome + "%'",
+                ViewProduto.class);
+
+        manager.getTransaction().commit();
+
+        return vp.getResultList();
+    }
+        public List<ViewProduto> BuscaPQ() {
+
+        manager.getTransaction().begin();
+        TypedQuery<ViewProduto> vp = (TypedQuery<ViewProduto>) manager.createNativeQuery("select * from viewprodutos  where estoque_atual > 0 ",
+                ViewProduto.class);
+
+        manager.getTransaction().commit();
+
         return vp.getResultList();
     }
 }

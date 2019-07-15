@@ -5,13 +5,17 @@
  */
 package br.com.pbd.controles;
 
+import br.com.pbd.DaoView.DaoViewAgenda;
+import br.com.pbd.Daos.DaoAgenda;
 import br.com.pbd.Fachada.Fachada;
+import br.com.pbd.Visoes.ViewAgenda;
 import br.com.pbd.modelos.Agenda;
 import br.com.pbd.modelos.Dados;
 import br.com.pbd.modelos.Login;
 import br.com.pbd.modelos.Professor;
 import br.com.pbd.modelos.Render;
 import br.com.pbd.view.Mensagens;
+import br.com.pbd.view.NovoProfessor;
 import br.com.pbd.view.Principal;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -41,12 +45,14 @@ public class ControleProfessor extends MouseAdapter implements ActionListener {
     private Principal principal;
     private List<Professor> professors;
     private Professor p;
-    private List<Agenda> agendas;
+    private List<ViewAgenda> viewagendas;
     private Agenda agenda;
     private int escolha;
     private final int salvar = 0, editar = 1, excluir = 2, agende = 3;
     private ControleLogin controleLogin;
     private Fachada fachada;
+    private NovoProfessor novoProfessor;
+    private int ro;
 
     private Mensagens mensagens;
 
@@ -66,6 +72,8 @@ public class ControleProfessor extends MouseAdapter implements ActionListener {
         principal.getAgendaprofessor().getTabelaAgenda().addMouseListener(this);
         principal.getBuscarProfessor().getBotaoAdicionar().addActionListener(this);
         mensagens = new Mensagens(principal, true);
+        novoProfessor = new NovoProfessor(principal, true);
+        novoProfessor.getBotaook().addActionListener(this);
 
         principal.getBuscarProfessor().getTxtPesquisa().addKeyListener(new KeyAdapter() {
 
@@ -80,6 +88,24 @@ public class ControleProfessor extends MouseAdapter implements ActionListener {
     }
 
     public void mouseClicked(MouseEvent e) {
+
+        if (e.getSource() == principal.getAgendaprofessor().getTabelaAgenda()) {
+            ro = retornaIndice(principal.getAgendaprofessor().getTabelaAgenda(), e);
+            int id = viewagendas.get(ro).getId();
+            agenda = new DaoAgenda().bucarPorId(id);
+            if (escolha == excluir) {
+                preencherProfessor();
+                professors = fachada.getAllPro();
+                if (professors.size() <= 1) {
+                    mensagens.mensagens("Exclusão Não Permitida. Não ha Substituto", "advertencia");
+                } else {
+                    mensagens.mensagens("Esccolha seu Substituto", "info");
+                    novoProfessor.setVisible(true);
+                }
+
+            }
+
+        }
         if (e.getSource() == principal.getBuscarProfessor().getTabelaProfessores()) {
             int ro = retornaIndice(principal.getBuscarProfessor().getTabelaProfessores(), e);
             p = professors.get(ro);
@@ -95,6 +121,13 @@ public class ControleProfessor extends MouseAdapter implements ActionListener {
 
             }
             if (escolha == excluir) {
+                if (fachada.ativarDesativar(p)) {
+                    professors = fachada.getAllPro();
+                    preencherTabela(professors);
+                    mensagens.mensagens("Exclusão Realizada", "info");
+                } else {
+                    mensagens.mensagens("Exclusão Não Permitida ", "advertencia");
+                }
 
             }
             if (escolha == agende) {
@@ -110,6 +143,7 @@ public class ControleProfessor extends MouseAdapter implements ActionListener {
                 principal.getAgendaprofessor().getCombodia().setVisible(false);
                 agenda();
             }
+
         }
 
     }
@@ -117,6 +151,17 @@ public class ControleProfessor extends MouseAdapter implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
 
+        if (e.getSource() == novoProfessor.getBotaook()) {
+            int indice = novoProfessor.getComboprofessor().getSelectedIndex();
+            Professor p = professors.get(indice);
+            int id = viewagendas.get(ro).getId();
+            agenda = new DaoAgenda().bucarPorId(id);
+            agenda.setProfessor(p);
+            fachada.salvar(agenda);
+            agenda();
+            novoProfessor.setVisible(false);
+
+        }
         if (e.getSource() == principal.getBotaoProfessor()) {
             professors = fachada.getAllPro();
             preencherTabela(professors);
@@ -179,7 +224,7 @@ public class ControleProfessor extends MouseAdapter implements ActionListener {
         if (principal.getAgendaprofessor().getCombodia1().getSelectedIndex() > -1) {
 
             String dia = principal.getAgendaprofessor().getCombodia1().getSelectedItem().toString();
-            agendas = fachada.usandoID(p, dia);
+            viewagendas = new DaoViewAgenda().BuscaPorProfessorDia(p, dia);
             preencherTabelaAgenda();
 
             principal.getAgendaprofessor().getLabeldia_semana().setText(dia);
@@ -281,6 +326,16 @@ public class ControleProfessor extends MouseAdapter implements ActionListener {
 
     }
 
+    public void preencherProfessor() {
+        professors = fachada.getAllPro();
+        novoProfessor.getComboprofessor().removeAllItems();
+        for (Professor pro : professors) {
+            novoProfessor.getComboprofessor().addItem(pro.getNome());
+
+        }
+
+    }
+
     public void preencherTabela(List<Professor> lista) {
 
         professors = fachada.getAllPro();
@@ -288,19 +343,18 @@ public class ControleProfessor extends MouseAdapter implements ActionListener {
         principal.getBuscarProfessor().getTabelaProfessores().setDefaultRenderer(Object.class, new Render());
 
         try {
-            String[] colunas = new String[]{"Nome", "Salario", "CPF", "RG", "sexo", "Editar", "Ecluir", "Agenda"};
-            Object[][] dados = new Object[lista.size()][8];
+            String[] colunas = new String[]{"Nome", "CPF", "RG", "sexo", "Editar", "Ecluir", "Agenda"};
+            Object[][] dados = new Object[lista.size()][7];
             for (int i = 0; i < lista.size(); i++) {
 
                 Professor professor = lista.get(i);
                 dados[i][0] = professor.getNome();
-                dados[i][1] = professor.getSalario();
-                dados[i][2] = professor.getCpf();
-                dados[i][3] = professor.getRg();
-                dados[i][4] = professor.getSexo();
-                dados[i][5] = principal.getBuscarProfessor().getBtnEd();
-                dados[i][6] = principal.getBuscarProfessor().getBtnEx();
-                dados[i][7] = principal.getBuscarProfessor().getBtnAgen();
+                dados[i][1] = professor.getCpf();
+                dados[i][2] = professor.getRg();
+                dados[i][3] = professor.getSexo();
+                dados[i][4] = principal.getBuscarProfessor().getBtnEd();
+                dados[i][5] = principal.getBuscarProfessor().getBtnEx();
+                dados[i][6] = principal.getBuscarProfessor().getBtnAgen();
 
             }
             DefaultTableModel dataModel = new DefaultTableModel(dados, colunas) {
@@ -335,11 +389,6 @@ public class ControleProfessor extends MouseAdapter implements ActionListener {
             pro.getDados().setCelular(principal.getCadastroProfessor().getTxtcelular().getText());
             pro.getDados().setTelefone(principal.getCadastroProfessor().getTxttelefone().getText());
 
-            String pwd = new String(principal.getCadastroProfessor().getTxtsenha().getPassword());
-            pro.getLogin().setSenha(pwd);
-            pro.getLogin().setUsuario(principal.getCadastroProfessor().getTxtusuario().getText());
-            String confirmar = new String(principal.getCadastroProfessor().getTxtconfirmasenha().getPassword());
-
             pro.setCarteira_trabalho(principal.getCadastroProfessor().getTxtcarteiratrabalho().getText());
             pro.setCpf(principal.getCadastroProfessor().getTxtCpf().getText());
             Date d = new Date(System.currentTimeMillis());
@@ -358,41 +407,15 @@ public class ControleProfessor extends MouseAdapter implements ActionListener {
             pro.setSalario(salari);
             pro.setSexo(principal.getCadastroProfessor().getCombosexo().getSelectedItem().toString());
 
-            String senhaHex = "";
-            StringBuilder ab = null;
+            fachada.salvar(pro);
+            mensagens.mensagens("Editado com Sucesso", "info");
+            principal.getBuscarProfessor().getTxtPesquisa().setText("");
+            professors = fachada.getAllPro();
+            preencherTabela(professors);
+            principal.getCadastroProfessor().setVisible(false);;
+            principal.getCadastroProfessor().Limpar();
+            principal.getCadastroProfessor().getLabelcadastro().setText("CADASTRAR PROFESSOR");
 
-            try {
-                MessageDigest md = MessageDigest.getInstance("SHA-256");
-                byte messageDigest[] = md.digest(pwd.getBytes("UTF-8"));
-
-                ab = new StringBuilder();
-
-                for (byte b : messageDigest) {
-                    ab.append(String.format("%02X", 0xFF & b));
-
-                }
-            } catch (NoSuchAlgorithmException ex) {
-                Logger.getLogger(ControleLogin.class.getName()).log(Level.SEVERE, null, ex);
-
-            } catch (UnsupportedEncodingException ex) {
-                Logger.getLogger(ControleLogin.class.getName()).log(Level.SEVERE, null, ex);
-            }
-
-            senhaHex = ab.toString();
-            pro.getLogin().setSenha(senhaHex);
-
-            if (confirmar.equals(pwd)) {
-                fachada.salvar(pro);
-                mensagens.mensagens("Editado com Sucesso", "info");
-                principal.getBuscarProfessor().getTxtPesquisa().setText("");
-                professors = fachada.getAllPro();
-                preencherTabela(professors);
-                principal.getCadastroProfessor().setVisible(false);;
-                principal.getCadastroProfessor().Limpar();
-                principal.getCadastroProfessor().getLabelcadastro().setText("CADASTRAR PROFESSOR");
-            } else {
-                mensagens.mensagens("Senhas Diferentes", "advertencia");
-            }
         } catch (java.lang.IllegalStateException n) {
             mensagens.mensagens("voce precisa preencher todos os campos!", "advertencia");
         } catch (javax.persistence.RollbackException roll) {
@@ -415,12 +438,12 @@ public class ControleProfessor extends MouseAdapter implements ActionListener {
 
         try {
             String[] colunas = new String[]{"Aluno", "Situação", "Turno", "Horario", "Excluir"};
-            Object[][] dados = new Object[agendas.size()][5];
-            for (int i = 0; i < agendas.size(); i++) {
+            Object[][] dados = new Object[viewagendas.size()][5];
+            for (int i = 0; i < viewagendas.size(); i++) {
 
-                Agenda ag = agendas.get(i);
-                dados[i][0] = ag.getAluno().getNome();
-                dados[i][1] = ag.getAluno().getSituacao();
+                ViewAgenda ag = viewagendas.get(i);
+                dados[i][0] = ag.getNome();
+                dados[i][1] = ag.getSituacao();
                 dados[i][2] = ag.getTurno();
                 dados[i][3] = ag.getHorario();
                 dados[i][4] = principal.getBuscarProfessor().getBtnEx();

@@ -35,16 +35,16 @@ public class Caixa extends javax.swing.JInternalFrame {
         botaoFecharcaixa = new javax.swing.JButton();
         botaofechar = new javax.swing.JButton();
         label6 = new java.awt.Label();
-        jDateChooser1 = new com.toedter.calendar.JDateChooser();
+        calendario = new com.toedter.calendar.JDateChooser();
         jLabel5 = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
         tabeladespesas = new javax.swing.JTable();
         jLabel4 = new javax.swing.JLabel();
         jScrollPane3 = new javax.swing.JScrollPane();
-        tabelapagamento = new javax.swing.JTable();
+        tabelamensalidade = new javax.swing.JTable();
         jLabel6 = new javax.swing.JLabel();
         jScrollPane4 = new javax.swing.JScrollPane();
-        tabelaparcela = new javax.swing.JTable();
+        tabelavenda = new javax.swing.JTable();
         jPanel4 = new javax.swing.JPanel();
         jLabel8 = new javax.swing.JLabel();
         txtlucro = new javax.swing.JTextField();
@@ -160,8 +160,8 @@ public class Caixa extends javax.swing.JInternalFrame {
         jLabel4.setFont(new java.awt.Font("Felix Titling", 1, 12)); // NOI18N
         jLabel4.setText("Mensalidades Recebidas");
 
-        tabelapagamento.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
-        tabelapagamento.setModel(new javax.swing.table.DefaultTableModel(
+        tabelamensalidade.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
+        tabelamensalidade.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {"", null, null, null},
@@ -191,17 +191,17 @@ public class Caixa extends javax.swing.JInternalFrame {
                 return canEdit [columnIndex];
             }
         });
-        tabelapagamento.setEnabled(false);
-        tabelapagamento.setRowHeight(25);
-        tabelapagamento.setSelectionBackground(new java.awt.Color(153, 204, 255));
-        tabelapagamento.setShowHorizontalLines(false);
-        jScrollPane3.setViewportView(tabelapagamento);
+        tabelamensalidade.setEnabled(false);
+        tabelamensalidade.setRowHeight(25);
+        tabelamensalidade.setSelectionBackground(new java.awt.Color(153, 204, 255));
+        tabelamensalidade.setShowHorizontalLines(false);
+        jScrollPane3.setViewportView(tabelamensalidade);
 
         jLabel6.setFont(new java.awt.Font("Felix Titling", 1, 12)); // NOI18N
         jLabel6.setText("Vendas Recebidas ");
 
-        tabelaparcela.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
-        tabelaparcela.setModel(new javax.swing.table.DefaultTableModel(
+        tabelavenda.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
+        tabelavenda.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {"", null, null, null},
@@ -223,10 +223,10 @@ public class Caixa extends javax.swing.JInternalFrame {
                 "Data", "Numero", "Paciente", "Valor Total"
             }
         ));
-        tabelaparcela.setRowHeight(25);
-        tabelaparcela.setSelectionBackground(new java.awt.Color(153, 204, 255));
-        tabelaparcela.setShowHorizontalLines(false);
-        jScrollPane4.setViewportView(tabelaparcela);
+        tabelavenda.setRowHeight(25);
+        tabelavenda.setSelectionBackground(new java.awt.Color(153, 204, 255));
+        tabelavenda.setShowHorizontalLines(false);
+        jScrollPane4.setViewportView(tabelavenda);
 
         jPanel4.setBackground(new java.awt.Color(153, 255, 153));
         jPanel4.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Lucro Diario", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 12))); // NOI18N
@@ -235,8 +235,9 @@ public class Caixa extends javax.swing.JInternalFrame {
         jLabel8.setText("R$");
 
         txtlucro.setBackground(new java.awt.Color(153, 255, 153));
-        txtlucro.setFont(new java.awt.Font("Felix Titling", 0, 24)); // NOI18N
+        txtlucro.setFont(new java.awt.Font("Felix Titling", 1, 24)); // NOI18N
         txtlucro.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
+        txtlucro.setEnabled(false);
 
         jLabel9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/pbd/resource/caixa1.png"))); // NOI18N
 
@@ -270,8 +271,9 @@ public class Caixa extends javax.swing.JInternalFrame {
         jLabel1.setText("R$");
 
         txttotal.setBackground(new java.awt.Color(153, 255, 153));
-        txttotal.setFont(new java.awt.Font("Felix Titling", 0, 24)); // NOI18N
+        txttotal.setFont(new java.awt.Font("Felix Titling", 1, 24)); // NOI18N
         txttotal.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
+        txttotal.setEnabled(false);
 
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/pbd/resource/caixa1.png"))); // NOI18N
 
@@ -280,8 +282,8 @@ public class Caixa extends javax.swing.JInternalFrame {
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(4, 4, 4)
+                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(txttotal, javax.swing.GroupLayout.DEFAULT_SIZE, 107, Short.MAX_VALUE)
@@ -289,12 +291,14 @@ public class Caixa extends javax.swing.JInternalFrame {
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(txttotal, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(txttotal, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
                 .addContainerGap())
         );
 
@@ -310,21 +314,22 @@ public class Caixa extends javax.swing.JInternalFrame {
                     .addComponent(jScrollPane3, javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel2Layout.createSequentialGroup()
+                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(30, 30, 30)
+                        .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(31, 31, 31)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addComponent(botaoFecharcaixa, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(29, 29, 29)
+                                .addComponent(botaofechar, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addComponent(label6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(29, 29, 29)
+                                .addComponent(calendario, javax.swing.GroupLayout.PREFERRED_SIZE, 204, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(0, 33, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel2Layout.createSequentialGroup()
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel2Layout.createSequentialGroup()
-                                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(30, 30, 30)
-                                .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(44, 44, 44)
-                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(jPanel2Layout.createSequentialGroup()
-                                        .addComponent(label6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(21, 21, 21)
-                                        .addComponent(jDateChooser1, javax.swing.GroupLayout.PREFERRED_SIZE, 248, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addGroup(jPanel2Layout.createSequentialGroup()
-                                        .addComponent(botaoFecharcaixa, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 37, Short.MAX_VALUE)
-                                        .addComponent(botaofechar, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE))))
                             .addComponent(jLabel6, javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(labelcadastro2, javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel5, javax.swing.GroupLayout.Alignment.LEADING)
@@ -342,19 +347,19 @@ public class Caixa extends javax.swing.JInternalFrame {
                 .addGap(18, 18, 18)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                            .addComponent(jPanel4, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(30, 30, 30)
+                        .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(botaoFecharcaixa)
+                            .addComponent(botaofechar))
+                        .addGap(32, 32, 32)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(label6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jDateChooser1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(botaoFecharcaixa, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(botaofechar, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)))
-                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                        .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                        .addComponent(jPanel4, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(30, 30, 30)
-                .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(calendario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -414,7 +419,7 @@ public class Caixa extends javax.swing.JInternalFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton botaoFecharcaixa;
     private javax.swing.JButton botaofechar;
-    private com.toedter.calendar.JDateChooser jDateChooser1;
+    private com.toedter.calendar.JDateChooser calendario;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel4;
@@ -432,8 +437,8 @@ public class Caixa extends javax.swing.JInternalFrame {
     private java.awt.Label label6;
     private javax.swing.JLabel labelcadastro2;
     private javax.swing.JTable tabeladespesas;
-    private javax.swing.JTable tabelapagamento;
-    private javax.swing.JTable tabelaparcela;
+    private javax.swing.JTable tabelamensalidade;
+    private javax.swing.JTable tabelavenda;
     private javax.swing.JTextField txtlucro;
     private javax.swing.JTextField txttotal;
     // End of variables declaration//GEN-END:variables
@@ -467,17 +472,17 @@ public class Caixa extends javax.swing.JInternalFrame {
     }
 
     /**
-     * @return the jDateChooser1
+     * @return the calendario
      */
-    public com.toedter.calendar.JDateChooser getjDateChooser1() {
-        return jDateChooser1;
+    public com.toedter.calendar.JDateChooser getCalendario() {
+        return calendario;
     }
 
     /**
-     * @param jDateChooser1 the jDateChooser1 to set
+     * @param calendario the calendario to set
      */
-    public void setjDateChooser1(com.toedter.calendar.JDateChooser jDateChooser1) {
-        this.jDateChooser1 = jDateChooser1;
+    public void setCalendario(com.toedter.calendar.JDateChooser calendario) {
+        this.calendario = calendario;
     }
 
     /**
@@ -719,31 +724,31 @@ public class Caixa extends javax.swing.JInternalFrame {
     }
 
     /**
-     * @return the tabelapagamento
+     * @return the tabelamensalidade
      */
-    public javax.swing.JTable getTabelapagamento() {
-        return tabelapagamento;
+    public javax.swing.JTable getTabelamensalidade() {
+        return tabelamensalidade;
     }
 
     /**
-     * @param tabelapagamento the tabelapagamento to set
+     * @param tabelamensalidade the tabelamensalidade to set
      */
-    public void setTabelapagamento(javax.swing.JTable tabelapagamento) {
-        this.tabelapagamento = tabelapagamento;
+    public void setTabelamensalidade(javax.swing.JTable tabelamensalidade) {
+        this.tabelamensalidade = tabelamensalidade;
     }
 
     /**
-     * @return the tabelaparcela
+     * @return the tabelavenda
      */
-    public javax.swing.JTable getTabelaparcela() {
-        return tabelaparcela;
+    public javax.swing.JTable getTabelavenda() {
+        return tabelavenda;
     }
 
     /**
-     * @param tabelaparcela the tabelaparcela to set
+     * @param tabelavenda the tabelavenda to set
      */
-    public void setTabelaparcela(javax.swing.JTable tabelaparcela) {
-        this.tabelaparcela = tabelaparcela;
+    public void setTabelavenda(javax.swing.JTable tabelavenda) {
+        this.tabelavenda = tabelavenda;
     }
 
     /**
@@ -774,6 +779,7 @@ public class Caixa extends javax.swing.JInternalFrame {
         this.txttotal = txttotal;
     }
 
-
+ 
+   
 
 }

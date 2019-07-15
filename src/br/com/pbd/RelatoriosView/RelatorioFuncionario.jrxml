@@ -1,0 +1,190 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="null" language="groovy" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="ac6cc7a3-8682-4074-b5c7-9f19a9b25367">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<style name="Title" forecolor="#FFFFFF" fontName="Times New Roman" fontSize="50" isBold="false" pdfFontName="Times-Bold"/>
+	<style name="SubTitle" forecolor="#CCCCCC" fontName="Times New Roman" fontSize="18" isBold="false" pdfFontName="Times-Roman"/>
+	<style name="Column header" forecolor="#666666" fontName="Times New Roman" fontSize="14" isBold="true" pdfFontName="Times-Roman"/>
+	<style name="Detail" mode="Transparent" fontName="Times New Roman" pdfFontName="Times-Roman"/>
+	<style name="Row" mode="Transparent" fontName="Times New Roman" pdfFontName="Times-Roman">
+		<conditionalStyle>
+			<conditionExpression><![CDATA[$V{REPORT_COUNT}%2 == 0]]></conditionExpression>
+			<style mode="Opaque" backcolor="#F0EFEF"/>
+		</conditionalStyle>
+	</style>
+	<parameter name="dataInicio" class="java.util.Date"/>
+	<parameter name="DataFinal" class="java.util.Date"/>
+	<queryString>
+		<![CDATA[SELECT
+     funcionario."id" AS funcionario_id,
+     funcionario."carteira_trabalho" AS funcionario_carteira_trabalho,
+     funcionario."cpf" AS funcionario_cpf,
+     funcionario."data_cadastro" AS funcionario_data_cadastro,
+     funcionario."data_nascimento" AS funcionario_data_nascimento,
+     funcionario."funcao" AS funcionario_funcao,
+     funcionario."nome" AS funcionario_nome,
+     funcionario."rg" AS funcionario_rg,
+     funcionario."salario" AS funcionario_salario,
+     funcionario."sexo" AS funcionario_sexo,
+     funcionario."dados_id" AS funcionario_dados_id,
+     funcionario."login_id" AS funcionario_login_id
+FROM
+     "public"."funcionario" funcionario
+
+where 
+ funcionario."data_cadastro"  BETWEEN $P{dataInicio} and $P{DataFinal}]]>
+	</queryString>
+	<field name="funcionario_id" class="java.lang.Long"/>
+	<field name="funcionario_carteira_trabalho" class="java.lang.String"/>
+	<field name="funcionario_cpf" class="java.lang.String"/>
+	<field name="funcionario_data_cadastro" class="java.sql.Date"/>
+	<field name="funcionario_data_nascimento" class="java.sql.Date"/>
+	<field name="funcionario_funcao" class="java.lang.String"/>
+	<field name="funcionario_nome" class="java.lang.String"/>
+	<field name="funcionario_rg" class="java.lang.String"/>
+	<field name="funcionario_salario" class="java.lang.Double"/>
+	<field name="funcionario_sexo" class="java.lang.String"/>
+	<field name="funcionario_dados_id" class="java.lang.Long"/>
+	<field name="funcionario_login_id" class="java.lang.Long"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="236" splitType="Stretch">
+			<staticText>
+				<reportElement style="Title" x="30" y="30" width="370" height="66" forecolor="#000000" backcolor="#FFFFFF" uuid="e3370c86-97ee-472e-927d-96c5b1db7c4a"/>
+				<textElement>
+					<font size="48" isBold="false"/>
+				</textElement>
+				<text><![CDATA[Corpo Em Forma]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="SubTitle" x="102" y="169" width="298" height="29" forecolor="#000000" uuid="bdce7b6e-f749-4f91-876b-9166a2511653"/>
+				<textElement>
+					<font fontName="SansSerif" size="22" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Relatorio dos Funcionarios]]></text>
+			</staticText>
+			<textField pattern="EEEEE dd MMMMM yyyy">
+				<reportElement x="400" y="137" width="144" height="20" forecolor="#000000" uuid="ed410e44-34ed-4c55-8b05-c56775784054"/>
+				<textElement textAlignment="Right">
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+			<image>
+				<reportElement x="422" y="30" width="70" height="85" uuid="5908302e-51d4-48e7-9202-b76a912d1676"/>
+				<imageExpression><![CDATA["C:\\Users\\Glenda Alves de Lima\\Documents\\NetBeansProjects\\PBDAcademia\\src\\br\\com\\pbd\\resource\\Use.png"]]></imageExpression>
+			</image>
+			<staticText>
+				<reportElement style="SubTitle" x="303" y="96" width="97" height="29" forecolor="#000000" uuid="bba032d7-43d9-4374-aef1-047aa1025eca"/>
+				<textElement>
+					<font size="22" isBold="false"/>
+				</textElement>
+				<text><![CDATA[Academia]]></text>
+			</staticText>
+		</band>
+	</title>
+	<pageHeader>
+		<band splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="37" splitType="Stretch">
+			<staticText>
+				<reportElement style="Column header" x="260" y="7" width="90" height="18" forecolor="#000000" uuid="8e34d577-513d-4a12-9001-464eadaa12ca"/>
+				<textElement>
+					<font fontName="SansSerif" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Cpf]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Column header" x="0" y="7" width="102" height="18" forecolor="#000000" uuid="8f2b423a-5f89-4f3f-ad3b-fe8d92e1dd5c"/>
+				<textElement>
+					<font fontName="SansSerif" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Data Cadastro]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Column header" x="369" y="7" width="84" height="18" forecolor="#000000" uuid="421e1a51-4d55-4e9b-b043-0489e74ff06c"/>
+				<textElement>
+					<font fontName="SansSerif" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Funcao]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Column header" x="127" y="7" width="108" height="18" forecolor="#000000" uuid="950df887-14c4-465c-b24f-ab460834e27a"/>
+				<textElement>
+					<font fontName="SansSerif" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Nome]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Column header" x="475" y="7" width="80" height="18" forecolor="#000000" uuid="bd24c68c-a387-419d-87d1-9eadc1b5d251"/>
+				<textElement>
+					<font fontName="SansSerif" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Rg]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="25" splitType="Stretch">
+			<frame>
+				<reportElement style="Row" mode="Opaque" x="0" y="0" width="555" height="18" uuid="87ed61a4-1268-4462-be46-beda991018ac"/>
+				<textField isStretchWithOverflow="true">
+					<reportElement style="Detail" positionType="Float" x="369" y="0" width="84" height="18" uuid="8e7e69ed-3b09-4ecd-bd19-d7b7178ddb1a"/>
+					<textElement>
+						<font size="14"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{funcionario_funcao}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true">
+					<reportElement style="Detail" positionType="Float" x="127" y="0" width="108" height="18" uuid="c819ac34-d1c0-4250-975a-eb7619839d93"/>
+					<textElement>
+						<font size="14"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{funcionario_nome}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true">
+					<reportElement style="Detail" positionType="Float" x="475" y="0" width="80" height="18" uuid="12b421a1-984f-4b67-897a-609689ac89d0"/>
+					<textElement>
+						<font size="14"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{funcionario_rg}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true">
+					<reportElement style="Detail" positionType="Float" x="0" y="0" width="102" height="18" uuid="026ea70f-e816-4b9d-8b43-ac0f3bdeac33"/>
+					<textElement>
+						<font size="14"/>
+					</textElement>
+					<textFieldExpression><![CDATA[new java.text.SimpleDateFormat("dd/MM/yyyy").format($F{funcionario_data_cadastro})
+]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true">
+					<reportElement style="Detail" positionType="Float" x="260" y="0" width="90" height="18" uuid="92d3706f-4bf8-4c93-978e-f1997c7f2536"/>
+					<textElement>
+						<font size="14"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{funcionario_cpf}]]></textFieldExpression>
+				</textField>
+			</frame>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="7" splitType="Stretch">
+			<line>
+				<reportElement positionType="FixRelativeToBottom" x="0" y="3" width="555" height="1" uuid="7095c147-40f3-4d7d-9c5d-6325d1f9c373"/>
+				<graphicElement>
+					<pen lineWidth="0.5" lineColor="#999999"/>
+				</graphicElement>
+			</line>
+		</band>
+	</columnFooter>
+	<pageFooter>
+		<band height="25" splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band splitType="Stretch"/>
+	</summary>
+</jasperReport>

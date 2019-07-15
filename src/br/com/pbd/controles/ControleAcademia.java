@@ -45,9 +45,10 @@ public class ControleAcademia extends MouseAdapter implements ActionListener {
     private Fachada fachada;
     private List<Funcionario> funcionarios;
     private List<Professor> professors;
-    private final int pro = 1, func = 2;
+    private final int pro = 1, func = 2, editar = 3, resetar = 4;
     private int opcao = 0;
     private Acesso acesso;
+    private int escolha;
 
     public ControleAcademia(Principal principal, Fachada fachada) {
         this.principal = principal;
@@ -71,16 +72,21 @@ public class ControleAcademia extends MouseAdapter implements ActionListener {
     public void mouseClicked(MouseEvent e) {
         if (e.getSource() == principal.getGerencia().getTabelausuario()) {
             int ro = retornaIndice(principal.getGerencia().getTabelausuario(), e);
+            if (escolha == editar) {
 
-            if (opcao == func) {
-                funcionario = funcionarios.get(ro);
-                acesso.getTxtnome().setText(funcionario.getLogin().getUsuario());
-                acesso.setVisible(true);
+                if (opcao == func) {
+                    funcionario = funcionarios.get(ro);
+                    acesso.getTxtnome().setText(funcionario.getLogin().getUsuario());
+                    acesso.setVisible(true);
 
-            } else if (opcao == pro) {
-                professor = professors.get(ro);
-                acesso.getTxtnome().setText(professor.getLogin().getUsuario());
-                acesso.setVisible(true);
+                } else if (opcao == pro) {
+                    professor = professors.get(ro);
+                    acesso.getTxtnome().setText(professor.getLogin().getUsuario());
+                    acesso.setVisible(true);
+                }
+            }
+            if (escolha == resetar) {
+
             }
         }
 
@@ -92,7 +98,7 @@ public class ControleAcademia extends MouseAdapter implements ActionListener {
         if (e.getSource() == principal.getGerencia().getConbousuario()) {
             escolherUsuario();
         }
-        if(e.getSource() == principal.getGerencia().getBotaoFechar()){
+        if (e.getSource() == principal.getGerencia().getBotaoFechar()) {
             principal.Ativar();
         }
         if (e.getSource() == principal.getBotaoSobre()) {
@@ -308,6 +314,15 @@ public class ControleAcademia extends MouseAdapter implements ActionListener {
                 ((JButton) value).doClick();
                 JButton boton = (JButton) value;
                 ro = tabela.getSelectedRow();
+                if (boton.getName().equals("editar")) {
+                    ro = tabela.getSelectedRow();
+                    escolha = editar;
+                }
+                if (boton.getName().equals("reset")) {
+                    ro = tabela.getSelectedRow();
+                    escolha = resetar;
+
+                }
 
             }
         }
@@ -320,6 +335,7 @@ public class ControleAcademia extends MouseAdapter implements ActionListener {
             String senhaHex = "";
             StringBuilder ab = null;
             String pwd = acesso.getSenha().getText();
+            String confirmar = acesso.getConfirmar().getText();
 
             try {
                 MessageDigest md = MessageDigest.getInstance("SHA-256");
@@ -340,9 +356,14 @@ public class ControleAcademia extends MouseAdapter implements ActionListener {
 
             senhaHex = ab.toString();
 
-            professor.getLogin().setSenha(senhaHex);
-            fachada.salvar(professor);
-            acesso.setVisible(false);
+            if (confirmar.equals(pwd)) {
+                professor.getLogin().setSenha(senhaHex);
+                fachada.salvar(professor);
+                acesso.setVisible(false);
+            } else {
+                mensagems.mensagens("Senhas Diferentes", "advertencia");
+            }
+
         } catch (java.lang.IllegalStateException n) {
             mensagems.mensagens("Voce precisa preencher todos os campos !", "advertencia");
         } catch (javax.persistence.RollbackException roll) {
@@ -355,6 +376,7 @@ public class ControleAcademia extends MouseAdapter implements ActionListener {
             String senhaHex = "";
             StringBuilder ab = null;
             String pwd = acesso.getSenha().getText();
+            String confirmar = acesso.getConfirmar().getText();
 
             try {
                 MessageDigest md = MessageDigest.getInstance("SHA-256");
@@ -375,9 +397,14 @@ public class ControleAcademia extends MouseAdapter implements ActionListener {
 
             senhaHex = ab.toString();
 
-            funcionario.getLogin().setSenha(senhaHex);
-            fachada.salvar(funcionario);
-            acesso.setVisible(false);
+            if (confirmar.equals(pwd)) {
+                funcionario.getLogin().setSenha(senhaHex);
+                fachada.salvar(funcionario);
+                acesso.setVisible(false);
+            } else {
+                mensagems.mensagens("Senhas Diferentes", "advertencia");
+            }
+
         } catch (java.lang.IllegalStateException n) {
             mensagems.mensagens("Voce precisa preencher todos os campos !", "advertencia");
         } catch (javax.persistence.RollbackException roll) {

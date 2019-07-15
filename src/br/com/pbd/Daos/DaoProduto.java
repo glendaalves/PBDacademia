@@ -5,6 +5,7 @@
  */
 package br.com.pbd.Daos;
 
+import br.com.pbd.modelos.Fornecedor;
 import br.com.pbd.modelos.Produto;
 import br.com.pbd.sql.SQLconexao;
 import java.util.List;
@@ -36,9 +37,20 @@ public class DaoProduto {
             query = manager.createQuery("SELECT  produto FROM Produto produto where produto.descricao like '%" + nome + "%' ");
 
         } catch (IllegalStateException e) {
-           System.out.println("erro ao realizar a buscar");
+            System.out.println("erro ao realizar a buscar");
         }
         return query.getResultList();
+    }
+
+    public Produto bucarPorId(int id) {
+        Query query = null;
+        try {
+            query = manager.createQuery("SELECT p FROM Produto p where p.id=:obj");
+            query.setParameter("obj", id);
+        } catch (IllegalStateException e) {
+            System.out.println("erro ao buscar produtos");
+        }
+        return (Produto) query.getSingleResult();
     }
 
     public List<Produto> BuscarQuantidade() {
@@ -51,4 +63,14 @@ public class DaoProduto {
         return query.getResultList();
     }
 
+    public List<Produto> BuscaProdutoFornecedor(Fornecedor fornecedor) {
+        Query query = null;
+        try {
+            query = manager.createQuery("SELECT  p FROM Produto p where p.fornecedor =:obj ");
+            query.setParameter("obj", fornecedor);
+        } catch (IllegalStateException e) {
+            System.out.println("erro ao realizar a buscar");
+        }
+        return query.getResultList();
+    }
 }

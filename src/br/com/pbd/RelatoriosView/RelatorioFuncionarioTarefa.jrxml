@@ -1,0 +1,222 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="null" language="groovy" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="7adc2709-e592-4cf9-8d60-95565bf0b091">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<style name="Title" forecolor="#FFFFFF" fontName="Times New Roman" fontSize="50" isBold="false" pdfFontName="Times-Bold"/>
+	<style name="SubTitle" forecolor="#CCCCCC" fontName="Times New Roman" fontSize="18" isBold="false" pdfFontName="Times-Roman"/>
+	<style name="Column header" forecolor="#666666" fontName="Times New Roman" fontSize="14" isBold="true" pdfFontName="Times-Roman"/>
+	<style name="Detail" mode="Transparent" fontName="Times New Roman" pdfFontName="Times-Roman"/>
+	<style name="Row" mode="Transparent" fontName="Times New Roman" pdfFontName="Times-Roman">
+		<conditionalStyle>
+			<conditionExpression><![CDATA[$V{REPORT_COUNT}%2 == 0]]></conditionExpression>
+			<style mode="Opaque" backcolor="#F0EFEF"/>
+		</conditionalStyle>
+	</style>
+	<parameter name="Funcionario" class="java.lang.String"/>
+	<parameter name="status" class="java.lang.String"/>
+	<queryString>
+		<![CDATA[SELECT
+     funcionario."id" AS funcionario_id,
+     funcionario."carteira_trabalho" AS funcionario_carteira_trabalho,
+     funcionario."cpf" AS funcionario_cpf,
+     funcionario."data_cadastro" AS funcionario_data_cadastro,
+     funcionario."data_nascimento" AS funcionario_data_nascimento,
+     funcionario."funcao" AS funcionario_funcao,
+     funcionario."nome" AS funcionario_nome,
+     funcionario."rg" AS funcionario_rg,
+     funcionario."salario" AS funcionario_salario,
+     funcionario."sexo" AS funcionario_sexo,
+     funcionario."dados_id" AS funcionario_dados_id,
+     funcionario."login_id" AS funcionario_login_id,
+     tarefa."id" AS tarefa_id,
+     tarefa."data_final" AS tarefa_data_final,
+     tarefa."data_inicial" AS tarefa_data_inicial,
+     tarefa."descricao" AS tarefa_descricao,
+     tarefa."prioridade" AS tarefa_prioridade,
+     tarefa."status" AS tarefa_status,
+     tarefa."funcionario_id" AS tarefa_funcionario_id
+FROM
+     "public"."funcionario" funcionario INNER JOIN "public"."tarefa" tarefa ON funcionario."id" = tarefa."funcionario_id"
+where  funcionario."nome" = $P{Funcionario} and  tarefa."status" = $P{status}]]>
+	</queryString>
+	<field name="funcionario_id" class="java.lang.Long"/>
+	<field name="funcionario_carteira_trabalho" class="java.lang.String"/>
+	<field name="funcionario_cpf" class="java.lang.String"/>
+	<field name="funcionario_data_cadastro" class="java.sql.Date"/>
+	<field name="funcionario_data_nascimento" class="java.sql.Date"/>
+	<field name="funcionario_funcao" class="java.lang.String"/>
+	<field name="funcionario_nome" class="java.lang.String"/>
+	<field name="funcionario_rg" class="java.lang.String"/>
+	<field name="funcionario_salario" class="java.lang.Double"/>
+	<field name="funcionario_sexo" class="java.lang.String"/>
+	<field name="funcionario_dados_id" class="java.lang.Long"/>
+	<field name="funcionario_login_id" class="java.lang.Long"/>
+	<field name="tarefa_id" class="java.lang.Long"/>
+	<field name="tarefa_data_final" class="java.sql.Date"/>
+	<field name="tarefa_data_inicial" class="java.sql.Date"/>
+	<field name="tarefa_descricao" class="java.lang.String"/>
+	<field name="tarefa_prioridade" class="java.lang.String"/>
+	<field name="tarefa_status" class="java.lang.String"/>
+	<field name="tarefa_funcionario_id" class="java.lang.Long"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="339" splitType="Stretch">
+			<staticText>
+				<reportElement style="SubTitle" x="313" y="106" width="97" height="29" forecolor="#000000" uuid="8b68398e-c671-4311-8a5a-b7b593d7f89f"/>
+				<textElement>
+					<font size="22" isBold="false"/>
+				</textElement>
+				<text><![CDATA[Academia]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Title" x="40" y="40" width="370" height="66" forecolor="#000000" backcolor="#FFFFFF" uuid="2c8ed095-a18e-4cab-959c-6ef4f1563cf8"/>
+				<textElement>
+					<font size="48" isBold="false"/>
+				</textElement>
+				<text><![CDATA[Corpo Em Forma]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="SubTitle" x="17" y="205" width="367" height="29" forecolor="#000000" uuid="a1ad2473-d2f8-4497-b07e-9cbd861a85f3"/>
+				<textElement>
+					<font fontName="SansSerif" size="20" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Relatorio das Tarefas - Funcionario (a)  ]]></text>
+			</staticText>
+			<image>
+				<reportElement x="432" y="40" width="70" height="85" uuid="b0226d8b-d112-4554-a536-4ab931b0ddfa"/>
+				<imageExpression><![CDATA["C:\\Users\\Glenda Alves de Lima\\Documents\\NetBeansProjects\\PBDAcademia\\src\\br\\com\\pbd\\resource\\Use.png"]]></imageExpression>
+			</image>
+			<textField pattern="EEEEE dd MMMMM yyyy">
+				<reportElement x="410" y="147" width="144" height="20" forecolor="#000000" uuid="d28bece9-816d-4005-a0cf-251a33f661a6"/>
+				<textElement textAlignment="Right">
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement style="Column header" x="416" y="254" width="130" height="19" forecolor="#000000" uuid="2c6a2376-e897-495d-bdd2-d2abe4d8fe86"/>
+				<textElement>
+					<font fontName="SansSerif" size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Cpf]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="384" y="205" width="170" height="29" uuid="f7cace2c-ac20-4710-93fc-b9b34353fedb"/>
+				<textElement>
+					<font size="20" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{funcionario_nome}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="416" y="285" width="130" height="20" uuid="56efe6f0-9ba9-4c50-bfe3-be19f998fb93"/>
+				<textElement>
+					<font size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{funcionario_cpf}]]></textFieldExpression>
+			</textField>
+		</band>
+	</title>
+	<pageHeader>
+		<band splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="40" splitType="Stretch">
+			<staticText>
+				<reportElement style="Column header" x="362" y="9" width="87" height="18" forecolor="#000000" uuid="9aba9223-8cc7-4f45-96aa-056810c2f8af"/>
+				<textElement>
+					<font fontName="SansSerif" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Data Final]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Column header" x="258" y="9" width="77" height="18" forecolor="#000000" uuid="83020c07-8304-4df1-9039-fc4ce68db93f"/>
+				<textElement>
+					<font fontName="SansSerif" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Data Inicio]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Column header" x="11" y="7" width="111" height="20" forecolor="#000000" uuid="affd3753-6d43-4616-90d8-66e1e4437508"/>
+				<textElement>
+					<font fontName="SansSerif" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Descrição]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Column header" x="151" y="9" width="81" height="18" forecolor="#000000" uuid="7ac5087a-3d77-4a85-9894-813352216c3e"/>
+				<textElement>
+					<font fontName="SansSerif" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Prioridade]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Column header" x="473" y="7" width="73" height="18" forecolor="#000000" uuid="139346d1-c894-42b1-bac6-d5a341557a97"/>
+				<textElement>
+					<font fontName="SansSerif" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Status]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="28" splitType="Stretch">
+			<frame>
+				<reportElement style="Row" mode="Opaque" x="0" y="0" width="555" height="20" uuid="dafaade7-4f70-4aa0-9ccc-3ad2cfd846f4"/>
+				<textField isStretchWithOverflow="true">
+					<reportElement style="Detail" positionType="Float" x="362" y="2" width="84" height="18" uuid="7199ede9-275d-40fe-9643-1c7b49c25c64"/>
+					<textElement>
+						<font size="14"/>
+					</textElement>
+					<textFieldExpression><![CDATA[new java.text.SimpleDateFormat("dd/MM/yyyy").format($F{tarefa_data_final})]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true">
+					<reportElement style="Detail" positionType="Float" x="258" y="2" width="74" height="18" uuid="d4bbd242-d071-4872-bda1-1aa01e73f657"/>
+					<textElement>
+						<font size="14"/>
+					</textElement>
+					<textFieldExpression><![CDATA[new java.text.SimpleDateFormat("dd/MM/yyyy").format($F{tarefa_data_inicial})]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true">
+					<reportElement style="Detail" positionType="Float" x="151" y="2" width="78" height="18" uuid="d1cb5b1e-4e5b-453e-bc8c-345a2b6224a1"/>
+					<textElement>
+						<font size="14"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{tarefa_prioridade}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true">
+					<reportElement style="Detail" positionType="Float" x="11" y="1" width="111" height="17" uuid="de49e874-8e56-4603-bb33-040aa210b530"/>
+					<textElement>
+						<font size="14"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{tarefa_descricao}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true">
+					<reportElement style="Detail" positionType="Float" x="473" y="0" width="73" height="18" uuid="025f2252-cd73-4652-a9d1-bb0a10912478"/>
+					<textElement>
+						<font size="14"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{tarefa_status}]]></textFieldExpression>
+				</textField>
+			</frame>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="7" splitType="Stretch">
+			<line>
+				<reportElement positionType="FixRelativeToBottom" x="0" y="3" width="555" height="1" uuid="afd83e30-5129-48b1-ace6-58d07385aecb"/>
+				<graphicElement>
+					<pen lineWidth="0.5" lineColor="#999999"/>
+				</graphicElement>
+			</line>
+		</band>
+	</columnFooter>
+	<pageFooter>
+		<band height="25" splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band splitType="Stretch"/>
+	</summary>
+</jasperReport>

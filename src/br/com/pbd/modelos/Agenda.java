@@ -43,13 +43,9 @@ public class Agenda implements EntidadeBase {
     @ManyToOne
     private Aluno aluno;
     
-    
-    @OneToMany// ( orphanRemoval = true)
+    @OneToMany
     private List<Exercicio> exercicios;
     
-  
-
-
     @Override
     public Long getId() {
         return id;

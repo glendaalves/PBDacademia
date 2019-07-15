@@ -13,11 +13,11 @@ import br.com.pbd.modelos.Academia;
  *
  * @author Glenda Alves de Lima
  */
-public class BusinessAcademia implements IBusinessAcademia {
+public class BusinessAcademia extends DaoGenerico<Academia> implements IBusinessAcademia {
 
     @Override
     public void salvar(Academia academia) {
-        new DaoGenerico<Academia>().salvar_ou_atualizar(academia);
+        salvar_ou_atualizar(academia);
     }
 
     @Override

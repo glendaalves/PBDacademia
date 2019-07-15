@@ -90,6 +90,10 @@ public class ControleTarefa extends MouseAdapter implements ActionListener {
 
             }
             if (escolha == excluir) {
+                fachada.ativarDesativar(tarefa);
+                mensagens.mensagens("Exclusão Realizada", "info");
+                tarefas = fachada.getAllT();
+                preencherTabela(tarefas);
 
             }
         }

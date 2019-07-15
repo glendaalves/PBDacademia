@@ -90,7 +90,10 @@ public class ControleFuncionario extends MouseAdapter implements ActionListener 
 
             }
             if (escolha == excluir) {
-
+                fachada.ativarDesativar(f);
+                mensagens.mensagens("Exclusão Realizada", "info");
+                funcionarios = fachada.getAllFun();
+                preencherTabela(funcionarios);
             }
         }
 
@@ -293,11 +296,7 @@ public class ControleFuncionario extends MouseAdapter implements ActionListener 
             fun.getDados().setEmail(principal.getCadastroFuncionario().getTxtemail().getText());
             fun.getDados().setCelular(principal.getCadastroFuncionario().getTxtcelular().getText());
             fun.getDados().setTelefone(principal.getCadastroFuncionario().getTxttelefone().getText());
-
-            String pwd = new String(principal.getCadastroFuncionario().getTxtsenha().getPassword());
-            fun.getLogin().setUsuario(principal.getCadastroFuncionario().getTxtlogin().getText());
-            String confirmar = new String(principal.getCadastroFuncionario().getTxtcomfirmarsenha().getPassword());
-
+            
             fun.setCarteira_trabalho(principal.getCadastroFuncionario().getTxtCarteiraTrabalho().getText());
             fun.setCpf(principal.getCadastroFuncionario().getTxtCpf().getText());
             Date d = new Date(System.currentTimeMillis());
@@ -317,43 +316,19 @@ public class ControleFuncionario extends MouseAdapter implements ActionListener 
             fun.setSexo(principal.getCadastroFuncionario().getCombosexo().getSelectedItem().toString());
             fun.setFuncao(principal.getCadastroFuncionario().getTxtfuncao().getSelectedItem().toString());
 
-            String senhaHex = "";
-            StringBuilder ab = null;
+            fachada.salvar(fun);
+            mensagens.mensagens("Editado com Sucesso", "info");
+            funcionarios = fachada.getAllFun();
+            preencherTabela(funcionarios);
+            principal.getCadastroFuncionario().setVisible(false);
+            principal.getBuscarFuncionario().getTxtPesquisa().setText("");
+            principal.getCadastroFuncionario().Limpar();
+            principal.getCadastroFuncionario().getLabelcadastro().setText("CADASTRAR FUNCIONARIO");
 
-            MessageDigest md = MessageDigest.getInstance("SHA-256");
-            byte messageDigest[] = md.digest(pwd.getBytes("UTF-8"));
-
-            ab = new StringBuilder();
-
-            for (byte b : messageDigest) {
-                ab.append(String.format("%02X", 0xFF & b));
-
-            }
-
-            senhaHex = ab.toString();
-            fun.getLogin().setSenha(senhaHex);
-
-            if (confirmar.equals(pwd)) {
-
-                fachada.salvar(fun);
-                mensagens.mensagens("Editado com Sucesso", "info");
-                funcionarios = fachada.getAllFun();
-                preencherTabela(funcionarios);
-                principal.getCadastroFuncionario().setVisible(false);
-                principal.getBuscarFuncionario().getTxtPesquisa().setText("");
-                principal.getCadastroFuncionario().Limpar();
-                principal.getCadastroFuncionario().getLabelcadastro().setText("CADASTRAR FUNCIONARIO");
-            } else {
-                mensagens.mensagens("Senhas Diferentes", "advertencia");
-            }
         } catch (java.lang.IllegalStateException n) {
             mensagens.mensagens("voce precisa preencher todos os campos!", "advertencia");
         } catch (javax.persistence.RollbackException roll) {
             mensagens.mensagens("Erro !!!", "erro");
-        } catch (NoSuchAlgorithmException ex) {
-            Logger.getLogger(ControleLogin.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (UnsupportedEncodingException ex) {
-            Logger.getLogger(ControleLogin.class.getName()).log(Level.SEVERE, null, ex);
         } catch (NumberFormatException erro) {
             mensagens.mensagens("Numero ou salario Invalido !!!", "erro");
         } catch (java.lang.NullPointerException e) {

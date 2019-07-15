@@ -257,7 +257,7 @@
             </Property>
           </Properties>
           <AuxValues>
-            <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new br.com.pbd.modelos.JTextFieldHint(new JTextField(), &quot;pesquisar&quot;, &quot; Pesquise por Nome Fantasa CNPJ ou Razao Social &quot;);"/>
+            <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new br.com.pbd.modelos.JTextFieldHint(new JTextField(), &quot;pesquisar&quot;, &quot; Pesquise por Nome Fantasa ou Razao Social &quot;);"/>
           </AuxValues>
         </Component>
       </SubComponents>

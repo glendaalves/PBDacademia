@@ -1,0 +1,227 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="null" language="groovy" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="fbcb02e7-a39a-48e8-bb2e-2d58438e386d">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<style name="Title" forecolor="#FFFFFF" fontName="Times New Roman" fontSize="50" isBold="false" pdfFontName="Times-Bold"/>
+	<style name="SubTitle" forecolor="#CCCCCC" fontName="Times New Roman" fontSize="18" isBold="false" pdfFontName="Times-Roman"/>
+	<style name="Column header" forecolor="#666666" fontName="Times New Roman" fontSize="14" isBold="true" pdfFontName="Times-Roman"/>
+	<style name="Detail" mode="Transparent" fontName="Times New Roman" pdfFontName="Times-Roman"/>
+	<style name="Row" mode="Transparent" fontName="Times New Roman" pdfFontName="Times-Roman">
+		<conditionalStyle>
+			<conditionExpression><![CDATA[$V{REPORT_COUNT}%2 == 0]]></conditionExpression>
+			<style mode="Opaque" backcolor="#F0EFEF"/>
+		</conditionalStyle>
+	</style>
+	<parameter name="venda" class="java.lang.Long"/>
+	<queryString>
+		<![CDATA[SELECT
+     item_venda."id" AS item_venda_id,
+     item_venda."quantidade" AS item_venda_quantidade,
+     item_venda."venda_id" AS item_venda_venda_id,
+     item_venda."produto_id" AS item_venda_produto_id,
+     venda."id" AS venda_id,
+     venda."desconto" AS venda_desconto,
+     venda."forma_pagamento" AS venda_forma_pagamento,
+     venda."subtotal" AS venda_subtotal,
+     venda."total" AS venda_total,
+     venda."caixa_id" AS venda_caixa_id,
+     venda."funcionario_id" AS venda_funcionario_id,
+     produto."id" AS produto_id,
+     produto."data_cadastro" AS produto_data_cadastro,
+     produto."descricao" AS produto_descricao,
+     produto."estoque_atual" AS produto_estoque_atual,
+     produto."tamanho_peso" AS produto_tamanho_peso,
+     produto."valor_venda" AS produto_valor_venda,
+     produto."fornecedor_id" AS produto_fornecedor_id,
+     produto."estoque_id" AS produto_estoque_id
+FROM
+     "public"."venda" venda INNER JOIN "public"."item_venda" item_venda ON venda."id" = item_venda."venda_id"
+     INNER JOIN "public"."produto" produto ON item_venda."produto_id" = produto."id"
+where
+   venda."id"= $P{venda}]]>
+	</queryString>
+	<field name="item_venda_id" class="java.lang.Long"/>
+	<field name="item_venda_quantidade" class="java.lang.Integer"/>
+	<field name="item_venda_venda_id" class="java.lang.Long"/>
+	<field name="item_venda_produto_id" class="java.lang.Long"/>
+	<field name="venda_id" class="java.lang.Long"/>
+	<field name="venda_desconto" class="java.lang.Double"/>
+	<field name="venda_forma_pagamento" class="java.lang.String"/>
+	<field name="venda_subtotal" class="java.lang.Double"/>
+	<field name="venda_total" class="java.lang.Double"/>
+	<field name="venda_caixa_id" class="java.lang.Long"/>
+	<field name="venda_funcionario_id" class="java.lang.Long"/>
+	<field name="produto_id" class="java.lang.Long"/>
+	<field name="produto_data_cadastro" class="java.sql.Date"/>
+	<field name="produto_descricao" class="java.lang.String"/>
+	<field name="produto_estoque_atual" class="java.lang.Integer"/>
+	<field name="produto_tamanho_peso" class="java.lang.String"/>
+	<field name="produto_valor_venda" class="java.lang.Double"/>
+	<field name="produto_fornecedor_id" class="java.lang.Long"/>
+	<field name="produto_estoque_id" class="java.lang.Long"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="230" splitType="Stretch">
+			<staticText>
+				<reportElement style="Title" x="30" y="30" width="370" height="66" forecolor="#000000" backcolor="#FFFFFF" uuid="29277733-9fcc-4702-bfbb-73082b4e0462"/>
+				<textElement>
+					<font size="48" isBold="false"/>
+				</textElement>
+				<text><![CDATA[Corpo Em Forma]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="SubTitle" x="77" y="172" width="345" height="29" forecolor="#000000" uuid="cbdfd4eb-7579-4062-a4bf-aadf484f70b7"/>
+				<textElement>
+					<font fontName="SansSerif" size="22" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Relatorio dos Produto da Venda]]></text>
+			</staticText>
+			<textField pattern="EEEEE dd MMMMM yyyy">
+				<reportElement x="400" y="137" width="144" height="20" forecolor="#000000" uuid="2a7a1560-86cf-452e-b61d-d947babb80f4"/>
+				<textElement textAlignment="Right">
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+			<image>
+				<reportElement x="422" y="30" width="70" height="85" uuid="f4b4f25d-3b75-4e71-9121-502651544dc8"/>
+				<imageExpression><![CDATA["C:\\Users\\Glenda Alves de Lima\\Documents\\NetBeansProjects\\PBDAcademia\\src\\br\\com\\pbd\\resource\\Use.png"]]></imageExpression>
+			</image>
+			<staticText>
+				<reportElement style="SubTitle" x="303" y="96" width="97" height="29" forecolor="#000000" uuid="7acc5882-ca82-4a4b-8f7f-7991ead71bf3"/>
+				<textElement>
+					<font size="22" isBold="false"/>
+				</textElement>
+				<text><![CDATA[Academia]]></text>
+			</staticText>
+		</band>
+	</title>
+	<pageHeader>
+		<band splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="41" splitType="Stretch">
+			<staticText>
+				<reportElement style="Column header" x="320" y="7" width="108" height="18" forecolor="#000000" uuid="7ff89a04-6db0-4d14-9c76-9236eeac8c84"/>
+				<textElement>
+					<font fontName="SansSerif" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Quantidade]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Column header" x="10" y="7" width="150" height="18" forecolor="#000000" uuid="66dff2df-4435-494f-8c7d-e1d7d96642d4"/>
+				<textElement>
+					<font fontName="SansSerif" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Produto]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Column header" x="176" y="5" width="112" height="18" forecolor="#000000" uuid="e053167b-c83b-46b2-9746-0463c7ed2c3b"/>
+				<textElement>
+					<font fontName="SansSerif" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Tamanho/peso]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Column header" x="445" y="7" width="99" height="18" forecolor="#000000" uuid="8086393f-e267-4db4-8abc-b9343c9f4467"/>
+				<textElement>
+					<font fontName="SansSerif" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Valor Unitario]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="24" splitType="Stretch">
+			<frame>
+				<reportElement style="Row" mode="Opaque" x="0" y="0" width="555" height="21" uuid="16e1c123-b77b-47e0-88c4-4931b7e6edaa"/>
+				<textField isStretchWithOverflow="true">
+					<reportElement style="Detail" positionType="Float" x="320" y="0" width="108" height="18" uuid="1b4b8ded-4cfd-4f71-83cd-adee8d9b16a3"/>
+					<textElement>
+						<font size="14"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{item_venda_quantidade}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true">
+					<reportElement style="Detail" positionType="Float" x="10" y="0" width="150" height="18" uuid="950ee0d2-ba7f-431b-b64f-c59578a87434"/>
+					<textElement>
+						<font size="14"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{produto_descricao}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true">
+					<reportElement style="Detail" positionType="Float" x="176" y="0" width="112" height="18" uuid="8becdfbb-98f9-411b-a126-74af0430c433"/>
+					<textElement>
+						<font size="14"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{produto_tamanho_peso}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="445" y="0" width="99" height="20" uuid="fee2e736-0f0c-4ffb-b8d7-70aebfa03687"/>
+					<textElement>
+						<font fontName="Times New Roman" size="14"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{produto_valor_venda}]]></textFieldExpression>
+				</textField>
+			</frame>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="10" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="33" splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band height="142" splitType="Stretch">
+			<staticText>
+				<reportElement style="Column header" x="277" y="32" width="151" height="18" forecolor="#000000" uuid="912017c8-6b6d-4784-b95a-f9da3d4859d3"/>
+				<textElement>
+					<font fontName="SansSerif" isBold="true"/>
+				</textElement>
+				<text><![CDATA[SubTotal da Venda :]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Column header" x="277" y="62" width="151" height="18" forecolor="#000000" uuid="b1b94d8d-bcb8-4673-8946-3e80e42182e4"/>
+				<textElement>
+					<font fontName="SansSerif" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Desconto da Venda :]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Column header" x="277" y="95" width="151" height="18" forecolor="#000000" uuid="95e3791a-d348-42b0-b204-20fba12fae7a"/>
+				<textElement>
+					<font fontName="SansSerif" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Total da Venda :]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="444" y="30" width="100" height="20" uuid="060a9db4-629e-44a8-9bf0-c651b3cf84eb"/>
+				<textElement>
+					<font fontName="Times New Roman" size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{venda_subtotal}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="444" y="62" width="100" height="20" uuid="4b580887-90c8-43db-b654-3273065ed042"/>
+				<textElement>
+					<font fontName="Times New Roman" size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{venda_desconto}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="445" y="95" width="100" height="20" uuid="b13e55f2-2a59-4bc4-b1dd-c4555ea07604"/>
+				<textElement>
+					<font fontName="Times New Roman" size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{venda_total}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="10" y="12" width="535" height="1" forecolor="#999999" uuid="9217b15d-aab1-4d0a-a224-d779a7f0e93d"/>
+			</line>
+		</band>
+	</summary>
+</jasperReport>

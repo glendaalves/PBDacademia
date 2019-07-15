@@ -21,6 +21,9 @@
     <class>br.com.pbd.modelos.Professor</class>
     <class>br.com.pbd.modelos.Tarefa</class>
     <class>br.com.pbd.modelos.Venda</class>
+    <class>br.com.pbd.Visoes.ViewProduto</class>
+    <class>br.com.pbd.Visoes.ViewAgenda</class>
+    <class>br.com.pbd.Visoes.ViewFornecedor</class>
     <properties>
       <property name="javax.persistence.jdbc.url" value="jdbc:postgresql://localhost:5432/PBD"/>
       <property name="javax.persistence.jdbc.user" value="postgres"/>

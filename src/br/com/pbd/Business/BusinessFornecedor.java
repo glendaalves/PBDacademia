@@ -7,28 +7,38 @@ package br.com.pbd.Business;
 
 import br.com.pbd.Daos.DaoFornecedor;
 import br.com.pbd.Daos.DaoGenerico;
+import br.com.pbd.Daos.DaoProduto;
 import br.com.pbd.modelos.Fornecedor;
+import br.com.pbd.modelos.Produto;
 import java.util.List;
 
 /**
  *
  * @author Glenda Alves de Lima
  */
-public class BusinessFornecedor implements IBusinessFornecedor {
+public class BusinessFornecedor extends DaoGenerico<Fornecedor> implements IBusinessFornecedor {
 
     @Override
     public void salvar(Fornecedor fornecedor) {
-        new DaoGenerico<Fornecedor>().salvar_ou_atualizar(fornecedor);
+        salvar_ou_atualizar(fornecedor);
     }
 
     @Override
     public List<Fornecedor> getAll() {
-        return new DaoGenerico<Fornecedor>().getAll(Fornecedor.class);
+        return getAll(Fornecedor.class);
     }
 
     @Override
-    public void ativarDesativar(Fornecedor fornecedor) {
-        new DaoGenerico<Fornecedor>().salvar_ou_atualizar(fornecedor);
+    public boolean ativarDesativar(Fornecedor fornecedor) {
+        List<Produto> produtos = new DaoProduto().BuscaProdutoFornecedor(fornecedor);
+
+        if (produtos.isEmpty()) {
+
+            remover(Fornecedor.class, fornecedor.getId());
+            return true;
+        } else {
+            return false;
+        }
     }
 
     @Override

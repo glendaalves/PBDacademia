@@ -450,10 +450,13 @@
             <Component class="javax.swing.JComboBox" name="combotreino">
               <Properties>
                 <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-                  <StringArray count="3">
-                    <StringItem index="0" value="EMAGRECIMENTO"/>
-                    <StringItem index="1" value="DEFINICAO DE MUSCULO"/>
-                    <StringItem index="2" value="GANHO DE MASSA"/>
+                  <StringArray count="6">
+                    <StringItem index="0" value="BAIXO PESO"/>
+                    <StringItem index="1" value="NORMAL"/>
+                    <StringItem index="2" value="SOBREPESO"/>
+                    <StringItem index="3" value="OBESO I"/>
+                    <StringItem index="4" value="OBESO II"/>
+                    <StringItem index="5" value="OBESO III"/>
                   </StringArray>
                 </Property>
               </Properties>
@@ -463,7 +466,7 @@
             </Component>
             <Component class="java.awt.Label" name="label7">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Objetivo :"/>
+                <Property name="text" type="java.lang.String" value="Recomenda&#xe7;&#xe3;o:"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JComboBox" name="combonivel">

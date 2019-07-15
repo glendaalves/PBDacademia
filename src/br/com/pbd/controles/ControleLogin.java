@@ -199,10 +199,11 @@ public class ControleLogin implements ActionListener, KeyListener {
             professor = getFachada().BuscarLoginProfessor(o);
             if (professor != null) {
                 getLogin().setVisible(false);
-                getPrincipal().getLabelnome().setText("Bem vindo " + professor.getNome());
+                getPrincipal().getLabelnome().setText("Bem vindo " + o.getUsuario());
+                getPrincipal().getListaAcompanhamento().getBotaoAdicionar().setEnabled(true);
+                getPrincipal().getAgendaAluno().getBotaoadicionar().setEnabled(true);
                 getPrincipal().getLabelfuncao().setText("Professor");
                 getPrincipal().setVisible(true);
-                getPrincipal().getListaAcompanhamento().getBotaoAdicionar().setEnabled(true);
                 getPrincipal().getBotaoTarefa().setEnabled(false);
                 getPrincipal().getBotaoFornecedor().setEnabled(false);
                 getPrincipal().getBotaoProduto().setEnabled(false);
@@ -268,21 +269,11 @@ public class ControleLogin implements ActionListener, KeyListener {
             funcionario = (getFachada().BuscarLoginFuncionario(o));
             if (funcionario != null) {
                 getLogin().setVisible(false);
-                getPrincipal().getLabelnome().setText("Bem vindo " + funcionario.getNome());
+                getPrincipal().getLabelnome().setText("Bem vindo " + o.getUsuario());
                 getPrincipal().getLabelfuncao().setText("Funcionario");
                 getPrincipal().setVisible(true);
                 getPrincipal().getTarefa().getBotaoAdiciona().setEnabled(true);
                 getPrincipal().getListaAcompanhamento().getBotaoAdicionar().setEnabled(false);
-                getPrincipal().getListaAcompanhamento().getBotaoatualizar().setEnabled(false);
-                getPrincipal().getListaAcompanhamento().getTxtpeito().setEnabled(false);
-                getPrincipal().getListaAcompanhamento().getTxtombro().setEnabled(false);
-                getPrincipal().getListaAcompanhamento().getTxtcintura().setEnabled(false);
-                getPrincipal().getListaAcompanhamento().getTxtquadril().setEnabled(false);
-                getPrincipal().getListaAcompanhamento().getTxtcoxa().setEnabled(false);
-                getPrincipal().getListaAcompanhamento().getTxtpanturrilha().setEnabled(false);
-                getPrincipal().getListaAcompanhamento().getTxtbraco().setEnabled(false);
-                getPrincipal().getListaAcompanhamento().getTxtantebraco().setEnabled(false);
-
                 getPrincipal().getAgendaAluno().getBotaoadicionar().setEnabled(false);
                 getPrincipal().getBotaoTarefa().setEnabled(true);
                 getPrincipal().getBotaoFornecedor().setEnabled(true);

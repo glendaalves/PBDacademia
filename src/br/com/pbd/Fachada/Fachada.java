@@ -125,7 +125,7 @@ public class Fachada implements IFachada {
 
     @Override
     public void ativarDesativar(Aluno aluno) {
-        this.iBusinessAluno.salvar(aluno);
+        this.iBusinessAluno.ativarDesativar(aluno);
     }
 
     @Override
@@ -185,7 +185,7 @@ public class Fachada implements IFachada {
 
     @Override
     public void ativarDesativar(Exercicio exercicio) {
-        this.iBusinessExercicio.salvar(exercicio);
+        this.iBusinessExercicio.ativarDesativar(exercicio);
     }
 
     @Override
@@ -205,7 +205,7 @@ public class Fachada implements IFachada {
 
     @Override
     public void ativarDesativar(Acompanhamento acompanhamento) {
-        this.iBusinessAcompanhamento.salvar(acompanhamento);
+        this.iBusinessAcompanhamento.ativarDesativar(acompanhamento);
     }
 
     @Override
@@ -254,8 +254,8 @@ public class Fachada implements IFachada {
     }
 
     @Override
-    public void ativarDesativar(Fornecedor fornecedor) {
-        this.iBusinessFornecedor.salvar(fornecedor);
+    public boolean ativarDesativar(Fornecedor fornecedor) {
+      return this.iBusinessFornecedor.ativarDesativar(fornecedor);
     }
 
     @Override
@@ -275,7 +275,7 @@ public class Fachada implements IFachada {
 
     @Override
     public void ativarDesativar(Funcionario funcionario) {
-        this.iBusinessFuncionario.salvar(funcionario);
+        this.iBusinessFuncionario.ativarDesativar(funcionario);
     }
 
     @Override
@@ -304,8 +304,8 @@ public class Fachada implements IFachada {
     }
 
     @Override
-    public void ativarDesativar(Produto produto) {
-        this.iBusinessProduto.salvar(produto);
+    public boolean ativarDesativar(Produto produto) {
+     return this.iBusinessProduto.ativarDesativar(produto);
     }
 
     @Override
@@ -344,8 +344,8 @@ public class Fachada implements IFachada {
     }
 
     @Override
-    public void ativarDesativar(Professor professor) {
-        this.iBusinessProfessor.salvar(professor);
+    public boolean ativarDesativar(Professor professor) {
+    return this.iBusinessProfessor.ativarDesativar(professor);
     }
 
     @Override
@@ -365,7 +365,7 @@ public class Fachada implements IFachada {
 
     @Override
     public void ativarDesativar(Tarefa tarefa) {
-        this.iBusinessTarefa.salvar(tarefa);
+        this.iBusinessTarefa.ativarDesativar(tarefa);
     }
 
     @Override
@@ -420,11 +420,16 @@ public class Fachada implements IFachada {
 
     @Override
     public void ativarDesativar(ContaaPagar contaaPagar) {
-        this.iBusinessDespesas.salvar(contaaPagar);
+        this.iBusinessDespesas.ativarDesativar(contaaPagar);
     }
 
     @Override
     public List<ContaaPagar> buscaC(String nome) {
         return this.iBusinessDespesas.busca(nome);
+    }
+
+    @Override
+    public List<Exercicio> BuscaImc(String nome) {
+        return this.iBusinessExercicio.BuscaImc(nome);
     }
 }

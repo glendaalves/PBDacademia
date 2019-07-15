@@ -5,6 +5,7 @@
  */
 package br.com.pbd.modelos;
 
+import java.sql.Date;
 import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -39,6 +40,8 @@ public class Venda implements EntidadeBase {
     private Double total;
     @Column (name = "desconto", precision = 3, scale = 2, nullable = false)
     private Double desconto;
+    @Column(name = "data_venda", columnDefinition = "DATE DEFAULT CURRENT_DATE", nullable = false)
+    private Date data_venda;
 
     @ManyToOne
     private Funcionario funcionario;
@@ -61,8 +64,6 @@ public class Venda implements EntidadeBase {
     public void setId(Long id) {
         this.id = id;
     }
-
-   
 
     /**
      * @return the forma_pagamento
@@ -164,5 +165,20 @@ public class Venda implements EntidadeBase {
     public void setDesconto(Double desconto) {
         this.desconto = desconto;
     }
+
+    /**
+     * @return the data_venda
+     */
+    public Date getData_venda() {
+        return data_venda;
+    }
+
+    /**
+     * @param data_venda the data_venda to set
+     */
+    public void setData_venda(Date data_venda) {
+        this.data_venda = data_venda;
+    }
+
 
 }

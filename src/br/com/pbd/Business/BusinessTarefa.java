@@ -14,21 +14,21 @@ import java.util.List;
  *
  * @author Glenda Alves de Lima
  */
-public class BusinessTarefa implements IBusinessTarefa {
+public class BusinessTarefa  extends DaoGenerico<Tarefa>implements IBusinessTarefa {
 
     @Override
     public void salvar(Tarefa tarefa) {
-        new DaoGenerico<Tarefa>().salvar_ou_atualizar(tarefa);
+        salvar_ou_atualizar(tarefa);
     }
 
     @Override
     public List<Tarefa> getAll() {
-        return new DaoGenerico<Tarefa>().getAll(Tarefa.class);
+        return getAll(Tarefa.class);
     }
 
     @Override
     public void ativarDesativar(Tarefa tarefa) {
-        new DaoGenerico<Tarefa>().salvar_ou_atualizar(tarefa);
+        remover(Tarefa.class, tarefa.getId());
     }
 
     @Override

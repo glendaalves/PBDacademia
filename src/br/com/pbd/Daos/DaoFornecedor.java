@@ -29,6 +29,16 @@ public class DaoFornecedor {
         }
         return query.getResultList();
     }
+    public Fornecedor bucarPorId(int id) {
+        Query query = null;
+        try {
+            query = manager.createQuery("SELECT p FROM Fornecedor p where p.id=:obj");
+            query.setParameter("obj", id);
+        } catch (IllegalStateException e) {
+            System.out.println("erro ao buscar produtos");
+        }
+        return (Fornecedor) query.getSingleResult();
+    }
 
     
 }

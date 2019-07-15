@@ -3,46 +3,50 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package br.com.pbd.modelos;
-
-
-/**
- *
- * @author Glenda Alves de Lima
- *
-    
-    /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
+package br.com.pbd.Visoes;
 
 import java.sql.Date;
 import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
 import javax.persistence.Table;
 import jdk.nashorn.internal.ir.annotations.Immutable;
 
-/**
- *
- * @author Glenda Alves de Lima
- */
 
 @Immutable
-@Table(name = "viewprodutos")
+@Entity
 public class ViewProduto {
-
     
-    @Column(name = "descricao")
-    private String descricao;
-    @Column(name = "tamanho_peso")
+    @Id
+    @Column(name = "id",nullable=false)
+    private int id;
+    
+    @Column(name = "descricao",nullable=false)
+     private String descricao;
+    
+    @Column(name = "tamanho_peso",nullable=false)
     private String tamanho_peso;
-    @Column(name = "estoque_atual")
+    
+    @Column(name = "estoque_atual",nullable=false)
     private int estoque_atual;
-    @Column(name = "valor_venda" )
+    
+    @Column(name = "valor_venda",nullable=false)
     private Double valor_venda;
-    @Column(name = "data_cadastro")
+    
+    @Column(name = "data_cadastro",nullable=false)
     private Date data_cadastro;
+
+    public ViewProduto() {
+    }
+
+    public ViewProduto(String descricao, String tamanho_peso, int estoque_atual, Double valor_venda, Date data_cadastro) {
+        this.descricao = descricao;
+        this.tamanho_peso = tamanho_peso;
+        this.estoque_atual = estoque_atual;
+        this.valor_venda = valor_venda;
+        this.data_cadastro = data_cadastro;
+    }
+    
 
     /**
      * @return the descricao
@@ -114,5 +118,22 @@ public class ViewProduto {
         this.data_cadastro = data_cadastro;
     }
 
-    
+    /**
+     * @return the id
+     */
+    public int getId() {
+        return id;
+    }
+
+    /**
+     * @param id the id to set
+     */
+    public void setId(int id) {
+        this.id = id;
+    }
+
+  
+
+
+
 }

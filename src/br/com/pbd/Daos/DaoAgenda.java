@@ -7,6 +7,8 @@ package br.com.pbd.Daos;
 
 import br.com.pbd.modelos.Agenda;
 import br.com.pbd.modelos.Aluno;
+import br.com.pbd.modelos.Exercicio;
+import br.com.pbd.modelos.Produto;
 import br.com.pbd.modelos.Professor;
 import br.com.pbd.sql.SQLconexao;
 import java.util.List;
@@ -31,6 +33,17 @@ public class DaoAgenda {
         }
         return query.getResultList();
     }
+     public Agenda bucarPorId(int id) {
+        Query query = null;
+        try {
+            query = manager.createQuery("SELECT p FROM Agenda p where p.id=:obj");
+            query.setParameter("obj", id);
+        } catch (IllegalStateException e) {
+            System.out.println("erro ao buscar produtos");
+        }
+        return (Agenda) query.getSingleResult();
+    }
+
 
     public List<Agenda> usandoAgenda(Professor professor, String dia) {
         Query query = null;
@@ -54,4 +67,5 @@ public class DaoAgenda {
         }
         return query.getResultList();
     }
+
 }

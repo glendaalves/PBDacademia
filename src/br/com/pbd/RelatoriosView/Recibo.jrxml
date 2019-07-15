@@ -1,0 +1,230 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="null" language="groovy" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="12f969cf-beab-4b92-9e3a-4adc043aaf3a">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<style name="Title" forecolor="#FFFFFF" fontName="Times New Roman" fontSize="50" isBold="false" pdfFontName="Times-Bold"/>
+	<style name="SubTitle" forecolor="#CCCCCC" fontName="Times New Roman" fontSize="18" isBold="false" pdfFontName="Times-Roman"/>
+	<style name="Column header" forecolor="#666666" fontName="Times New Roman" fontSize="14" isBold="true" pdfFontName="Times-Roman"/>
+	<style name="Detail" mode="Transparent" fontName="Times New Roman" pdfFontName="Times-Roman"/>
+	<style name="Row" mode="Transparent" fontName="Times New Roman" pdfFontName="Times-Roman">
+		<conditionalStyle>
+			<conditionExpression><![CDATA[$V{REPORT_COUNT}%2 == 0]]></conditionExpression>
+			<style mode="Opaque" backcolor="#F0EFEF"/>
+		</conditionalStyle>
+	</style>
+	<parameter name="aluno" class="java.lang.String"/>
+	<parameter name="valor" class="java.lang.Double"/>
+	<parameter name="data" class="java.util.Date"/>
+	<queryString>
+		<![CDATA[SELECT
+     aluno."id" AS aluno_id,
+     aluno."cpf" AS aluno_cpf,
+     aluno."data_matricula" AS aluno_data_matricula,
+     aluno."data_nascimento" AS aluno_data_nascimento,
+     aluno."estado_civil" AS aluno_estado_civil,
+     aluno."nivel" AS aluno_nivel,
+     aluno."nome" AS aluno_nome,
+     aluno."plano" AS aluno_plano,
+     aluno."rg" AS aluno_rg,
+     aluno."sexo" AS aluno_sexo,
+     aluno."situacao" AS aluno_situacao,
+     aluno."dados_id" AS aluno_dados_id,
+     mensalidade."id" AS mensalidade_id,
+     mensalidade."forma_pagamento" AS mensalidade_forma_pagamento,
+     mensalidade."numero" AS mensalidade_numero,
+     mensalidade."pagamento" AS mensalidade_pagamento,
+     mensalidade."plano" AS mensalidade_plano,
+     mensalidade."status" AS mensalidade_status,
+     mensalidade."tipo" AS mensalidade_tipo,
+     mensalidade."valor" AS mensalidade_valor,
+     mensalidade."vencimento" AS mensalidade_vencimento,
+     mensalidade."aluno_id" AS mensalidade_aluno_id
+FROM
+     "public"."aluno" aluno INNER JOIN "public"."mensalidade" mensalidade ON aluno."id" = mensalidade."aluno_id"
+where  aluno."nome"= $P{aluno} and   mensalidade."vencimento"= $P{data} and mensalidade."valor"= $P{valor}]]>
+	</queryString>
+	<field name="aluno_id" class="java.lang.Long"/>
+	<field name="aluno_cpf" class="java.lang.String"/>
+	<field name="aluno_data_matricula" class="java.sql.Date"/>
+	<field name="aluno_data_nascimento" class="java.sql.Date"/>
+	<field name="aluno_estado_civil" class="java.lang.String"/>
+	<field name="aluno_nivel" class="java.lang.String"/>
+	<field name="aluno_nome" class="java.lang.String"/>
+	<field name="aluno_plano" class="java.lang.String"/>
+	<field name="aluno_rg" class="java.lang.String"/>
+	<field name="aluno_sexo" class="java.lang.String"/>
+	<field name="aluno_situacao" class="java.lang.String"/>
+	<field name="aluno_dados_id" class="java.lang.Long"/>
+	<field name="mensalidade_id" class="java.lang.Long"/>
+	<field name="mensalidade_forma_pagamento" class="java.lang.String"/>
+	<field name="mensalidade_numero" class="java.lang.Integer"/>
+	<field name="mensalidade_pagamento" class="java.sql.Date"/>
+	<field name="mensalidade_plano" class="java.lang.String"/>
+	<field name="mensalidade_status" class="java.lang.String"/>
+	<field name="mensalidade_tipo" class="java.lang.String"/>
+	<field name="mensalidade_valor" class="java.lang.Double"/>
+	<field name="mensalidade_vencimento" class="java.sql.Date"/>
+	<field name="mensalidade_aluno_id" class="java.lang.Long"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="245" splitType="Stretch">
+			<staticText>
+				<reportElement style="Title" x="10" y="10" width="370" height="66" forecolor="#000000" uuid="5407e647-ce00-4b79-a32e-23a7dd758535"/>
+				<textElement>
+					<font size="48" isBold="false"/>
+				</textElement>
+				<text><![CDATA[Corpo Em Forma]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="SubTitle" x="288" y="76" width="92" height="29" forecolor="#000000" uuid="bc260dda-f6dd-439c-870b-abb820178bd5"/>
+				<textElement>
+					<font size="22" isBold="false"/>
+				</textElement>
+				<text><![CDATA[Academia]]></text>
+			</staticText>
+			<image>
+				<reportElement x="405" y="10" width="70" height="85" uuid="85f1e0a2-139e-4002-8b6a-10e4c9efab40"/>
+				<imageExpression><![CDATA["C:\\Users\\Glenda Alves de Lima\\Documents\\NetBeansProjects\\PBDAcademia\\src\\br\\com\\pbd\\resource\\Use.png"]]></imageExpression>
+			</image>
+			<staticText>
+				<reportElement style="SubTitle" x="393" y="147" width="129" height="33" forecolor="#000000" uuid="59d634d4-8da5-47de-b118-38f7ed60b615"/>
+				<textElement textAlignment="Center">
+					<font fontName="SansSerif" size="26" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Recibo]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="SubTitle" x="393" y="196" width="33" height="33" forecolor="#000000" uuid="a82aa9d0-b53e-4ca1-a157-8b60b1596561"/>
+				<textElement>
+					<font fontName="SansSerif" size="24" isBold="true"/>
+				</textElement>
+				<text><![CDATA[R$]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="439" y="196" width="100" height="33" forecolor="#000000" backcolor="#FFFFFF" uuid="b93578cf-29d3-4028-9a13-0ee5c120f499"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="SansSerif" size="24" isBold="true" isItalic="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{mensalidade_valor}]]></textFieldExpression>
+			</textField>
+		</band>
+	</title>
+	<pageHeader>
+		<band splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band splitType="Stretch"/>
+	</columnHeader>
+	<detail>
+		<band height="336" splitType="Stretch">
+			<staticText>
+				<reportElement style="Column header" x="10" y="18" width="111" height="18" forecolor="#000000" uuid="284755df-61ce-49d2-911e-c4df58388340"/>
+				<textElement>
+					<font isBold="false"/>
+				</textElement>
+				<text><![CDATA[Recebemos do Sr.]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="122" y="16" width="417" height="20" uuid="773d0a66-df96-440c-b23d-79e32d10b954"/>
+				<textElement textAlignment="Center">
+					<font fontName="SansSerif" size="14" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{aluno_nome}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement style="Column header" x="11" y="55" width="123" height="18" forecolor="#000000" uuid="472add67-1efc-4911-a076-e5b50ccdb86e"/>
+				<textElement>
+					<font isBold="false"/>
+				</textElement>
+				<text><![CDATA[a quantia de R$]]></text>
+			</staticText>
+			<line>
+				<reportElement x="122" y="37" width="417" height="1" uuid="e79ffd6c-1ff8-4ea9-b303-332908749286"/>
+			</line>
+			<line>
+				<reportElement x="134" y="75" width="100" height="1" uuid="5fa36977-0635-43de-9968-b9ba67ef8c32"/>
+			</line>
+			<textField>
+				<reportElement x="134" y="53" width="100" height="20" uuid="72a64446-b022-4d6c-b2f0-ea5d13bd7af6"/>
+				<textElement textAlignment="Center">
+					<font fontName="SansSerif" size="14" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{mensalidade_valor}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement style="Column header" x="245" y="58" width="294" height="18" forecolor="#000000" uuid="8a1e1e3e-ce9f-4517-899c-10e78567e78c"/>
+				<textElement>
+					<font isBold="false"/>
+				</textElement>
+				<text><![CDATA[referente ao pagamento da mensalidade, com data ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Column header" x="10" y="93" width="123" height="18" forecolor="#000000" uuid="8ae6d5d0-b821-4dd5-9910-3c726d09b870"/>
+				<textElement>
+					<font isBold="false"/>
+				</textElement>
+				<text><![CDATA[de vencimento em ]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="134" y="90" width="143" height="20" uuid="fe62e252-d555-495b-a63b-498df436b911"/>
+				<textElement textAlignment="Center">
+					<font fontName="SansSerif" size="14" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new java.text.SimpleDateFormat("dd/MM/yyyy").format($F{mensalidade_vencimento})]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="134" y="110" width="143" height="1" uuid="5c478f2d-9446-482f-b092-f886045343ac"/>
+			</line>
+			<staticText>
+				<reportElement style="Column header" x="11" y="132" width="266" height="18" forecolor="#000000" uuid="0ebcbd53-fa5e-43fe-a532-203dd59ac837"/>
+				<textElement>
+					<font isBold="false"/>
+				</textElement>
+				<text><![CDATA[Para maior clareza, firmamos o presente em,]]></text>
+			</staticText>
+			<textField pattern="EEEEE dd MMMMM yyyy">
+				<reportElement x="234" y="184" width="305" height="20" forecolor="#000000" uuid="2b5de6c2-5611-41ac-979e-025b67c9a9af"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="SansSerif" size="14" isBold="true" isItalic="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement style="Column header" x="288" y="93" width="5" height="18" forecolor="#000000" uuid="9d7aaa4c-9ba5-4089-8acf-979f4696dfd4"/>
+				<textElement>
+					<font isBold="false"/>
+				</textElement>
+				<text><![CDATA[.]]></text>
+			</staticText>
+			<line>
+				<reportElement x="81" y="282" width="358" height="1" uuid="833d8228-0af1-4f2d-b357-4071d52e97e3"/>
+			</line>
+			<staticText>
+				<reportElement style="Column header" x="127" y="295" width="266" height="18" forecolor="#000000" uuid="eb54e006-46f3-4ab3-b124-1074550a8525"/>
+				<textElement textAlignment="Center">
+					<font isBold="false"/>
+				</textElement>
+				<text><![CDATA[Assinatura]]></text>
+			</staticText>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="7" splitType="Stretch">
+			<line>
+				<reportElement positionType="FixRelativeToBottom" x="0" y="3" width="555" height="1" uuid="ba682814-0862-44c6-992f-9700f8e2fa8e"/>
+				<graphicElement>
+					<pen lineWidth="0.5" lineColor="#999999"/>
+				</graphicElement>
+			</line>
+		</band>
+	</columnFooter>
+	<pageFooter>
+		<band height="25" splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band splitType="Stretch"/>
+	</summary>
+</jasperReport>

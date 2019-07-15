@@ -62,17 +62,11 @@ public class Despesas extends javax.swing.JInternalFrame {
         panelContas = new javax.swing.JPanel();
         label2 = new java.awt.Label();
         descricaoConta = new javax.swing.JTextField();
-        label3 = new java.awt.Label();
-        dataemissaoconta = new com.toedter.calendar.JDateChooser();
         label4 = new java.awt.Label();
         datavencimentoconta = new com.toedter.calendar.JDateChooser();
         label5 = new java.awt.Label();
         valorconta = new javax.swing.JTextField();
         botaoSalvarconta = new javax.swing.JButton();
-        label14 = new java.awt.Label();
-        combotipo = new javax.swing.JComboBox<>();
-        combopagamento = new javax.swing.JComboBox<>();
-        label15 = new java.awt.Label();
         botaoCancelar = new javax.swing.JButton();
         label6 = new java.awt.Label();
         txtPesquisa = new br.com.pbd.modelos.JTextFieldHint(new JTextField(), "pesquisar", " Pesquise por Descrição  ");
@@ -107,8 +101,6 @@ public class Despesas extends javax.swing.JInternalFrame {
 
         label2.setText("Descricao :");
 
-        label3.setText("Data de Emissão :");
-
         label4.setText("Data Vencimento");
 
         label5.setText("Valor :");
@@ -127,14 +119,6 @@ public class Despesas extends javax.swing.JInternalFrame {
                 botaoSalvarcontaMouseExited(evt);
             }
         });
-
-        label14.setText("Tipo :");
-
-        combotipo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "credito", "debito" }));
-
-        combopagamento.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "dinheiro", "cheque", "cartâo" }));
-
-        label15.setText("Forma de Pagamento :");
 
         botaoCancelar.setBackground(new java.awt.Color(255, 255, 255));
         botaoCancelar.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
@@ -164,72 +148,47 @@ public class Despesas extends javax.swing.JInternalFrame {
                 .addGap(19, 19, 19)
                 .addGroup(panelContasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(panelContasLayout.createSequentialGroup()
+                        .addGap(571, 571, 571)
+                        .addComponent(botaoSalvarconta)
+                        .addGap(42, 42, 42)
+                        .addComponent(botaoCancelar)
+                        .addContainerGap(49, Short.MAX_VALUE))
+                    .addGroup(panelContasLayout.createSequentialGroup()
                         .addGroup(panelContasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(label2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(descricaoConta, javax.swing.GroupLayout.PREFERRED_SIZE, 406, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(46, 46, 46)
-                        .addGroup(panelContasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(dataemissaoconta, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(label3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(panelContasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(datavencimentoconta, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(label4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(27, 27, 27)
+                            .addComponent(label4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(datavencimentoconta, javax.swing.GroupLayout.PREFERRED_SIZE, 188, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(37, 37, 37)
                         .addGroup(panelContasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(label5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(valorconta, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(panelContasLayout.createSequentialGroup()
-                        .addGroup(panelContasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(combotipo, javax.swing.GroupLayout.PREFERRED_SIZE, 235, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(label14, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(60, 60, 60)
-                        .addGroup(panelContasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(panelContasLayout.createSequentialGroup()
-                                .addComponent(label15, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(0, 0, Short.MAX_VALUE))
-                            .addGroup(panelContasLayout.createSequentialGroup()
-                                .addComponent(combopagamento, javax.swing.GroupLayout.PREFERRED_SIZE, 219, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(64, 64, 64)
-                                .addComponent(botaoSalvarconta)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                        .addGap(38, 38, 38)
-                        .addComponent(botaoCancelar)
-                        .addGap(36, 36, 36)))
-                .addContainerGap())
+                            .addComponent(valorconta, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(97, 97, 97))))
         );
         panelContasLayout.setVerticalGroup(
             panelContasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelContasLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(panelContasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(label2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(label3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(label4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(label5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(panelContasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(descricaoConta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(dataemissaoconta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(datavencimentoconta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(valorconta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(panelContasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(label14, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(label15, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGroup(panelContasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(panelContasLayout.createSequentialGroup()
-                        .addGap(21, 21, 21)
-                        .addGroup(panelContasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(combotipo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(combopagamento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addContainerGap())
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelContasLayout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGroup(panelContasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(botaoSalvarconta)
-                            .addComponent(botaoCancelar))
-                        .addContainerGap())))
+                        .addGroup(panelContasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(label2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(label4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addGroup(panelContasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(descricaoConta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(datavencimentoconta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(panelContasLayout.createSequentialGroup()
+                        .addComponent(label5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(valorconta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(25, 25, 25)
+                .addGroup(panelContasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(botaoSalvarconta)
+                    .addComponent(botaoCancelar))
+                .addContainerGap())
         );
 
         label6.setText("Pesquisar :");
@@ -368,7 +327,7 @@ public class Despesas extends javax.swing.JInternalFrame {
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 312, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 108, Short.MAX_VALUE))
+                .addGap(0, 118, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -447,9 +406,6 @@ public class Despesas extends javax.swing.JInternalFrame {
     private javax.swing.JButton botaoFechar;
     private javax.swing.JButton botaoSalvarconta;
     private javax.swing.JButton botaoadicionar;
-    private javax.swing.JComboBox<String> combopagamento;
-    private javax.swing.JComboBox<String> combotipo;
-    private com.toedter.calendar.JDateChooser dataemissaoconta;
     private com.toedter.calendar.JDateChooser datavencimentoconta;
     private javax.swing.JTextField descricaoConta;
     private javax.swing.JLabel jLabel2;
@@ -457,10 +413,7 @@ public class Despesas extends javax.swing.JInternalFrame {
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel9;
     private javax.swing.JScrollPane jScrollPane2;
-    private java.awt.Label label14;
-    private java.awt.Label label15;
     private java.awt.Label label2;
-    private java.awt.Label label3;
     private java.awt.Label label4;
     private java.awt.Label label5;
     private java.awt.Label label6;
@@ -475,35 +428,16 @@ public class Despesas extends javax.swing.JInternalFrame {
     public void Limpar() {
 
         getDescricaoConta().setText("");
-        getDataemissaoconta().setDate(null);
         getDatavencimentoconta().setDate(null);
         getValorconta().setText("");
-        getCombopagamento().setSelectedIndex(0);
-        getCombotipo().setSelectedIndex(0);
 
     }
 
     public void preencherCadastro(ContaaPagar p) {
 
         getDescricaoConta().setText(p.getDescricao());
-        getDataemissaoconta().setDate(p.getData_emissao());
         getDatavencimentoconta().setDate(p.getData_vencimento());
         getValorconta().setText(p.getValor() + "");
-
-        for (int u = 0; u < getCombopagamento().getItemCount(); u++) {
-
-            if (getCombopagamento().getItemAt(u).equals(p.getForma_pagamento())) {
-                getCombopagamento().setSelectedItem(getCombopagamento().getItemAt(u));
-            }
-        }
-
-        for (int u = 0; u < getCombotipo().getItemCount(); u++) {
-
-            if (getCombotipo().getItemAt(u).equals(p.getTipo())) {
-                getCombotipo().setSelectedItem(getCombotipo().getItemAt(u));
-
-            }
-        }
 
     }
 
@@ -648,48 +582,6 @@ public class Despesas extends javax.swing.JInternalFrame {
     }
 
     /**
-     * @return the combopagamento
-     */
-    public javax.swing.JComboBox<String> getCombopagamento() {
-        return combopagamento;
-    }
-
-    /**
-     * @param combopagamento the combopagamento to set
-     */
-    public void setCombopagamento(javax.swing.JComboBox<String> combopagamento) {
-        this.combopagamento = combopagamento;
-    }
-
-    /**
-     * @return the combotipo
-     */
-    public javax.swing.JComboBox<String> getCombotipo() {
-        return combotipo;
-    }
-
-    /**
-     * @param combotipo the combotipo to set
-     */
-    public void setCombotipo(javax.swing.JComboBox<String> combotipo) {
-        this.combotipo = combotipo;
-    }
-
-    /**
-     * @return the dataemissaoconta
-     */
-    public com.toedter.calendar.JDateChooser getDataemissaoconta() {
-        return dataemissaoconta;
-    }
-
-    /**
-     * @param dataemissaoconta the dataemissaoconta to set
-     */
-    public void setDataemissaoconta(com.toedter.calendar.JDateChooser dataemissaoconta) {
-        this.dataemissaoconta = dataemissaoconta;
-    }
-
-    /**
      * @return the datavencimentoconta
      */
     public com.toedter.calendar.JDateChooser getDatavencimentoconta() {
@@ -787,33 +679,6 @@ public class Despesas extends javax.swing.JInternalFrame {
         this.jScrollPane2 = jScrollPane2;
     }
 
-    /**
-     * @return the label14
-     */
-    public java.awt.Label getLabel14() {
-        return label14;
-    }
-
-    /**
-     * @param label14 the label14 to set
-     */
-    public void setLabel14(java.awt.Label label14) {
-        this.label14 = label14;
-    }
-
-    /**
-     * @return the label15
-     */
-    public java.awt.Label getLabel15() {
-        return label15;
-    }
-
-    /**
-     * @param label15 the label15 to set
-     */
-    public void setLabel15(java.awt.Label label15) {
-        this.label15 = label15;
-    }
 
     /**
      * @return the label2
@@ -827,20 +692,6 @@ public class Despesas extends javax.swing.JInternalFrame {
      */
     public void setLabel2(java.awt.Label label2) {
         this.label2 = label2;
-    }
-
-    /**
-     * @return the label3
-     */
-    public java.awt.Label getLabel3() {
-        return label3;
-    }
-
-    /**
-     * @param label3 the label3 to set
-     */
-    public void setLabel3(java.awt.Label label3) {
-        this.label3 = label3;
     }
 
     /**

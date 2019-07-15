@@ -59,7 +59,7 @@ public class BuscarFornecedor extends javax.swing.JInternalFrame {
         tabelaFornecedor = new javax.swing.JTable();
         jPanel2 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
-        txtPesquisa = new br.com.pbd.modelos.JTextFieldHint(new JTextField(), "pesquisar", " Pesquise por Nome Fantasa CNPJ ou Razao Social ");
+        txtPesquisa = new br.com.pbd.modelos.JTextFieldHint(new JTextField(), "pesquisar", " Pesquise por Nome Fantasa ou Razao Social ");
 
         setPreferredSize(new java.awt.Dimension(962, 739));
 

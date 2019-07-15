@@ -45,6 +45,10 @@ public class Acompanhamento implements EntidadeBase {
     private Double braco;
     @Column(name = "antebraco", precision = 2, scale = 3, nullable = false)
     private Double antebraco;
+     @Column(name = "peso", precision = 2, scale = 3, nullable = false)
+    private Double peso;
+      @Column(name = "altura", precision = 2, scale = 3, nullable = false)
+    private Double altura;
     
 
     @ManyToOne // muitos para um
@@ -60,6 +64,20 @@ public class Acompanhamento implements EntidadeBase {
      */
     public void setId(Long id) {
         this.id = id;
+    }
+
+    /**
+     * @return the data
+     */
+    public Date getData() {
+        return data;
+    }
+
+    /**
+     * @param data the data to set
+     */
+    public void setData(Date data) {
+        this.data = data;
     }
 
     /**
@@ -133,14 +151,14 @@ public class Acompanhamento implements EntidadeBase {
     }
 
     /**
-     * @return the panturriha
+     * @return the panturrilha
      */
     public Double getPanturrilha() {
         return panturrilha;
     }
 
     /**
-     * @param panturriha the panturriha to set
+     * @param panturrilha the panturrilha to set
      */
     public void setPanturrilha(Double panturrilha) {
         this.panturrilha = panturrilha;
@@ -175,6 +193,34 @@ public class Acompanhamento implements EntidadeBase {
     }
 
     /**
+     * @return the peso
+     */
+    public Double getPeso() {
+        return peso;
+    }
+
+    /**
+     * @param peso the peso to set
+     */
+    public void setPeso(Double peso) {
+        this.peso = peso;
+    }
+
+    /**
+     * @return the altura
+     */
+    public Double getAltura() {
+        return altura;
+    }
+
+    /**
+     * @param altura the altura to set
+     */
+    public void setAltura(Double altura) {
+        this.altura = altura;
+    }
+
+    /**
      * @return the aluno
      */
     public Aluno getAluno() {
@@ -188,18 +234,6 @@ public class Acompanhamento implements EntidadeBase {
         this.aluno = aluno;
     }
 
-    /**
-     * @return the data
-     */
-    public Date getData() {
-        return data;
-    }
-
-    /**
-     * @param data the data to set
-     */
-    public void setData(Date data) {
-        this.data = data;
-    }
+  
 
 }

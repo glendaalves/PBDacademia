@@ -7,6 +7,7 @@ package br.com.pbd.Daos;
 
 import br.com.pbd.modelos.Aluno;
 import br.com.pbd.sql.SQLconexao;
+import java.sql.Date;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
@@ -30,5 +31,7 @@ public class DaoAluno {
         }
         return query.getResultList();
     }
+
+      
 
 }

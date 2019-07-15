@@ -57,11 +57,6 @@ public class ListaExercicio extends javax.swing.JInternalFrame {
         jPanel3 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         botaoFechar = new javax.swing.JButton();
-        botaocomfirmar = new javax.swing.JButton();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        tabelaadicionados = new javax.swing.JTable();
-        jPanel4 = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
         label1 = new java.awt.Label();
         pesquise = new br.com.pbd.modelos.JTextFieldHint(new JTextField(), "pesquisar", " Pesquise por Descrição Objetivo ou Nivel ");
 
@@ -148,60 +143,6 @@ public class ListaExercicio extends javax.swing.JInternalFrame {
             }
         });
 
-        botaocomfirmar.setBackground(new java.awt.Color(255, 255, 255));
-        botaocomfirmar.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
-        botaocomfirmar.setForeground(new java.awt.Color(0, 102, 102));
-        botaocomfirmar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/pbd/resource/Salva.png"))); // NOI18N
-        botaocomfirmar.setText("Comfirmar");
-        botaocomfirmar.setBorderPainted(false);
-        botaocomfirmar.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                botaocomfirmarMouseEntered(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                botaocomfirmarMouseExited(evt);
-            }
-        });
-        botaocomfirmar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                botaocomfirmarActionPerformed(evt);
-            }
-        });
-
-        tabelaadicionados.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {},
-                {},
-                {},
-                {}
-            },
-            new String [] {
-
-            }
-        ));
-        tabelaadicionados.setRowHeight(30);
-        jScrollPane1.setViewportView(tabelaadicionados);
-
-        jPanel4.setBackground(new java.awt.Color(153, 153, 153));
-
-        jLabel1.setFont(new java.awt.Font("DeVinne Txt BT", 1, 36)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setText("Exercicios Adicionados");
-
-        javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
-        jPanel4.setLayout(jPanel4Layout);
-        jPanel4Layout.setHorizontalGroup(
-            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-        );
-        jPanel4Layout.setVerticalGroup(
-            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel4Layout.createSequentialGroup()
-                .addComponent(jLabel1)
-                .addGap(0, 0, 0))
-        );
-
         label1.setText("Pesquisar :");
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
@@ -209,12 +150,6 @@ public class ListaExercicio extends javax.swing.JInternalFrame {
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jPanel9, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(botaocomfirmar)
-                .addGap(36, 36, 36)
-                .addComponent(botaoFechar)
-                .addGap(76, 76, 76))
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -222,15 +157,15 @@ public class ListaExercicio extends javax.swing.JInternalFrame {
                         .addComponent(labelcadastro2)
                         .addGap(0, 785, Short.MAX_VALUE))
                     .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jPanel4, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.TRAILING))
                 .addContainerGap())
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGap(42, 42, 42)
                 .addComponent(label1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(pesquise, javax.swing.GroupLayout.PREFERRED_SIZE, 714, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(pesquise, javax.swing.GroupLayout.PREFERRED_SIZE, 584, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(53, 53, 53)
+                .addComponent(botaoFechar)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
@@ -244,19 +179,13 @@ public class ListaExercicio extends javax.swing.JInternalFrame {
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(pesquise, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(pesquise, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(botaoFechar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addComponent(label1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(18, 18, 18)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 192, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(25, 25, 25)
-                .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(8, 8, 8)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 211, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(25, 25, 25)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(botaoFechar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(botaocomfirmar))
-                .addGap(117, 117, 117))
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 486, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(176, 176, 176))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -284,37 +213,20 @@ public class ListaExercicio extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_botaoFecharMouseExited
 
     private void botaoFecharActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoFecharActionPerformed
-        setVisible(false);
+        
     }//GEN-LAST:event_botaoFecharActionPerformed
-
-    private void botaocomfirmarMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_botaocomfirmarMouseEntered
-        // TODO add your handling code here:
-    }//GEN-LAST:event_botaocomfirmarMouseEntered
-
-    private void botaocomfirmarMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_botaocomfirmarMouseExited
-        // TODO add your handling code here:
-    }//GEN-LAST:event_botaocomfirmarMouseExited
-
-    private void botaocomfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaocomfirmarActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_botaocomfirmarActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton botaoFechar;
-    private javax.swing.JButton botaocomfirmar;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
-    private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel9;
-    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private java.awt.Label label1;
     private javax.swing.JLabel labelcadastro2;
     private javax.swing.JTextField pesquise;
-    private javax.swing.JTable tabelaadicionados;
     private javax.swing.JTable tabelaexercicio;
     // End of variables declaration//GEN-END:variables
 
@@ -331,35 +243,6 @@ public class ListaExercicio extends javax.swing.JInternalFrame {
     public void setBotaoFechar(javax.swing.JButton botaoFechar) {
         this.botaoFechar = botaoFechar;
     }
-
-    /**
-     * @return the botaocomfirmar
-     */
-    public javax.swing.JButton getBotaocomfirmar() {
-        return botaocomfirmar;
-    }
-
-    /**
-     * @param botaocomfirmar the botaocomfirmar to set
-     */
-    public void setBotaocomfirmar(javax.swing.JButton botaocomfirmar) {
-        this.botaocomfirmar = botaocomfirmar;
-    }
-
-    /**
-     * @return the jLabel1
-     */
-    public javax.swing.JLabel getjLabel1() {
-        return jLabel1;
-    }
-
-    /**
-     * @param jLabel1 the jLabel1 to set
-     */
-    public void setjLabel1(javax.swing.JLabel jLabel1) {
-        this.jLabel1 = jLabel1;
-    }
-
     /**
      * @return the jLabel2
      */
@@ -403,20 +286,6 @@ public class ListaExercicio extends javax.swing.JInternalFrame {
     }
 
     /**
-     * @return the jPanel4
-     */
-    public javax.swing.JPanel getjPanel4() {
-        return jPanel4;
-    }
-
-    /**
-     * @param jPanel4 the jPanel4 to set
-     */
-    public void setjPanel4(javax.swing.JPanel jPanel4) {
-        this.jPanel4 = jPanel4;
-    }
-
-    /**
      * @return the jPanel9
      */
     public javax.swing.JPanel getjPanel9() {
@@ -430,19 +299,7 @@ public class ListaExercicio extends javax.swing.JInternalFrame {
         this.jPanel9 = jPanel9;
     }
 
-    /**
-     * @return the jScrollPane1
-     */
-    public javax.swing.JScrollPane getjScrollPane1() {
-        return jScrollPane1;
-    }
 
-    /**
-     * @param jScrollPane1 the jScrollPane1 to set
-     */
-    public void setjScrollPane1(javax.swing.JScrollPane jScrollPane1) {
-        this.jScrollPane1 = jScrollPane1;
-    }
 
     /**
      * @return the jScrollPane2
@@ -500,19 +357,6 @@ public class ListaExercicio extends javax.swing.JInternalFrame {
         this.pesquise = pesquise;
     }
 
-    /**
-     * @return the tabelaadicionados
-     */
-    public javax.swing.JTable getTabelaadicionados() {
-        return tabelaadicionados;
-    }
-
-    /**
-     * @param tabelaadicionados the tabelaadicionados to set
-     */
-    public void setTabelaadicionados(javax.swing.JTable tabelaadicionados) {
-        this.tabelaadicionados = tabelaadicionados;
-    }
 
     /**
      * @return the tabelaexercicio

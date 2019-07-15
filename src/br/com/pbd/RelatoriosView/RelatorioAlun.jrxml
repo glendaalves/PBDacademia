@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="null" language="groovy" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="8d14826b-2509-4971-a416-2e23d26eed1f">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<style name="Title" forecolor="#FFFFFF" fontName="Times New Roman" fontSize="50" isBold="false" pdfFontName="Times-Bold"/>
+	<style name="SubTitle" forecolor="#CCCCCC" fontName="Times New Roman" fontSize="18" isBold="false" pdfFontName="Times-Roman"/>
+	<style name="Column header" forecolor="#666666" fontName="Times New Roman" fontSize="14" isBold="true" pdfFontName="Times-Roman"/>
+	<style name="Detail" mode="Transparent" fontName="Times New Roman" pdfFontName="Times-Roman"/>
+	<style name="Row" mode="Transparent" fontName="Times New Roman" pdfFontName="Times-Roman">
+		<conditionalStyle>
+			<conditionExpression><![CDATA[$V{REPORT_COUNT}%2 == 0]]></conditionExpression>
+			<style mode="Opaque" backcolor="#F0EFEF"/>
+		</conditionalStyle>
+	</style>
+	<parameter name="Situacao" class="java.lang.String"/>
+	<parameter name="DataInicio" class="java.util.Date"/>
+	<parameter name="DataFinal" class="java.util.Date"/>
+	<queryString>
+		<![CDATA[SELECT
+     aluno."cpf" AS aluno_cpf,
+     aluno."nome" AS aluno_nome,
+     aluno."rg" AS aluno_rg,
+     aluno."situacao" AS aluno_situacao,
+     aluno."data_matricula" AS aluno_data_matricula
+FROM
+     "public"."aluno" aluno
+Where  aluno."situacao" = $P{Situacao} and  aluno."data_matricula"  BETWEEN $P{DataInicio} and $P{DataFinal}]]>
+	</queryString>
+	<field name="aluno_cpf" class="java.lang.String"/>
+	<field name="aluno_nome" class="java.lang.String"/>
+	<field name="aluno_rg" class="java.lang.String"/>
+	<field name="aluno_situacao" class="java.lang.String"/>
+	<field name="aluno_data_matricula" class="java.sql.Date"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="198" splitType="Stretch">
+			<image>
+				<reportElement x="402" y="10" width="70" height="85" uuid="ce571335-977a-419f-a407-ca8ca18e0b07"/>
+				<imageExpression><![CDATA["C:\\Users\\Glenda Alves de Lima\\Documents\\NetBeansProjects\\PBDAcademia\\src\\br\\com\\pbd\\resource\\Use.png"]]></imageExpression>
+			</image>
+			<staticText>
+				<reportElement style="Title" x="10" y="10" width="370" height="66" forecolor="#000000" backcolor="#FFFFFF" uuid="59999c60-b1a3-44c2-a555-fb86ca97a6c2"/>
+				<textElement>
+					<font size="48" isBold="false"/>
+				</textElement>
+				<text><![CDATA[Corpo Em Forma]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="SubTitle" x="283" y="76" width="97" height="29" forecolor="#000000" uuid="2e14dc51-42f1-4d1f-8cfe-3da18539f350"/>
+				<textElement>
+					<font size="22" isBold="false"/>
+				</textElement>
+				<text><![CDATA[Academia]]></text>
+			</staticText>
+			<textField pattern="EEEEE dd MMMMM yyyy">
+				<reportElement x="380" y="117" width="144" height="20" forecolor="#000000" uuid="456848fc-0477-4645-be4a-0028896ac2d5"/>
+				<textElement textAlignment="Right">
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement style="SubTitle" x="141" y="150" width="239" height="29" forecolor="#000000" uuid="6d2a9ec3-1d3e-47b3-ba26-f8f3793de918"/>
+				<textElement>
+					<font fontName="SansSerif" size="22" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Relatorio dos Alunos]]></text>
+			</staticText>
+		</band>
+	</title>
+	<pageHeader>
+		<band splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="34" splitType="Stretch">
+			<staticText>
+				<reportElement style="Column header" x="295" y="7" width="111" height="18" forecolor="#000000" uuid="9ceb2bf5-afdc-4b0b-a08c-02553fc2c942"/>
+				<textElement>
+					<font fontName="SansSerif" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Cpf ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Column header" x="156" y="7" width="111" height="18" forecolor="#000000" uuid="314b2bfe-ef86-42b2-b538-d9b861dacf65"/>
+				<textElement>
+					<font fontName="SansSerif" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Nome]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Column header" x="434" y="7" width="111" height="18" forecolor="#000000" uuid="be8ba1f1-bb82-4312-aa52-dbe2b60cc261"/>
+				<textElement>
+					<font fontName="SansSerif" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Rg]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Column header" x="10" y="7" width="131" height="18" forecolor="#000000" uuid="5b9960e9-d3f6-497d-89bd-6f3ff6a53480"/>
+				<textElement>
+					<font fontName="SansSerif" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Data Matricula]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="22" splitType="Stretch">
+			<frame>
+				<reportElement style="Row" mode="Opaque" x="0" y="0" width="555" height="18" uuid="d6fbbf2c-ff1b-440b-8300-031d4468758a"/>
+				<textField isStretchWithOverflow="true">
+					<reportElement style="Detail" positionType="Float" x="156" y="0" width="111" height="18" uuid="e217993f-31ad-4a42-b0aa-b54e65c15411"/>
+					<textElement>
+						<font size="14"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{aluno_nome}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true">
+					<reportElement style="Detail" positionType="Float" x="434" y="0" width="111" height="18" uuid="73785b5b-4413-4ee7-b9e3-a42a66c0406d"/>
+					<textElement>
+						<font size="14"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{aluno_rg}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true">
+					<reportElement style="Detail" positionType="Float" x="10" y="0" width="111" height="18" uuid="c3e154d9-95c6-4008-8adf-da9b306ebbff"/>
+					<textElement>
+						<font size="14"/>
+					</textElement>
+					<textFieldExpression><![CDATA[new java.text.SimpleDateFormat("dd/MM/yyyy").format($F{aluno_data_matricula})]]></textFieldExpression>
+				</textField>
+			</frame>
+			<textField isStretchWithOverflow="true">
+				<reportElement style="Detail" positionType="Float" x="295" y="0" width="111" height="18" uuid="0fa5398d-85ce-49c6-b93b-29c6a5f40cbb"/>
+				<textElement>
+					<font size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{aluno_cpf}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="9" splitType="Stretch">
+			<line>
+				<reportElement positionType="FixRelativeToBottom" x="0" y="3" width="555" height="1" uuid="3b73ac16-5652-425b-aa74-705623ca4f7a"/>
+				<graphicElement>
+					<pen lineWidth="0.5" lineColor="#999999"/>
+				</graphicElement>
+			</line>
+		</band>
+	</columnFooter>
+	<pageFooter>
+		<band height="25" splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band splitType="Stretch"/>
+	</summary>
+</jasperReport>

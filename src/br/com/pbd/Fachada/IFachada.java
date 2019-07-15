@@ -52,6 +52,7 @@ public interface IFachada {
     public List<Exercicio> Busca(String nome);
     public List<Exercicio> usandoAluno(Aluno aluno);
     public List<Exercicio> usandoIDE(Aluno aluno);
+    public List<Exercicio> BuscaImc(String nome);
     
     public void salvar(Acompanhamento acompanhamento);
     public void ativarDesativar(Acompanhamento acompanhamento);
@@ -65,7 +66,7 @@ public interface IFachada {
     
     public void salvar(Fornecedor fornecedor);
     public List<Fornecedor> getAllFor();
-    public void ativarDesativar(Fornecedor fornecedor);
+    public boolean ativarDesativar(Fornecedor fornecedor);
     public List<Fornecedor> BuscaFor(String nome);
     
     public void salvar(Funcionario funcionario);
@@ -83,7 +84,7 @@ public interface IFachada {
     
     public void salvar(Produto produto);
     public List<Produto> getAllP();
-    public void ativarDesativar(Produto produto);
+    public boolean ativarDesativar(Produto produto);
     public List<Produto> Buscapro(String nome);
     public List<Produto> BuscaP(String nome) ;
     public List<Produto> BuscarQuantidade() ;
@@ -93,7 +94,7 @@ public interface IFachada {
     
     public void salvar(Professor professor);
     public List<Professor> getAllPro();
-    public void ativarDesativar(Professor professor);
+    public boolean ativarDesativar(Professor professor);
     public List<Professor> buscaP(String nome); 
     
     public void salvar(Tarefa tarefa);

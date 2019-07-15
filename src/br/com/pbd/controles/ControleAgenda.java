@@ -190,7 +190,7 @@ public class ControleAgenda extends MouseAdapter implements ActionListener {
     }
 
     public void preencherProfessor() {
-        professors = new DaoGenerico<Professor>().getAll(Professor.class);
+        professors = fachada.getAllPro();
         principal.getAgendaExercicios().getComboprofessor().removeAllItems();
         for (Professor pro : professors) {
             principal.getAgendaExercicios().getComboprofessor().addItem(pro.getNome());
@@ -227,8 +227,8 @@ public class ControleAgenda extends MouseAdapter implements ActionListener {
         String turno = "Não Definido", professor = "Não Escolhido", horario = "Não Definido";
 
         try {
-            String[] colunas = new String[]{"Aluno", "Professor", "Dias", "Turno", "Horario", "Editar", "Ecluir"};
-            Object[][] dados = new Object[agendas.size()][7];
+            String[] colunas = new String[]{"Aluno", "Professor", "Dias", "Turno", "Horario", "Editar"};
+            Object[][] dados = new Object[agendas.size()][6];
             for (Agenda a : agendas) {
 
                 if (a.getProfessor() == null) {
@@ -238,7 +238,6 @@ public class ControleAgenda extends MouseAdapter implements ActionListener {
                     dados[i][3] = turno;
                     dados[i][4] = horario;
                     dados[i][5] = principal.getAgendaExercicios().getBtnEd();
-                    dados[i][6] = principal.getAgendaExercicios().getBtnEx();
 
                 } else {
                     dados[i][0] = aluno.getNome();
@@ -247,7 +246,6 @@ public class ControleAgenda extends MouseAdapter implements ActionListener {
                     dados[i][3] = a.getTurno();
                     dados[i][4] = a.getHorario();
                     dados[i][5] = principal.getAgendaExercicios().getBtnEd();
-                    dados[i][6] = principal.getAgendaExercicios().getBtnEx();
 
                 }
                 i++;

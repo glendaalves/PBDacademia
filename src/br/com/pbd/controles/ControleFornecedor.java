@@ -5,7 +5,10 @@
  */
 package br.com.pbd.controles;
 
+import br.com.pbd.DaoView.DaoViewFornecedor;
+import br.com.pbd.Daos.DaoFornecedor;
 import br.com.pbd.Fachada.Fachada;
+import br.com.pbd.Visoes.ViewFornecedor;
 import br.com.pbd.modelos.Dados;
 import br.com.pbd.modelos.Fornecedor;
 import br.com.pbd.modelos.Produto;
@@ -39,7 +42,7 @@ public class ControleFornecedor extends MouseAdapter implements ActionListener {
 
     private Principal principal;
     private Fornecedor f;
-    private List<Fornecedor> fornecedors;
+    private List<ViewFornecedor> viewFornecedors;
     private int escolha;
     private final int salvar = 0, editar = 1, excluir = 2;
     private Mensagens mensagens;
@@ -61,8 +64,9 @@ public class ControleFornecedor extends MouseAdapter implements ActionListener {
 
             @Override
             public void keyReleased(KeyEvent e) {
-                fornecedors = fachada.BuscaFor(principal.getBuscarFornecedor().getTxtPesquisa().getText());
-                preencherTabela(fornecedors);
+              
+                viewFornecedors = new DaoViewFornecedor().BuscaP(principal.getBuscarFornecedor().getTxtPesquisa().getText());
+                preencherTabela(viewFornecedors);
             }
 
         });
@@ -74,17 +78,25 @@ public class ControleFornecedor extends MouseAdapter implements ActionListener {
         if (e.getSource() == principal.getBuscarFornecedor().getTabelaFornecedor()) {
 
             int ro = retornaIndice(principal.getBuscarFornecedor().getTabelaFornecedor(), e);
-            f = fornecedors.get(ro);
+            int id = viewFornecedors.get(ro).getId();
+            f = new DaoFornecedor().bucarPorId(id);
             if (escolha == editar) {
 
-                fornecedors = fachada.getAllFor();
-                preencherTabela(fornecedors);
+                viewFornecedors = new DaoViewFornecedor().Getall();
+                preencherTabela(viewFornecedors);
                 principal.getBuscarFornecedor().getTxtPesquisa().setText("");
                 principal.getCadastroFornecedor().setVisible(true);
                 principal.getCadastroFornecedor().getLabelcadastro().setText("ATUALIZAR FORNECEDOR");
                 principal.getCadastroFornecedor().preencherCadastro(f);
             }
             if (escolha == excluir) {
+                if (fachada.ativarDesativar(f)) {
+                    viewFornecedors = new DaoViewFornecedor().Getall();
+                    preencherTabela(viewFornecedors);
+                    mensagens.mensagens("Exclusão Realizada", "info");
+                } else {
+                    mensagens.mensagens("Exclusão Não Permitida ", "advertencia");
+                }
                 principal.getBuscarFornecedor().getTxtPesquisa().setText("");
             }
 
@@ -98,8 +110,8 @@ public class ControleFornecedor extends MouseAdapter implements ActionListener {
             escolha = salvar;
         }
         if (e.getSource() == principal.getBotaoFornecedor()) {
-            fornecedors = fachada.getAllFor();
-            preencherTabela(fornecedors);
+            viewFornecedors = new DaoViewFornecedor().Getall();
+            preencherTabela(viewFornecedors);
             principal.Desativar();
             principal.getBuscarFornecedor().getTxtPesquisa().setText("");
             principal.getBuscarFornecedor().getTxtPesquisa().grabFocus();
@@ -110,8 +122,8 @@ public class ControleFornecedor extends MouseAdapter implements ActionListener {
         if (e.getSource() == principal.getCadastroFornecedor().getBotaoCancelar()) {
             principal.getCadastroFornecedor().Limpar();
             principal.getCadastroFornecedor().getLabelcadastro().setText("CADASTRAR FORNECEDOR");
-            fornecedors = fachada.getAllFor();
-            preencherTabela(fornecedors);
+            viewFornecedors = new DaoViewFornecedor().Getall();
+            preencherTabela(viewFornecedors);
             principal.getBuscarFornecedor().getTxtPesquisa().setText("");
             principal.getBuscarFornecedor().getTxtPesquisa().grabFocus();
         }
@@ -161,8 +173,8 @@ public class ControleFornecedor extends MouseAdapter implements ActionListener {
             fornecedor.setProdutos(new ArrayList<Produto>());
             mensagens.mensagens("Cadastrado com Sucesso", "info");
             fachada.salvar(fornecedor);
-            fornecedors = fachada.getAllFor();
-            preencherTabela(fornecedors);
+            viewFornecedors = new DaoViewFornecedor().Getall();
+            preencherTabela(viewFornecedors);
             principal.getCadastroFornecedor().setVisible(false);
             principal.getCadastroFornecedor().Limpar();
 
@@ -176,23 +188,22 @@ public class ControleFornecedor extends MouseAdapter implements ActionListener {
 
     }
 
-    public void preencherTabela(List<Fornecedor> lista) {
+    public void preencherTabela(List<ViewFornecedor> lista) {
 
         principal.getBuscarFornecedor().getTabelaFornecedor().setDefaultRenderer(Object.class, new Render());
 
         try {
-            String[] colunas = new String[]{"Nome Fantasia", "Razão Social", "Cnpj", "Email", "Celular", "Editar", "Ecluir"};
+            String[] colunas = new String[]{"Nome Fantasia", "Razão Social", "Cnpj", "Celular", "Editar", "Ecluir"};
             Object[][] dados = new Object[lista.size()][7];
             for (int i = 0; i < lista.size(); i++) {
 
-                Fornecedor f = lista.get(i);
+                ViewFornecedor f = lista.get(i);
                 dados[i][0] = f.getNome_fantasia();
                 dados[i][1] = f.getRazao_social();
                 dados[i][2] = f.getCnpj();
-                dados[i][3] = f.getDados().getEmail();
-                dados[i][4] = f.getDados().getCelular();
-                dados[i][5] = principal.getBuscarFornecedor().getBtnEd();
-                dados[i][6] = principal.getBuscarFornecedor().getBtnEx();
+                dados[i][3] = f.getCelular();
+                dados[i][4] = principal.getBuscarFornecedor().getBtnEd();
+                dados[i][5] = principal.getBuscarFornecedor().getBtnEx();
 
             }
             DefaultTableModel dataModel = new DefaultTableModel(dados, colunas) {
@@ -212,7 +223,7 @@ public class ControleFornecedor extends MouseAdapter implements ActionListener {
     public void EditarFornecedor(Fornecedor fo) {
 
         try {
-            
+
             fo.getDados().setBairro(principal.getCadastroFornecedor().getTxtbairro().getText());
             fo.getDados().setRua(principal.getCadastroFornecedor().getTxtrua().getText());
             fo.getDados().setCep(principal.getCadastroFornecedor().getTxtCep().getText());
@@ -241,8 +252,8 @@ public class ControleFornecedor extends MouseAdapter implements ActionListener {
             fachada.salvar(fo);
             mensagens.mensagens("Editado com Sucesso", "info");
             principal.getBuscarFornecedor().getTxtPesquisa().setText("");
-            fornecedors = fachada.getAllFor();
-            preencherTabela(fornecedors);
+            viewFornecedors = new DaoViewFornecedor().Getall();
+            preencherTabela(viewFornecedors);
             principal.getCadastroFornecedor().setVisible(false);
             principal.getCadastroFornecedor().Limpar();
             principal.getCadastroFornecedor().getLabelcadastro().setText("CADASTRAR FORNECEDOR");

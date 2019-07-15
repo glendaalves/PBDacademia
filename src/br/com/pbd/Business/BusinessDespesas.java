@@ -8,27 +8,29 @@ package br.com.pbd.Business;
 import br.com.pbd.Daos.DaoDespesas;
 import br.com.pbd.Daos.DaoGenerico;
 import br.com.pbd.modelos.ContaaPagar;
+import br.com.pbd.view.Despesas;
 import java.util.List;
 
 /**
  *
  * @author Glenda Alves de Lima
  */
-public class BusinessDespesas implements IBusinessDespesas {
+public class BusinessDespesas extends DaoGenerico<ContaaPagar> implements IBusinessDespesas {
 
     @Override
     public void salvar(ContaaPagar contaaPagar) {
-        new DaoGenerico<ContaaPagar>().salvar_ou_atualizar(contaaPagar);
+        salvar_ou_atualizar(contaaPagar);
     }
 
     @Override
     public List<ContaaPagar> getAll() {
-        return (new DaoGenerico<ContaaPagar>().getAll(ContaaPagar.class));
+        return getAll(ContaaPagar.class);
     }
 
     @Override
     public void ativarDesativar(ContaaPagar contaaPagar) {
-        new DaoGenerico<ContaaPagar>().salvar_ou_atualizar(contaaPagar);
+        remover(ContaaPagar.class, contaaPagar.getId());
+
     }
 
     @Override
