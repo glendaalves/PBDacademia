@@ -11,12 +11,12 @@ import java.awt.Color;
  *
  * @author Glenda Alves de Lima
  */
-public class RelatorioFornecedor extends javax.swing.JInternalFrame {
+public class RelatorioExercicio extends javax.swing.JInternalFrame {
 
     /**
-     * Creates new form RelatorioFornecedor
+     * Creates new form RelatorioExercicio
      */
-    public RelatorioFornecedor() {
+    public RelatorioExercicio() {
         initComponents();
     }
 
@@ -33,21 +33,18 @@ public class RelatorioFornecedor extends javax.swing.JInternalFrame {
         labelcadastro2 = new javax.swing.JLabel();
         jPanel9 = new javax.swing.JPanel();
         labelcadastro3 = new javax.swing.JLabel();
-        label1 = new java.awt.Label();
-        label2 = new java.awt.Label();
-        calendarioIn = new com.toedter.calendar.JCalendar();
-        calendarioFin = new com.toedter.calendar.JCalendar();
         botaoconfirmar = new javax.swing.JButton();
         botaoCancelar = new javax.swing.JButton();
         labelcadastro5 = new javax.swing.JLabel();
         jPanel11 = new javax.swing.JPanel();
+        combotreino = new javax.swing.JComboBox<>();
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
         jPanel1.setPreferredSize(new java.awt.Dimension(871, 559));
 
         labelcadastro2.setFont(new java.awt.Font("Felix Titling", 0, 24)); // NOI18N
         labelcadastro2.setForeground(new java.awt.Color(0, 102, 102));
-        labelcadastro2.setText("Relatorio Fornecedor");
+        labelcadastro2.setText("Relatorio Exercicio");
 
         jPanel9.setBackground(new java.awt.Color(153, 153, 153));
 
@@ -64,11 +61,7 @@ public class RelatorioFornecedor extends javax.swing.JInternalFrame {
 
         labelcadastro3.setFont(new java.awt.Font("Felix Titling", 1, 14)); // NOI18N
         labelcadastro3.setForeground(new java.awt.Color(0, 102, 102));
-        labelcadastro3.setText("escolha um periodo :");
-
-        label1.setText("Inicial :");
-
-        label2.setText("Final :");
+        labelcadastro3.setText("escolha um Tipo  :");
 
         botaoconfirmar.setBackground(new java.awt.Color(255, 255, 255));
         botaoconfirmar.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
@@ -81,6 +74,11 @@ public class RelatorioFornecedor extends javax.swing.JInternalFrame {
             }
             public void mouseExited(java.awt.event.MouseEvent evt) {
                 botaoconfirmarMouseExited(evt);
+            }
+        });
+        botaoconfirmar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botaoconfirmarActionPerformed(evt);
             }
         });
 
@@ -105,7 +103,7 @@ public class RelatorioFornecedor extends javax.swing.JInternalFrame {
 
         labelcadastro5.setFont(new java.awt.Font("Felix Titling", 1, 14)); // NOI18N
         labelcadastro5.setForeground(new java.awt.Color(0, 102, 102));
-        labelcadastro5.setText("Relatorio dos Fornecedores em um periodo");
+        labelcadastro5.setText("Relatorio dos exercicio por tipo");
 
         jPanel11.setBackground(new java.awt.Color(153, 153, 153));
 
@@ -120,6 +118,8 @@ public class RelatorioFornecedor extends javax.swing.JInternalFrame {
             .addGap(0, 9, Short.MAX_VALUE)
         );
 
+        combotreino.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "BAIXO PESO", "NORMAL", "SOBREPESO", "OBESO I", "OBESO II", "OBESO III" }));
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -128,33 +128,30 @@ public class RelatorioFornecedor extends javax.swing.JInternalFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addComponent(labelcadastro2)
                 .addGap(0, 0, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(botaoconfirmar)
-                .addGap(18, 18, 18)
-                .addComponent(botaoCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(65, 65, 65))
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanel11, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(11, 11, 11)
-                        .addComponent(labelcadastro5)
-                        .addGap(0, 445, Short.MAX_VALUE)))
+                        .addContainerGap()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jPanel11, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(11, 11, 11)
+                                .addComponent(labelcadastro5)
+                                .addGap(0, 0, Short.MAX_VALUE))))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(52, 52, 52)
+                                .addComponent(labelcadastro3)
+                                .addGap(27, 27, 27)
+                                .addComponent(combotreino, javax.swing.GroupLayout.PREFERRED_SIZE, 201, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(313, 313, 313)
+                                .addComponent(botaoconfirmar)
+                                .addGap(54, 54, 54)
+                                .addComponent(botaoCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(0, 319, Short.MAX_VALUE)))
                 .addContainerGap())
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(38, 38, 38)
-                .addComponent(labelcadastro3)
-                .addGap(32, 32, 32)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(label1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(calendarioIn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(59, 59, 59)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(calendarioFin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(label2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -166,22 +163,15 @@ public class RelatorioFornecedor extends javax.swing.JInternalFrame {
                 .addComponent(labelcadastro5, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jPanel11, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(53, 53, 53)
+                .addGap(86, 86, 86)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(combotreino, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(labelcadastro3, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(77, 77, 77)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(labelcadastro3, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(label1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(calendarioIn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(calendarioFin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addComponent(label2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 92, Short.MAX_VALUE)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(botaoCancelar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(botaoconfirmar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(35, 35, 35))
+                    .addComponent(botaoconfirmar)
+                    .addComponent(botaoCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(176, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -222,17 +212,18 @@ public class RelatorioFornecedor extends javax.swing.JInternalFrame {
 
     }//GEN-LAST:event_botaoCancelarActionPerformed
 
+    private void botaoconfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoconfirmarActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_botaoconfirmarActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton botaoCancelar;
     private javax.swing.JButton botaoconfirmar;
-    private com.toedter.calendar.JCalendar calendarioFin;
-    private com.toedter.calendar.JCalendar calendarioIn;
+    private javax.swing.JComboBox<String> combotreino;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel11;
     private javax.swing.JPanel jPanel9;
-    private java.awt.Label label1;
-    private java.awt.Label label2;
     private javax.swing.JLabel labelcadastro2;
     private javax.swing.JLabel labelcadastro3;
     private javax.swing.JLabel labelcadastro5;
@@ -267,31 +258,17 @@ public class RelatorioFornecedor extends javax.swing.JInternalFrame {
     }
 
     /**
-     * @return the calendarioFin
+     * @return the combotreino
      */
-    public com.toedter.calendar.JCalendar getCalendarioFin() {
-        return calendarioFin;
+    public javax.swing.JComboBox<String> getCombotreino() {
+        return combotreino;
     }
 
     /**
-     * @param calendarioFin the calendarioFin to set
+     * @param combotreino the combotreino to set
      */
-    public void setCalendarioFin(com.toedter.calendar.JCalendar calendarioFin) {
-        this.calendarioFin = calendarioFin;
-    }
-
-    /**
-     * @return the calendarioIn
-     */
-    public com.toedter.calendar.JCalendar getCalendarioIn() {
-        return calendarioIn;
-    }
-
-    /**
-     * @param calendarioIn the calendarioIn to set
-     */
-    public void setCalendarioIn(com.toedter.calendar.JCalendar calendarioIn) {
-        this.calendarioIn = calendarioIn;
+    public void setCombotreino(javax.swing.JComboBox<String> combotreino) {
+        this.combotreino = combotreino;
     }
 
     /**
@@ -309,6 +286,20 @@ public class RelatorioFornecedor extends javax.swing.JInternalFrame {
     }
 
     /**
+     * @return the jPanel11
+     */
+    public javax.swing.JPanel getjPanel11() {
+        return jPanel11;
+    }
+
+    /**
+     * @param jPanel11 the jPanel11 to set
+     */
+    public void setjPanel11(javax.swing.JPanel jPanel11) {
+        this.jPanel11 = jPanel11;
+    }
+
+    /**
      * @return the jPanel9
      */
     public javax.swing.JPanel getjPanel9() {
@@ -320,34 +311,6 @@ public class RelatorioFornecedor extends javax.swing.JInternalFrame {
      */
     public void setjPanel9(javax.swing.JPanel jPanel9) {
         this.jPanel9 = jPanel9;
-    }
-
-    /**
-     * @return the label1
-     */
-    public java.awt.Label getLabel1() {
-        return label1;
-    }
-
-    /**
-     * @param label1 the label1 to set
-     */
-    public void setLabel1(java.awt.Label label1) {
-        this.label1 = label1;
-    }
-
-    /**
-     * @return the label2
-     */
-    public java.awt.Label getLabel2() {
-        return label2;
-    }
-
-    /**
-     * @param label2 the label2 to set
-     */
-    public void setLabel2(java.awt.Label label2) {
-        this.label2 = label2;
     }
 
     /**
@@ -376,6 +339,20 @@ public class RelatorioFornecedor extends javax.swing.JInternalFrame {
      */
     public void setLabelcadastro3(javax.swing.JLabel labelcadastro3) {
         this.labelcadastro3 = labelcadastro3;
+    }
+
+    /**
+     * @return the labelcadastro5
+     */
+    public javax.swing.JLabel getLabelcadastro5() {
+        return labelcadastro5;
+    }
+
+    /**
+     * @param labelcadastro5 the labelcadastro5 to set
+     */
+    public void setLabelcadastro5(javax.swing.JLabel labelcadastro5) {
+        this.labelcadastro5 = labelcadastro5;
     }
 
 

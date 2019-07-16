@@ -38,9 +38,7 @@
      aluno."data_matricula" AS aluno_data_matricula,
      aluno."data_nascimento" AS aluno_data_nascimento,
      aluno."estado_civil" AS aluno_estado_civil,
-     aluno."nivel" AS aluno_nivel,
      aluno."nome" AS aluno_nome,
-     aluno."plano" AS aluno_plano,
      aluno."rg" AS aluno_rg,
      aluno."sexo" AS aluno_sexo,
      aluno."situacao" AS aluno_situacao,
@@ -73,9 +71,7 @@ where professor."nome" = $P{Professor}]]>
 	<field name="aluno_data_matricula" class="java.sql.Date"/>
 	<field name="aluno_data_nascimento" class="java.sql.Date"/>
 	<field name="aluno_estado_civil" class="java.lang.String"/>
-	<field name="aluno_nivel" class="java.lang.String"/>
 	<field name="aluno_nome" class="java.lang.String"/>
-	<field name="aluno_plano" class="java.lang.String"/>
 	<field name="aluno_rg" class="java.lang.String"/>
 	<field name="aluno_sexo" class="java.lang.String"/>
 	<field name="aluno_situacao" class="java.lang.String"/>

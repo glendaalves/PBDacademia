@@ -65,11 +65,6 @@ public class CadastroAlunos extends javax.swing.JInternalFrame {
         label14 = new java.awt.Label();
         label15 = new java.awt.Label();
         label16 = new java.awt.Label();
-        jPanel3 = new javax.swing.JPanel();
-        combonivel = new javax.swing.JComboBox<>();
-        label17 = new java.awt.Label();
-        label18 = new java.awt.Label();
-        combotreino = new javax.swing.JComboBox<>();
         botaoSalvar = new javax.swing.JButton();
         botaoCancelar = new javax.swing.JButton();
         jPanel4 = new javax.swing.JPanel();
@@ -174,7 +169,7 @@ public class CadastroAlunos extends javax.swing.JInternalFrame {
                         .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(label10, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(Txtrg, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 59, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 43, Short.MAX_VALUE)
                         .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(comboPosicao, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(label7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -309,45 +304,6 @@ public class CadastroAlunos extends javax.swing.JInternalFrame {
                 .addGap(15, 15, 15))
         );
 
-        jPanel3.setBackground(new java.awt.Color(255, 255, 255));
-        jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Treno", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 11))); // NOI18N
-        jPanel3.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-
-        combonivel.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "INICIANTE", "INTERMEDIARIO", "AVANCADO" }));
-
-        label17.setText("Nivel :");
-
-        label18.setText("Prioridade :");
-
-        combotreino.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "EMAGRECIMENTO", "DEFINICAO DE MUSCULO", "GANHO DE MASSA" }));
-
-        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
-        jPanel3.setLayout(jPanel3Layout);
-        jPanel3Layout.setHorizontalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel3Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(label17, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(22, 22, 22)
-                .addComponent(combonivel, javax.swing.GroupLayout.PREFERRED_SIZE, 201, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(35, 35, 35)
-                .addComponent(label18, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(combotreino, javax.swing.GroupLayout.PREFERRED_SIZE, 201, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-        jPanel3Layout.setVerticalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel3Layout.createSequentialGroup()
-                .addGap(30, 30, 30)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(combotreino, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(label18, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(label17, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(combonivel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(21, 21, 21))
-        );
-
         botaoSalvar.setBackground(new java.awt.Color(255, 255, 255));
         botaoSalvar.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         botaoSalvar.setForeground(new java.awt.Color(0, 102, 102));
@@ -462,16 +418,14 @@ public class CadastroAlunos extends javax.swing.JInternalFrame {
                             .addComponent(jPanel9, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addContainerGap())
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(botaoSalvar)
-                        .addGap(18, 18, 18)
-                        .addComponent(botaoCancelar)
-                        .addGap(107, 107, 107))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addContainerGap())))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(botaoSalvar)
+                .addGap(18, 18, 18)
+                .addComponent(botaoCancelar)
+                .addGap(114, 114, 114))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -486,13 +440,11 @@ public class CadastroAlunos extends javax.swing.JInternalFrame {
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(63, 63, 63)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(botaoSalvar)
                     .addComponent(botaoCancelar))
-                .addGap(70, 70, 70))
+                .addContainerGap(112, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -505,7 +457,7 @@ public class CadastroAlunos extends javax.swing.JInternalFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 715, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 709, Short.MAX_VALUE)
         );
 
         pack();
@@ -561,12 +513,9 @@ public class CadastroAlunos extends javax.swing.JInternalFrame {
     private javax.swing.JButton botaoSalvar;
     private javax.swing.JComboBox<String> comboEstadoCivil;
     private javax.swing.JComboBox<String> comboPosicao;
-    private javax.swing.JComboBox<String> combonivel;
-    private javax.swing.JComboBox<String> combotreino;
     private com.toedter.calendar.JDateChooser datanascimento;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
-    private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel7;
     private javax.swing.JPanel jPanel9;
@@ -577,8 +526,6 @@ public class CadastroAlunos extends javax.swing.JInternalFrame {
     private java.awt.Label label14;
     private java.awt.Label label15;
     private java.awt.Label label16;
-    private java.awt.Label label17;
-    private java.awt.Label label18;
     private java.awt.Label label22;
     private java.awt.Label label23;
     private java.awt.Label label24;
@@ -617,9 +564,7 @@ public class CadastroAlunos extends javax.swing.JInternalFrame {
         getTxtNome().setText("");
         getComboEstadoCivil().setSelectedIndex(0);
         getComboPosicao().setSelectedIndex(0);
-        getCombonivel().setSelectedIndex(0);
         getCombosexo().setSelectedIndex(0);
-        getCombotreino().setSelectedIndex(0);
         getTxtUf().setSelectedIndex(0);
         getDatanascimento().setDate(null);
 
@@ -785,33 +730,6 @@ public class CadastroAlunos extends javax.swing.JInternalFrame {
         this.comboPosicao = comboPosicao;
     }
 
-    /**
-     * @return the combonivel
-     */
-    public javax.swing.JComboBox<String> getCombonivel() {
-        return combonivel;
-    }
-
-    /**
-     * @param combonivel the combonivel to set
-     */
-    public void setCombonivel(javax.swing.JComboBox<String> combonivel) {
-        this.combonivel = combonivel;
-    }
-
-    /**
-     * @return the combotreino
-     */
-    public javax.swing.JComboBox<String> getCombotreino() {
-        return combotreino;
-    }
-
-    /**
-     * @param combotreino the combotreino to set
-     */
-    public void setCombotreino(javax.swing.JComboBox<String> combotreino) {
-        this.combotreino = combotreino;
-    }
 
     /**
      * @return the datanascimento
@@ -855,19 +773,7 @@ public class CadastroAlunos extends javax.swing.JInternalFrame {
         this.jPanel2 = jPanel2;
     }
 
-    /**
-     * @return the jPanel3
-     */
-    public javax.swing.JPanel getjPanel3() {
-        return jPanel3;
-    }
 
-    /**
-     * @param jPanel3 the jPanel3 to set
-     */
-    public void setjPanel3(javax.swing.JPanel jPanel3) {
-        this.jPanel3 = jPanel3;
-    }
 
     /**
      * @return the jPanel4
@@ -1009,33 +915,7 @@ public class CadastroAlunos extends javax.swing.JInternalFrame {
         this.label16 = label16;
     }
 
-    /**
-     * @return the label17
-     */
-    public java.awt.Label getLabel17() {
-        return label17;
-    }
 
-    /**
-     * @param label17 the label17 to set
-     */
-    public void setLabel17(java.awt.Label label17) {
-        this.label17 = label17;
-    }
-
-    /**
-     * @return the label18
-     */
-    public java.awt.Label getLabel18() {
-        return label18;
-    }
-
-    /**
-     * @param label18 the label18 to set
-     */
-    public void setLabel18(java.awt.Label label18) {
-        this.label18 = label18;
-    }
 
     /**
      * @return the label22

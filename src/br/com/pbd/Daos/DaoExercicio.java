@@ -35,17 +35,6 @@ public class DaoExercicio {
         return query.getResultList();
     }
 
-    public List<Exercicio> usandoAluno(Aluno aluno) {
-        Query query = null;
-        try {
-            query = manager.createQuery("SELECT  m FROM Exercicio m where (m.Treino =:tre and m.nivel =:niv) ");
-            query.setParameter("niv", aluno.getNivel());
-            query.setParameter("tre", aluno.getPlano());
-        } catch (IllegalStateException e) {
-            System.out.println("erro ao realizar a buscar");
-        }
-        return query.getResultList();
-    }
 
     public List<Exercicio> usandoID(Aluno aluno) {
         Query query = null;

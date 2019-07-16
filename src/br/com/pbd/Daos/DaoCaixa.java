@@ -8,9 +8,11 @@ package br.com.pbd.Daos;
 import br.com.pbd.modelos.Caixa;
 import br.com.pbd.sql.SQLconexao;
 import java.sql.Date;
+import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
 import javax.persistence.Query;
+import javax.persistence.TypedQuery;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 
@@ -46,6 +48,15 @@ public class DaoCaixa {
             System.out.println("erro ao realizar a buscar");
         }
         return (Caixa) query.getSingleResult();
+
+    }
+ 
+  
+     public void Busca(Long id) {
+
+        manager.getTransaction().begin();
+        TypedQuery<Double> vp = (TypedQuery<Double>)manager.createNativeQuery("SELECT lucro("+id+")", Double.class);
+        manager.getTransaction().commit();
 
     }
 

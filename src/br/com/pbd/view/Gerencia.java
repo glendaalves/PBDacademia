@@ -5,6 +5,7 @@
  */
 package br.com.pbd.view;
 
+import br.com.pbd.sql.PostgresBackup_Curso;
 import java.awt.Color;
 
 /**
@@ -36,6 +37,8 @@ public class Gerencia extends javax.swing.JInternalFrame {
         tabelausuario = new javax.swing.JTable();
         botaoFechar = new javax.swing.JButton();
         label1 = new java.awt.Label();
+        label2 = new java.awt.Label();
+        botaoBackup = new javax.swing.JButton();
 
         jTabbedPane1.setBackground(new java.awt.Color(255, 255, 255));
         jTabbedPane1.setPreferredSize(new java.awt.Dimension(962, 739));
@@ -80,6 +83,28 @@ public class Gerencia extends javax.swing.JInternalFrame {
 
         label1.setText("Escolha o Usuario :");
 
+        label2.setText(" Backup :");
+
+        botaoBackup.setBackground(new java.awt.Color(255, 255, 255));
+        botaoBackup.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        botaoBackup.setForeground(new java.awt.Color(0, 102, 102));
+        botaoBackup.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/pbd/resource/reset.png"))); // NOI18N
+        botaoBackup.setText("Backup");
+        botaoBackup.setBorderPainted(false);
+        botaoBackup.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                botaoBackupMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                botaoBackupMouseExited(evt);
+            }
+        });
+        botaoBackup.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botaoBackupActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -89,26 +114,36 @@ public class Gerencia extends javax.swing.JInternalFrame {
                 .addComponent(label1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(23, 23, 23)
                 .addComponent(Conbousuario, javax.swing.GroupLayout.PREFERRED_SIZE, 182, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(130, 130, 130)
+                .addComponent(label2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(27, 27, 27)
+                .addComponent(botaoBackup)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(botaoFechar)
                 .addGap(59, 59, 59))
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 918, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addContainerGap(29, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(30, 30, 30)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(label1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(Conbousuario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(botaoFechar)))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(30, 30, 30)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(label1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(Conbousuario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(botaoFechar)
+                                .addComponent(botaoBackup))))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(40, 40, 40)
+                        .addComponent(label2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(38, 38, 38)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 467, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(135, Short.MAX_VALUE))
+                .addContainerGap(139, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Controle de Acesso", jPanel1);
@@ -141,19 +176,31 @@ public class Gerencia extends javax.swing.JInternalFrame {
         setVisible(false);
     }//GEN-LAST:event_botaoFecharActionPerformed
 
+    private void botaoBackupMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_botaoBackupMouseEntered
+        // TODO add your handling code here:
+    }//GEN-LAST:event_botaoBackupMouseEntered
+
+    private void botaoBackupMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_botaoBackupMouseExited
+        // TODO add your handling code here:
+    }//GEN-LAST:event_botaoBackupMouseExited
+
+    private void botaoBackupActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoBackupActionPerformed
+        PostgresBackup_Curso pb = new PostgresBackup_Curso();
+    }//GEN-LAST:event_botaoBackupActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JComboBox<String> Conbousuario;
+    private javax.swing.JButton botaoBackup;
     private javax.swing.JButton botaoFechar;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTabbedPane jTabbedPane1;
     private java.awt.Label label1;
+    private java.awt.Label label2;
     private javax.swing.JTable tabelausuario;
     // End of variables declaration//GEN-END:variables
 
-    
-    
     /**
      * @return the Conbousuario
      */
@@ -238,5 +285,18 @@ public class Gerencia extends javax.swing.JInternalFrame {
         this.botaoFechar = botaoFechar;
     }
 
+    /**
+     * @return the botaoBackup
+     */
+    public javax.swing.JButton getBotaoBackup() {
+        return botaoBackup;
+    }
+
+    /**
+     * @param botaoBackup the botaoBackup to set
+     */
+    public void setBotaoBackup(javax.swing.JButton botaoBackup) {
+        this.botaoBackup = botaoBackup;
+    }
 
 }

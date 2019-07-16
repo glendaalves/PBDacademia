@@ -236,6 +236,9 @@ public class ControleCaixa implements ActionListener {
     public void fecharCaixa() {
         double lucro = caixa.getValor_fechamento() - caixa.getValor_abertura();
         caixa.setLucro(lucro);
+//        java.util.Date d = new java.util.Date();
+//        caixa = new DaoCaixa().BuscarCaixa(ConverterData(d));
+//        new DaoCaixa().Busca(caixa.getId());
         caixa.setStatus(false);
         fachada.salvar(caixa);
         mensagens.mensagens("Caixa Fechado", "info");

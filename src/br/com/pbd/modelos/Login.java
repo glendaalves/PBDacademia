@@ -29,6 +29,8 @@ public class Login implements EntidadeBase {
     private String usuario;
     @Column (name="senha",length=100,nullable=false)
     private String senha;
+    @Column (name="reset",insertable = false)
+    private boolean reset;
 
     @Override
     public Long getId() {
@@ -68,6 +70,20 @@ public class Login implements EntidadeBase {
      */
     public void setSenha(String senha) {
         this.senha = senha;
+    }
+
+    /**
+     * @return the reset
+     */
+    public boolean isReset() {
+        return reset;
+    }
+
+    /**
+     * @param reset the reset to set
+     */
+    public void setReset(boolean reset) {
+        this.reset = reset;
     }
 
 }

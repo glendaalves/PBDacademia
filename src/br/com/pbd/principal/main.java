@@ -7,6 +7,7 @@
 package br.com.pbd.principal;
 
 import br.com.pbd.DaoView.DaoViewProduto;
+import br.com.pbd.Daos.DaoCaixa;
 import br.com.pbd.Fachada.Fachada;
 import br.com.pbd.controles.ControleAcademia;
 import br.com.pbd.controles.ControleAgenda;
@@ -26,6 +27,8 @@ import br.com.pbd.view.TelaAdministrador;
 import br.com.pbd.view.Principal;
 import br.com.pbd.view.TelaLogin;
 import br.com.pbd.Visoes.ViewProduto;
+import br.com.pbd.modelos.Caixa;
+import java.sql.Date;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
@@ -73,10 +76,8 @@ public class main {
         ControleVendas controleVendas = new ControleVendas(principal, fachada);
 
         ControleTarefa controleTarefa = new ControleTarefa(principal, fachada);
-//        List<ViewProduto> l = new DaoViewProduto().Buscaa("camisas");
-//        System.out.println(l.get(0).getDescricao());
-
-       
+      
 
     }
+
 }

@@ -153,7 +153,7 @@ public class ControleAlunos extends MouseAdapter implements ActionListener {
                     Date d = new Date(System.currentTimeMillis());
                     mensalidades.get(ro).setPagamento(d);
                     mensalidades.get(ro).setStatus("Pago");
-                    double soma = caixa.getValor_fechamento() +  mensalidades.get(ro).getValor();
+                    double soma = caixa.getValor_fechamento() + mensalidades.get(ro).getValor();
                     a.setMensalidades(mensalidades);
                     fachada.salvar(a);
                     caixa.setValor_fechamento(soma);
@@ -173,17 +173,7 @@ public class ControleAlunos extends MouseAdapter implements ActionListener {
             }
 
         }
-        if (e.getSource() == principal.getAgendaAluno().getTabelaAgenda()) {
-            int ro = retornaIndice(principal.getAgendaAluno().getTabelaAgenda(), e);
-            if (escolha == excluir) {
-                Exercicio u = Edicaoexercicio.get(ro);
-                exercicios.add(u);
-                Edicaoexercicio.remove(u);
-                preencherTabelaExercicios(exercicios);
-
-            }
-
-        }
+//      
         if (e.getSource() == principal.getListaAcompanhamento().getTabelaAcompanhamento()) {
             int ro = retornaIndice(principal.getListaAcompanhamento().getTabelaAcompanhamento(), e);
             acom = acompanhamentos.get(ro);
@@ -503,13 +493,9 @@ public class ControleAlunos extends MouseAdapter implements ActionListener {
             aluno.setNome(principal.getCadastroAlunos().getTxtNome().getText());
             aluno.setRg(principal.getCadastroAlunos().getTxtrg().getText());
             aluno.setSexo(principal.getCadastroAlunos().getCombosexo().getSelectedItem().toString());
-
-            aluno.setSituacao(principal.getCadastroAlunos().getComboPosicao().getSelectedItem().toString());
-            aluno.setPlano(principal.getCadastroAlunos().getCombotreino().getSelectedItem().toString());
             aluno.setSituacao(principal.getCadastroAlunos().getComboPosicao().getSelectedItem().toString());
 
             aluno.setAgendas(lista);
-            aluno.setNivel(principal.getCadastroAlunos().getCombonivel().getSelectedItem().toString());
             fachada.salvar(aluno);
             alunos = fachada.getAll();
             preencherTabelaAluno(alunos);
@@ -771,8 +757,8 @@ public class ControleAlunos extends MouseAdapter implements ActionListener {
 
             int i = 0;
             try {
-                String[] colunas = new String[]{"Descricao", "Peso (Kg)", "Serie", "Repetiçao", "Intervalo", "Objetivo", "Nivel", "Excluir"};
-                Object[][] dados = new Object[exercicios.size()][8];
+                String[] colunas = new String[]{"Descricao", "Peso (Kg)", "Serie", "Repetiçao", "Intervalo", "Objetivo", "Nivel"};
+                Object[][] dados = new Object[exercicios.size()][7];
                 for (Exercicio m : exercicios) {
                     dados[i][0] = m.getDescricao();
                     dados[i][1] = m.getPeso();
@@ -781,7 +767,6 @@ public class ControleAlunos extends MouseAdapter implements ActionListener {
                     dados[i][4] = m.getIntervalo();
                     dados[i][5] = m.getTreino();
                     dados[i][6] = m.getNivel();
-                    dados[i][7] = principal.getListaExercicio().getBtnEx();
                     i++;
 
                 }

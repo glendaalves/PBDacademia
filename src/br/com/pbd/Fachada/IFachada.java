@@ -50,7 +50,6 @@ public interface IFachada {
     public List<Exercicio> getAllE();
     public void ativarDesativar(Exercicio exercicio);
     public List<Exercicio> Busca(String nome);
-    public List<Exercicio> usandoAluno(Aluno aluno);
     public List<Exercicio> usandoIDE(Aluno aluno);
     public List<Exercicio> BuscaImc(String nome);
     

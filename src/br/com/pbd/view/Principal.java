@@ -853,7 +853,6 @@ public class Principal extends javax.swing.JFrame implements ActionListener {
 
     private void botaoSairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoSairActionPerformed
         System.exit(0);
-        //PostgresBackup_Curso pb = new  PostgresBackup_Curso();
 
     }//GEN-LAST:event_botaoSairActionPerformed
 

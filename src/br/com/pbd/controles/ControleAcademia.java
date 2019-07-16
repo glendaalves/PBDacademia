@@ -72,20 +72,34 @@ public class ControleAcademia extends MouseAdapter implements ActionListener {
     public void mouseClicked(MouseEvent e) {
         if (e.getSource() == principal.getGerencia().getTabelausuario()) {
             int ro = retornaIndice(principal.getGerencia().getTabelausuario(), e);
-            if (escolha == editar) {
 
+//            if (escolha == editar) {
+//
+//                if (opcao == func) {
+//                    funcionario = funcionarios.get(ro);
+//                    acesso.getTxtnome().setText(funcionario.getLogin().getUsuario());
+//                    acesso.setVisible(true);
+//
+//                } else if (opcao == pro) {
+//                    professor = professors.get(ro);
+//                    acesso.getTxtnome().setText(professor.getLogin().getUsuario());
+//                    acesso.setVisible(true);
+//                }
+//            }
+            if (escolha == resetar) {
                 if (opcao == func) {
                     funcionario = funcionarios.get(ro);
-                    acesso.getTxtnome().setText(funcionario.getLogin().getUsuario());
-                    acesso.setVisible(true);
+                    funcionario.getLogin().setReset(true);
+                    fachada.salvar(funcionario);
+                    mensagems.mnsReset();
 
                 } else if (opcao == pro) {
                     professor = professors.get(ro);
-                    acesso.getTxtnome().setText(professor.getLogin().getUsuario());
-                    acesso.setVisible(true);
+                    professor.getLogin().setReset(true);
+                    fachada.salvar(professor);
+                    mensagems.mnsReset();
+
                 }
-            }
-            if (escolha == resetar) {
 
             }
         }
@@ -233,7 +247,7 @@ public class ControleAcademia extends MouseAdapter implements ActionListener {
         principal.getGerencia().getTabelausuario().setDefaultRenderer(Object.class, new Render());
 
         try {
-            String[] colunas = new String[]{"Nome", "CPF", "RG", "Carteira trabalho", "Editar", "Resetar"};
+            String[] colunas = new String[]{"Nome", "CPF", "RG", "Carteira trabalho", "Editar"};
             Object[][] dados = new Object[lista.size()][6];
             for (int i = 0; i < lista.size(); i++) {
 
@@ -243,7 +257,6 @@ public class ControleAcademia extends MouseAdapter implements ActionListener {
                 dados[i][2] = professor.getRg();
                 dados[i][3] = professor.getCarteira_trabalho();
                 dados[i][4] = acesso.getBtnEd();
-                dados[i][5] = acesso.getBtnRe();
 
             }
             DefaultTableModel dataModel = new DefaultTableModel(dados, colunas) {
@@ -264,8 +277,8 @@ public class ControleAcademia extends MouseAdapter implements ActionListener {
         principal.getGerencia().getTabelausuario().setDefaultRenderer(Object.class, new Render());
 
         try {
-            String[] colunas = new String[]{"Nome", "CPF", "RG", "Carteira trabalho", "Editar", "Resetar"};
-            Object[][] dados = new Object[lista.size()][6];
+            String[] colunas = new String[]{"Nome", "CPF", "RG", "Carteira trabalho", "Editar"};
+            Object[][] dados = new Object[lista.size()][5];
             for (int i = 0; i < lista.size(); i++) {
 
                 Funcionario funcionario = lista.get(i);
@@ -273,8 +286,7 @@ public class ControleAcademia extends MouseAdapter implements ActionListener {
                 dados[i][1] = funcionario.getCpf();
                 dados[i][2] = funcionario.getRg();
                 dados[i][3] = funcionario.getCarteira_trabalho();
-                dados[i][4] = acesso.getBtnEd();
-                dados[i][5] = acesso.getBtnRe();
+                dados[i][4] = acesso.getBtnRe();
 
             }
             DefaultTableModel dataModel = new DefaultTableModel(dados, colunas) {

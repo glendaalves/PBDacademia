@@ -49,10 +49,7 @@ public class Aluno implements EntidadeBase {
     private Date data_matricula;
     @Column(name = "data_nascimento", columnDefinition = "DATE DEFAULT CURRENT_DATE", nullable = false)
     private Date data_nascimento;
-    @Column(name = "plano", length = 30, nullable = false)
-    private String plano;
-    @Column(name = "nivel", length = 20, nullable = false)
-    private String nivel;
+
 
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "dados_id")
@@ -145,13 +142,6 @@ public class Aluno implements EntidadeBase {
         return nome;
     }
 
-    public String getPlano() {
-        return plano;
-    }
-
-    public void setPlano(String plano) {
-        this.plano = plano;
-    }
 
     /**
      * @param nome the nome to set
@@ -256,14 +246,6 @@ public class Aluno implements EntidadeBase {
      */
     public void setMensalidades(List<Mensalidade> mensalidades) {
         this.mensalidades = mensalidades;
-    }
-
-    public String getNivel() {
-        return nivel;
-    }
-
-    public void setNivel(String nivel) {
-        this.nivel = nivel;
     }
 
     

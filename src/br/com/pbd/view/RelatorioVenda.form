@@ -19,12 +19,12 @@
   <Layout>
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Component id="jPanel1" alignment="0" max="32767" attributes="0"/>
+          <Component id="jPanel1" alignment="0" pref="811" max="32767" attributes="0"/>
       </Group>
     </DimensionLayout>
     <DimensionLayout dim="1">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Component id="jPanel1" alignment="0" max="32767" attributes="0"/>
+          <Component id="jPanel1" alignment="0" pref="631" max="32767" attributes="0"/>
       </Group>
     </DimensionLayout>
   </Layout>
@@ -47,21 +47,14 @@
                   <Component id="labelcadastro2" min="-2" max="-2" attributes="0"/>
                   <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
               </Group>
-              <Group type="102" alignment="1" attributes="0">
-                  <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
-                  <Component id="botaoconfirmar" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace type="separate" max="-2" attributes="0"/>
-                  <Component id="botaoCancelar" min="-2" pref="78" max="-2" attributes="0"/>
-                  <EmptySpace min="-2" pref="65" max="-2" attributes="0"/>
-              </Group>
-              <Group type="102" attributes="0">
+              <Group type="102" alignment="0" attributes="0">
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Component id="jPanel11" alignment="0" max="32767" attributes="0"/>
-                      <Group type="102" attributes="0">
+                      <Group type="102" alignment="0" attributes="0">
                           <EmptySpace min="-2" pref="11" max="-2" attributes="0"/>
                           <Component id="labelcadastro5" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace min="0" pref="445" max="32767" attributes="0"/>
+                          <EmptySpace min="0" pref="492" max="32767" attributes="0"/>
                       </Group>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
@@ -69,17 +62,19 @@
               <Group type="102" alignment="0" attributes="0">
                   <EmptySpace min="-2" pref="38" max="-2" attributes="0"/>
                   <Component id="labelcadastro3" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace min="-2" pref="32" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="47" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="label1" alignment="0" min="-2" max="-2" attributes="0"/>
-                      <Component id="calendarioIn" alignment="0" min="-2" max="-2" attributes="0"/>
-                  </Group>
-                  <EmptySpace min="-2" pref="59" max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="calendarioFin" alignment="0" min="-2" max="-2" attributes="0"/>
-                      <Component id="label2" alignment="0" min="-2" max="-2" attributes="0"/>
+                      <Component id="calendariodata" min="-2" max="-2" attributes="0"/>
+                      <Component id="label1" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace max="32767" attributes="0"/>
+              </Group>
+              <Group type="102" alignment="1" attributes="0">
+                  <EmptySpace max="32767" attributes="0"/>
+                  <Component id="botaoconfirmar" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="52" max="-2" attributes="0"/>
+                  <Component id="botaoCancelar" min="-2" pref="78" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="202" max="-2" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -95,25 +90,17 @@
                   <Component id="jPanel11" min="-2" max="-2" attributes="0"/>
                   <EmptySpace min="-2" pref="53" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Group type="102" alignment="0" attributes="0">
-                          <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="labelcadastro3" alignment="0" min="-2" pref="30" max="-2" attributes="0"/>
-                              <Component id="label1" alignment="0" min="-2" max="-2" attributes="0"/>
-                          </Group>
-                          <EmptySpace max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="calendarioIn" alignment="0" min="-2" max="-2" attributes="0"/>
-                              <Component id="calendarioFin" alignment="0" min="-2" max="-2" attributes="0"/>
-                          </Group>
-                      </Group>
-                      <Component id="label2" alignment="0" min="-2" max="-2" attributes="0"/>
+                      <Component id="labelcadastro3" alignment="0" min="-2" pref="30" max="-2" attributes="0"/>
+                      <Component id="label1" alignment="0" min="-2" max="-2" attributes="0"/>
                   </Group>
-                  <EmptySpace pref="92" max="32767" attributes="0"/>
-                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                      <Component id="botaoCancelar" max="32767" attributes="0"/>
-                      <Component id="botaoconfirmar" max="32767" attributes="0"/>
+                  <EmptySpace max="-2" attributes="0"/>
+                  <Component id="calendariodata" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="51" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="1" attributes="0">
+                      <Component id="botaoCancelar" min="-2" pref="73" max="-2" attributes="0"/>
+                      <Component id="botaoconfirmar" min="-2" max="-2" attributes="0"/>
                   </Group>
-                  <EmptySpace min="-2" pref="35" max="-2" attributes="0"/>
+                  <EmptySpace pref="148" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -127,7 +114,7 @@
             <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="66" green="66" red="0" type="rgb"/>
             </Property>
-            <Property name="text" type="java.lang.String" value="Relatorio Fornecedor"/>
+            <Property name="text" type="java.lang.String" value="Relatorio Vendas"/>
           </Properties>
         </Component>
         <Container class="javax.swing.JPanel" name="jPanel9">
@@ -158,22 +145,15 @@
             <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="66" green="66" red="0" type="rgb"/>
             </Property>
-            <Property name="text" type="java.lang.String" value="escolha um periodo :"/>
+            <Property name="text" type="java.lang.String" value="escolha um Data :"/>
           </Properties>
         </Component>
         <Component class="java.awt.Label" name="label1">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Inicial :"/>
+            <Property name="text" type="java.lang.String" value="Data :"/>
           </Properties>
         </Component>
-        <Component class="java.awt.Label" name="label2">
-          <Properties>
-            <Property name="text" type="java.lang.String" value="Final :"/>
-          </Properties>
-        </Component>
-        <Component class="com.toedter.calendar.JCalendar" name="calendarioIn">
-        </Component>
-        <Component class="com.toedter.calendar.JCalendar" name="calendarioFin">
+        <Component class="com.toedter.calendar.JCalendar" name="calendariodata">
         </Component>
         <Component class="javax.swing.JButton" name="botaoconfirmar">
           <Properties>
@@ -226,7 +206,7 @@
             <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="66" green="66" red="0" type="rgb"/>
             </Property>
-            <Property name="text" type="java.lang.String" value="Relatorio dos Fornecedores em um periodo"/>
+            <Property name="text" type="java.lang.String" value="Relatorio das vendas de um dia"/>
           </Properties>
         </Component>
         <Container class="javax.swing.JPanel" name="jPanel11">

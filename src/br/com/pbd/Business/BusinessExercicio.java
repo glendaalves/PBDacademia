@@ -38,11 +38,6 @@ public class BusinessExercicio extends DaoGenerico<Exercicio>implements IBusines
     }
 
     @Override
-    public List<Exercicio> usandoAluno(Aluno aluno) {
-        return new DaoExercicio().usandoAluno(aluno);
-    }
-
-    @Override
     public List<Exercicio> usandoID(Aluno aluno) {
         return new DaoExercicio().usandoID(aluno);
     }

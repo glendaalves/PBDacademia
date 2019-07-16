@@ -193,10 +193,6 @@ public class Fachada implements IFachada {
         return this.iBusinessExercicio.Busca(nome);
     }
 
-    @Override
-    public List<Exercicio> usandoAluno(Aluno aluno) {
-        return this.iBusinessExercicio.usandoAluno(aluno);
-    }
 
     @Override
     public void salvar(Acompanhamento acompanhamento) {

@@ -1,0 +1,201 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="null" language="groovy" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="07c269c4-2e5f-4745-afa6-2b726b8bebc0">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<style name="Title" forecolor="#FFFFFF" fontName="Times New Roman" fontSize="50" isBold="false" pdfFontName="Times-Bold"/>
+	<style name="SubTitle" forecolor="#CCCCCC" fontName="Times New Roman" fontSize="18" isBold="false" pdfFontName="Times-Roman"/>
+	<style name="Column header" forecolor="#666666" fontName="Times New Roman" fontSize="14" isBold="true" pdfFontName="Times-Roman"/>
+	<style name="Detail" mode="Transparent" fontName="Times New Roman" pdfFontName="Times-Roman"/>
+	<style name="Row" mode="Transparent" fontName="Times New Roman" pdfFontName="Times-Roman">
+		<conditionalStyle>
+			<conditionExpression><![CDATA[$V{REPORT_COUNT}%2 == 0]]></conditionExpression>
+			<style mode="Opaque" backcolor="#F0EFEF"/>
+		</conditionalStyle>
+	</style>
+	<parameter name="s" class="java.lang.String"/>
+	<queryString>
+		<![CDATA[SELECT
+     exercicio."id" AS exercicio_id,
+     exercicio."treino" AS exercicio_treino,
+     exercicio."descricao" AS exercicio_descricao,
+     exercicio."intervalo" AS exercicio_intervalo,
+     exercicio."nivel" AS exercicio_nivel,
+     exercicio."peso" AS exercicio_peso,
+     exercicio."repeticao" AS exercicio_repeticao,
+     exercicio."serie" AS exercicio_serie,
+     exercicio."academia_id" AS exercicio_academia_id
+FROM
+     "public"."exercicio" exercicio
+where exercicio."treino" = $P{s}]]>
+	</queryString>
+	<field name="exercicio_id" class="java.lang.Long"/>
+	<field name="exercicio_treino" class="java.lang.String"/>
+	<field name="exercicio_descricao" class="java.lang.String"/>
+	<field name="exercicio_intervalo" class="java.lang.String"/>
+	<field name="exercicio_nivel" class="java.lang.String"/>
+	<field name="exercicio_peso" class="java.lang.Double"/>
+	<field name="exercicio_repeticao" class="java.lang.Integer"/>
+	<field name="exercicio_serie" class="java.lang.Integer"/>
+	<field name="exercicio_academia_id" class="java.lang.Long"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="235" splitType="Stretch">
+			<textField pattern="EEEEE dd MMMMM yyyy">
+				<reportElement x="400" y="137" width="144" height="20" forecolor="#000000" uuid="b80b21b9-ff2c-4f90-9e36-b139372e0db1"/>
+				<textElement textAlignment="Right">
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+			<image>
+				<reportElement x="422" y="30" width="70" height="85" uuid="c7d100a4-b58f-4eef-be6d-2cd8d1f79820"/>
+				<imageExpression><![CDATA["C:\\Users\\Glenda Alves de Lima\\Documents\\NetBeansProjects\\PBDAcademia\\src\\br\\com\\pbd\\resource\\Use.png"]]></imageExpression>
+			</image>
+			<staticText>
+				<reportElement style="Title" x="30" y="30" width="370" height="66" forecolor="#000000" backcolor="#FFFFFF" uuid="f53133c4-9039-4d3d-9d44-8b65862f2690"/>
+				<textElement>
+					<font size="48" isBold="false"/>
+				</textElement>
+				<text><![CDATA[Corpo Em Forma]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="SubTitle" x="303" y="96" width="97" height="29" forecolor="#000000" uuid="1b36b6e2-76d5-440b-a1fc-9890c0cc2dea"/>
+				<textElement>
+					<font size="22" isBold="false"/>
+				</textElement>
+				<text><![CDATA[Academia]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="SubTitle" x="78" y="173" width="268" height="29" forecolor="#000000" uuid="2a30979d-3365-40c8-a6ad-a647b081c2ab"/>
+				<textElement>
+					<font fontName="SansSerif" size="22" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Relatorio dos Exercicio-]]></text>
+			</staticText>
+			<textField isStretchWithOverflow="true">
+				<reportElement style="Detail" positionType="Float" x="346" y="173" width="174" height="29" uuid="b5d39b6d-fea2-4cd5-a5f7-0b01a990ff58"/>
+				<textElement>
+					<font fontName="SansSerif" size="22" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{exercicio_treino}]]></textFieldExpression>
+			</textField>
+		</band>
+	</title>
+	<pageHeader>
+		<band splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="41" splitType="Stretch">
+			<staticText>
+				<reportElement style="Column header" x="11" y="7" width="105" height="18" forecolor="#000000" uuid="9b4fde9b-0f3d-4d2b-a955-b854ceca6936"/>
+				<textElement>
+					<font fontName="SansSerif" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Descrição]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Column header" x="126" y="7" width="73" height="18" forecolor="#000000" uuid="141606c6-03db-491b-a770-2c0c1f7a5262"/>
+				<textElement>
+					<font fontName="SansSerif" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Intervalo]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Column header" x="474" y="6" width="81" height="18" forecolor="#000000" uuid="f78300de-50f0-4bba-8030-78396f038142"/>
+				<textElement>
+					<font fontName="SansSerif" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Nivel]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Column header" x="220" y="6" width="83" height="18" forecolor="#000000" uuid="bb7573ca-e501-484e-bba0-95bbba926320"/>
+				<textElement>
+					<font fontName="SansSerif" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Peso Equip.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Column header" x="315" y="7" width="72" height="18" forecolor="#000000" uuid="a03a8a00-6e27-4cdb-aa20-8d0656f80711"/>
+				<textElement>
+					<font fontName="SansSerif" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Repetição]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Column header" x="400" y="7" width="50" height="18" forecolor="#000000" uuid="be0f04b4-363d-4fa7-a87a-ffa4e2ca00b7"/>
+				<textElement>
+					<font fontName="SansSerif" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Serie]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="27" splitType="Stretch">
+			<frame>
+				<reportElement style="Row" mode="Opaque" x="0" y="0" width="555" height="18" uuid="a947c4ea-d07b-4964-8aa6-4f99bdf80a12"/>
+				<textField isStretchWithOverflow="true">
+					<reportElement style="Detail" positionType="Float" x="126" y="0" width="73" height="18" uuid="df0fc1e7-791a-49c7-8b13-fae370c84dfa"/>
+					<textElement>
+						<font size="14"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{exercicio_intervalo}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true">
+					<reportElement style="Detail" positionType="Float" x="315" y="0" width="72" height="18" uuid="073cdb0c-fe17-45bd-9485-399706c926e6"/>
+					<textElement>
+						<font size="14"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{exercicio_repeticao}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true">
+					<reportElement style="Detail" positionType="Float" x="11" y="0" width="105" height="18" uuid="abae65f7-c2c2-4bcb-9efc-0c8649a2183a"/>
+					<textElement>
+						<font size="14"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{exercicio_descricao}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true">
+					<reportElement style="Detail" positionType="Float" x="400" y="0" width="50" height="18" uuid="6d6ce06a-cc72-45c8-965c-6bcde2eb8f88"/>
+					<textElement>
+						<font size="14"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{exercicio_serie}]]></textFieldExpression>
+				</textField>
+			</frame>
+			<textField isStretchWithOverflow="true">
+				<reportElement style="Detail" positionType="Float" x="231" y="4" width="57" height="18" uuid="f7bd4ce3-d3db-47ab-9339-d13ab601eff8"/>
+				<textElement>
+					<font size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{exercicio_peso}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement style="Detail" positionType="Float" x="474" y="4" width="81" height="18" uuid="a92f753b-6228-4703-949f-cdd87d1a6b25"/>
+				<textElement>
+					<font size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{exercicio_nivel}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="7" splitType="Stretch">
+			<line>
+				<reportElement positionType="FixRelativeToBottom" x="0" y="3" width="555" height="1" uuid="da4db897-7f58-4b28-8454-9884a4fd62bb"/>
+				<graphicElement>
+					<pen lineWidth="0.5" lineColor="#999999"/>
+				</graphicElement>
+			</line>
+		</band>
+	</columnFooter>
+	<pageFooter>
+		<band height="25" splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band splitType="Stretch"/>
+	</summary>
+</jasperReport>

@@ -24,9 +24,21 @@ public class Mensagens extends javax.swing.JDialog implements KeyListener {
     /**
      * Creates new form Mensagems
      */
+    private final String CADASTRO, EDICAO, ERRO, DADOSVAZIO,RESET;
+    private final Icon imgADV, imgINF, imgERRO;
+
     public Mensagens(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+        this.CADASTRO = "Cadastro Realizado";
+        this.EDICAO = "Ediçao Realizada";
+        this.ERRO = "Erro";
+        this.DADOSVAZIO = "Preencha todos os campos";
+        this.RESET= "Reset Realizado";
+        imgADV = new ImageIcon(getClass().getResource("/br/com/pbd/resource/advertencia.png"));
+        imgINF = new ImageIcon(getClass().getResource("/br/com/pbd/resource/info.png"));
+        imgERRO = new ImageIcon(getClass().getResource("/br/com/pbd/resource/erro.png"));
+
         keyEventos = new HashMap<Integer, Boolean>();
         BotaoOk.addKeyListener(this);
         this.addKeyListener(this);
@@ -166,6 +178,36 @@ public class Mensagens extends javax.swing.JDialog implements KeyListener {
         Icon img1 = new ImageIcon(getClass().getResource("/br/com/pbd/resource/" + icon + ".png"));
         Icone.setIcon(img1);
         mensagem.setText(mensagen);
+        setVisible(true);
+    }
+
+    public void mnsERRO() {
+        Icone.setIcon(imgERRO);
+        mensagem.setText(ERRO);
+        setVisible(true);
+    }
+
+    public void mnscadastro() {
+        Icone.setIcon(imgINF);
+        mensagem.setText(CADASTRO);
+        setVisible(true);
+    }
+
+    public void mnsEdicao() {
+        Icone.setIcon(imgINF);
+        mensagem.setText(EDICAO);
+        setVisible(true);
+    }
+
+    public void mnsADV() {
+        Icone.setIcon(imgADV);
+        mensagem.setText(DADOSVAZIO);
+        setVisible(true);
+    }
+
+    public void mnsReset() {
+        Icone.setIcon(imgINF);
+        mensagem.setText(RESET);
         setVisible(true);
     }
 

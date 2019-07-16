@@ -47,8 +47,6 @@ public class ControleRelatorios implements ActionListener {
 
     private Principal principal;
     private Mensagens mensagens;
-    private Map<String, Object> map;
-    private JasperPrint jasperPrint;
     private Connection conn;
     private List<Professor> professors;
     private List<Funcionario> funcionarios;
@@ -64,6 +62,8 @@ public class ControleRelatorios implements ActionListener {
         principal.getRelatorios().getBotaoRfornecedor().addActionListener(this);
         principal.getRelatorios().getBotaoRfuncionario().addActionListener(this);
         principal.getRelatorios().getBotaoRconta().addActionListener(this);
+        principal.getRelatorios().getBotaoRexercicio().addActionListener(this);
+        principal.getRelatorios().getBotaoRcaixa().addActionListener(this);
         principal.getRelatorios().getRelatorioAluno().getBotaoCancelar().addActionListener(this);
         principal.getRelatorios().getRelatorioAluno().getBotaoconfirmar().addActionListener(this);
         principal.getRelatorios().getRelatorioFornecedor().getBotaoconfirmar().addActionListener(this);
@@ -76,6 +76,10 @@ public class ControleRelatorios implements ActionListener {
         principal.getRelatorios().getRelatorioFuncionario().getBotaoconfirmatarefa().addActionListener(this);
         principal.getRelatorios().getRelatorioContas().getBotaoCancelar().addActionListener(this);
         principal.getRelatorios().getRelatorioContas().getBotaoconfirmar().addActionListener(this);
+        principal.getRelatorios().getRelatorioExercicio().getBotaoCancelar().addActionListener(this);
+        principal.getRelatorios().getRelatorioExercicio().getBotaoconfirmar().addActionListener(this);
+        principal.getRelatorios().getRelatorioVenda().getBotaoCancelar().addActionListener(this);
+        principal.getRelatorios().getRelatorioVenda().getBotaoconfirmar().addActionListener(this);
 
         mensagens = new Mensagens(principal, true);
         conn = DriverManager.getConnection("jdbc:postgresql://localhost:5432/PBD", "postgres", "123");
@@ -164,12 +168,53 @@ public class ControleRelatorios implements ActionListener {
             }
 
         }
+        if (e.getSource() == principal.getRelatorios().getRelatorioExercicio().getBotaoconfirmar()) {
+
+            try {
+                exibirRelatorioExercicio();
+            } catch (SQLException ex) {
+                Logger.getLogger(ControleRelatorios.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (JRException ex) {
+                Logger.getLogger(ControleRelatorios.class.getName()).log(Level.SEVERE, null, ex);
+            }
+
+        }
+        if (e.getSource() == principal.getRelatorios().getRelatorioVenda().getBotaoconfirmar()) {
+
+            try {
+                exibirRelatorioVenda();
+            } catch (SQLException ex) {
+                Logger.getLogger(ControleRelatorios.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (JRException ex) {
+                Logger.getLogger(ControleRelatorios.class.getName()).log(Level.SEVERE, null, ex);
+            }
+
+        }
+        
+         if (e.getSource() == principal.getRelatorios().getBotaoRcaixa()) {
+            preencherFuncionario();
+            principal.getRelatorios().getRelatorioVenda().setVisible(true);
+            principal.getRelatorios().Desativar();
+        }
+        if (e.getSource() == principal.getRelatorios().getRelatorioVenda().getBotaoCancelar()) {
+            principal.getRelatorios().Ativar();
+            principal.getRelatorios().getRelatorioVenda().setVisible(false);
+        }
+        if (e.getSource() == principal.getRelatorios().getBotaoRexercicio()) {
+            preencherFuncionario();
+            principal.getRelatorios().getRelatorioExercicio().setVisible(true);
+            principal.getRelatorios().Desativar();
+        }
+        if (e.getSource() == principal.getRelatorios().getRelatorioExercicio().getBotaoCancelar()) {
+            principal.getRelatorios().Ativar();
+            principal.getRelatorios().getRelatorioExercicio().setVisible(false);
+        }
         if (e.getSource() == principal.getRelatorios().getBotaoRconta()) {
             preencherFuncionario();
             principal.getRelatorios().getRelatorioContas().setVisible(true);
             principal.getRelatorios().Desativar();
         }
-        if (e.getSource()== principal.getRelatorios().getRelatorioContas().getBotaoCancelar()) {
+        if (e.getSource() == principal.getRelatorios().getRelatorioContas().getBotaoCancelar()) {
             principal.getRelatorios().Ativar();
             principal.getRelatorios().getRelatorioContas().setVisible(false);
         }
@@ -178,7 +223,7 @@ public class ControleRelatorios implements ActionListener {
             principal.getRelatorios().getRelatorioFuncionario().setVisible(true);
             principal.getRelatorios().Desativar();
         }
-        if (e.getSource()== principal.getRelatorios().getRelatorioFuncionario().getBotaoCancelar()) {
+        if (e.getSource() == principal.getRelatorios().getRelatorioFuncionario().getBotaoCancelar()) {
             principal.getRelatorios().Ativar();
             principal.getRelatorios().getRelatorioFuncionario().setVisible(false);
         }
@@ -212,8 +257,7 @@ public class ControleRelatorios implements ActionListener {
             principal.getRelatorios().getRelatorioProfessor().setVisible(false);
         }
 
-        if (e.getSource()
-                == principal.getRelatorios().getBotaoSair()) {
+        if (e.getSource() == principal.getRelatorios().getBotaoSair()) {
             principal.Ativar();
             principal.getRelatorios().setVisible(false);
         }
@@ -242,31 +286,29 @@ public class ControleRelatorios implements ActionListener {
     public void exibirRelatorioAlun() throws SQLException, JRException {
 
         InputStream fonte = ControleRelatorios.class.getResourceAsStream("/br/com/pbd/RelatoriosView/RelatorioAlun.jasper");
-        map = new HashMap<String, Object>();
+        Map<String, Object> map = new HashMap<String, Object>();
         map.put("Situacao", principal.getRelatorios().getRelatorioAluno().getComboPosicao().getSelectedItem().toString());
         map.put("DataInicio", principal.getRelatorios().getRelatorioAluno().getCalendarioIn().getDate());
         map.put("DataFinal", principal.getRelatorios().getRelatorioAluno().getCalendarioFin().getDate());
-        if(map == null){
         JasperReport jasperReport = (JasperReport) JRLoader.loadObject(fonte);
-        jasperPrint = JasperFillManager.fillReport(jasperReport, map, conn);
+        JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, map, conn);
+
         JasperViewer jrviewer = new JasperViewer(jasperPrint, false);
         jrviewer.setVisible(true);
         jrviewer.toFront();
-        }else{
-            mensagens.mensagens("Relatorio Vazio!", "advertencia");
-        }
 
     }
 
     public void exibirRelatorioFornecedor() throws SQLException, JRException {
 
         InputStream fonte = ControleRelatorios.class.getResourceAsStream("/br/com/pbd/RelatoriosView/RelatorioFornecedor.jasper");
-        map = new HashMap<String, Object>();
+        Map<String, Object> map = new HashMap<String, Object>();
         map.put("dataInicio", principal.getRelatorios().getRelatorioFornecedor().getCalendarioIn().getDate());
         map.put("DataFinal", principal.getRelatorios().getRelatorioFornecedor().getCalendarioFin().getDate());
         JasperReport jasperReport = (JasperReport) JRLoader.loadObject(fonte);
-        jasperPrint = JasperFillManager.fillReport(jasperReport, map, conn);
+        JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, map, conn);
         JasperViewer jrviewer = new JasperViewer(jasperPrint, false);
+
         jrviewer.setVisible(true);
         jrviewer.toFront();
 
@@ -275,12 +317,13 @@ public class ControleRelatorios implements ActionListener {
     public void exibirRelatorioProfessoor() throws SQLException, JRException {
 
         InputStream fonte = ControleRelatorios.class.getResourceAsStream("/br/com/pbd/RelatoriosView/RelatorioProfessorPeriodo.jasper");
-        map = new HashMap<String, Object>();
+        Map<String, Object> map = new HashMap<String, Object>();
         map.put("dataInicio", principal.getRelatorios().getRelatorioProfessor().getCalendarioIn().getDate());
         map.put("DataFinal", principal.getRelatorios().getRelatorioProfessor().getCalendarioFin().getDate());
         JasperReport jasperReport = (JasperReport) JRLoader.loadObject(fonte);
-        jasperPrint = JasperFillManager.fillReport(jasperReport, map, conn);
+        JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, map, conn);
         JasperViewer jrviewer = new JasperViewer(jasperPrint, false);
+
         jrviewer.setVisible(true);
         jrviewer.toFront();
 
@@ -289,11 +332,12 @@ public class ControleRelatorios implements ActionListener {
     public void exibirRelatorioProfessoorAgenda() throws SQLException, JRException {
 
         InputStream fonte = ControleRelatorios.class.getResourceAsStream("/br/com/pbd/RelatoriosView/RelatorioProfessorAgenda.jasper");
-        map = new HashMap<String, Object>();
+        Map<String, Object> map = new HashMap<String, Object>();
         map.put("Professor", principal.getRelatorios().getRelatorioProfessor().getComboProfessor().getSelectedItem().toString());
         JasperReport jasperReport = (JasperReport) JRLoader.loadObject(fonte);
-        jasperPrint = JasperFillManager.fillReport(jasperReport, map, conn);
+        JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, map, conn);
         JasperViewer jrviewer = new JasperViewer(jasperPrint, false);
+
         jrviewer.setVisible(true);
         jrviewer.toFront();
 
@@ -302,12 +346,13 @@ public class ControleRelatorios implements ActionListener {
     public void exibirRelatorioFuncionarioTarefa() throws SQLException, JRException {
 
         InputStream fonte = ControleRelatorios.class.getResourceAsStream("/br/com/pbd/RelatoriosView/RelatorioFuncionarioTarefa.jasper");
-        map = new HashMap<String, Object>();
+        Map<String, Object> map = new HashMap<String, Object>();
         map.put("Funcionario", principal.getRelatorios().getRelatorioFuncionario().getComboFuncionario().getSelectedItem().toString());
         map.put("status", principal.getRelatorios().getRelatorioFuncionario().getCombostatus().getSelectedItem().toString());
         JasperReport jasperReport = (JasperReport) JRLoader.loadObject(fonte);
-        jasperPrint = JasperFillManager.fillReport(jasperReport, map, conn);
+        JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, map, conn);
         JasperViewer jrviewer = new JasperViewer(jasperPrint, false);
+
         jrviewer.setVisible(true);
         jrviewer.toFront();
 
@@ -316,26 +361,56 @@ public class ControleRelatorios implements ActionListener {
     public void exibirRelatorioFuncionario() throws SQLException, JRException {
 
         InputStream fonte = ControleRelatorios.class.getResourceAsStream("/br/com/pbd/RelatoriosView/RelatorioFuncionario.jasper");
-        map = new HashMap<String, Object>();
+        Map<String, Object> map = new HashMap<String, Object>();
         map.put("dataInicio", principal.getRelatorios().getRelatorioFuncionario().getCalendarioIn().getDate());
         map.put("DataFinal", principal.getRelatorios().getRelatorioFuncionario().getCalendarioFin().getDate());
         JasperReport jasperReport = (JasperReport) JRLoader.loadObject(fonte);
-        jasperPrint = JasperFillManager.fillReport(jasperReport, map, conn);
+        JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, map, conn);
         JasperViewer jrviewer = new JasperViewer(jasperPrint, false);
+
         jrviewer.setVisible(true);
         jrviewer.toFront();
 
     }
-        public void exibirRelatorioConta() throws SQLException, JRException {
+
+    public void exibirRelatorioConta() throws SQLException, JRException {
 
         InputStream fonte = ControleRelatorios.class.getResourceAsStream("/br/com/pbd/RelatoriosView/RelatorioContas.jasper");
-        map = new HashMap<String, Object>();
+        Map<String, Object> map = new HashMap<String, Object>();
         map.put("status", principal.getRelatorios().getRelatorioContas().getComboconta().getSelectedItem().toString());
         map.put("DataInicio", principal.getRelatorios().getRelatorioContas().getCalendarioIn().getDate());
         map.put("DataFinal", principal.getRelatorios().getRelatorioContas().getCalendarioFin().getDate());
         JasperReport jasperReport = (JasperReport) JRLoader.loadObject(fonte);
-        jasperPrint = JasperFillManager.fillReport(jasperReport, map, conn);
+        JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, map, conn);
         JasperViewer jrviewer = new JasperViewer(jasperPrint, false);
+
+        jrviewer.setVisible(true);
+        jrviewer.toFront();
+
+    }
+
+    public void exibirRelatorioExercicio() throws SQLException, JRException {
+
+        InputStream fonte = ControleRelatorios.class.getResourceAsStream("/br/com/pbd/RelatoriosView/RelatorioExercicio.jasper");
+        Map<String, Object> map = new HashMap<String, Object>();
+        map.put("s", principal.getRelatorios().getRelatorioExercicio().getCombotreino().getSelectedItem().toString());
+        JasperReport jasperReport = (JasperReport) JRLoader.loadObject(fonte);
+        JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, map, conn);
+        JasperViewer jrviewer = new JasperViewer(jasperPrint, false);
+
+        jrviewer.setVisible(true);
+        jrviewer.toFront();
+
+    }
+     public void exibirRelatorioVenda() throws SQLException, JRException {
+
+        InputStream fonte = ControleRelatorios.class.getResourceAsStream("/br/com/pbd/RelatoriosView/RelatorioVenda.jasper");
+        Map<String, Object> map = new HashMap<String, Object>();
+        map.put("situacao", principal.getRelatorios().getRelatorioVenda().getCalendariodata().getDate());
+        JasperReport jasperReport = (JasperReport) JRLoader.loadObject(fonte);
+        JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, map, conn);
+        JasperViewer jrviewer = new JasperViewer(jasperPrint, false);
+
         jrviewer.setVisible(true);
         jrviewer.toFront();
 

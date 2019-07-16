@@ -21,6 +21,8 @@ public class Relatorios extends javax.swing.JInternalFrame {
     private RelatorioProfessor relatorioProfessor = new RelatorioProfessor();
     private RelatorioFuncionario relatorioFuncionario = new RelatorioFuncionario();
     private RelatorioContas relatorioContas = new RelatorioContas();
+    private RelatorioExercicio relatorioExercicio = new RelatorioExercicio();
+    private RelatorioVenda relatorioVenda = new RelatorioVenda();
 
     public Relatorios() {
         initComponents();
@@ -29,6 +31,8 @@ public class Relatorios extends javax.swing.JInternalFrame {
         fundos(relatorioProfessor);
         fundos(relatorioFuncionario);
         fundos(relatorioContas);
+        fundos(relatorioExercicio);
+        fundos(relatorioVenda);
 
     }
 
@@ -47,13 +51,11 @@ public class Relatorios extends javax.swing.JInternalFrame {
         BotaoSair = new javax.swing.JButton();
         BotaoRexercicio = new javax.swing.JButton();
         BotaoRcaixa = new javax.swing.JButton();
-        BotaoRproduto = new javax.swing.JButton();
         BotaoRprofessor = new javax.swing.JButton();
         BotaoRconta = new javax.swing.JButton();
         BotaoRfornecedor = new javax.swing.JButton();
         BotaoRfuncionario = new javax.swing.JButton();
         AreaPanel = new javax.swing.JDesktopPane();
-        jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
 
         setPreferredSize(new java.awt.Dimension(962, 739));
@@ -135,7 +137,7 @@ public class Relatorios extends javax.swing.JInternalFrame {
         BotaoRcaixa.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         BotaoRcaixa.setForeground(new java.awt.Color(0, 102, 102));
         BotaoRcaixa.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/pbd/resource/bars-graphic.png"))); // NOI18N
-        BotaoRcaixa.setText("Caixa");
+        BotaoRcaixa.setText("Venda");
         BotaoRcaixa.setBorderPainted(false);
         BotaoRcaixa.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         BotaoRcaixa.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
@@ -151,29 +153,6 @@ public class Relatorios extends javax.swing.JInternalFrame {
         BotaoRcaixa.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 BotaoRcaixaActionPerformed(evt);
-            }
-        });
-
-        BotaoRproduto.setBackground(new java.awt.Color(255, 255, 255));
-        BotaoRproduto.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        BotaoRproduto.setForeground(new java.awt.Color(0, 102, 102));
-        BotaoRproduto.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/pbd/resource/shopping-online.png"))); // NOI18N
-        BotaoRproduto.setText(" Produto");
-        BotaoRproduto.setBorderPainted(false);
-        BotaoRproduto.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        BotaoRproduto.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        BotaoRproduto.setVerticalTextPosition(javax.swing.SwingConstants.TOP);
-        BotaoRproduto.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                BotaoRprodutoMouseEntered(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                BotaoRprodutoMouseExited(evt);
-            }
-        });
-        BotaoRproduto.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                BotaoRprodutoActionPerformed(evt);
             }
         });
 
@@ -287,10 +266,9 @@ public class Relatorios extends javax.swing.JInternalFrame {
                 .addComponent(BotaoRexercicio)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(BotaoRcaixa)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(BotaoRproduto)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(BotaoSair, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addComponent(BotaoSair, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
         PanelPrincipalLayout.setVerticalGroup(
             PanelPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -298,38 +276,26 @@ public class Relatorios extends javax.swing.JInternalFrame {
             .addComponent(BotaoRexercicio, javax.swing.GroupLayout.DEFAULT_SIZE, 81, Short.MAX_VALUE)
             .addComponent(BotaoRcaixa, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(BotaoSair, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(BotaoRproduto, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(BotaoRprofessor, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(BotaoRconta, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(BotaoRfornecedor, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(BotaoRfuncionario, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
-        AreaPanel.setLayer(jLabel1, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/pbd/resource/oie_QwU0UgmKkfFG.png"))); // NOI18N
+
         AreaPanel.setLayer(jLabel2, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         javax.swing.GroupLayout AreaPanelLayout = new javax.swing.GroupLayout(AreaPanel);
         AreaPanel.setLayout(AreaPanelLayout);
         AreaPanelLayout.setHorizontalGroup(
             AreaPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(AreaPanelLayout.createSequentialGroup()
-                .addGroup(AreaPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(AreaPanelLayout.createSequentialGroup()
-                        .addGap(129, 129, 129)
-                        .addComponent(jLabel1))
-                    .addGroup(AreaPanelLayout.createSequentialGroup()
-                        .addGap(119, 119, 119)
-                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 702, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         AreaPanelLayout.setVerticalGroup(
             AreaPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(AreaPanelLayout.createSequentialGroup()
-                .addGap(72, 72, 72)
-                .addComponent(jLabel1)
-                .addGap(72, 72, 72)
-                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 336, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(125, Short.MAX_VALUE))
+            .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, 684, Short.MAX_VALUE)
         );
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -378,10 +344,6 @@ public class Relatorios extends javax.swing.JInternalFrame {
     private void BotaoRcaixaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotaoRcaixaActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_BotaoRcaixaActionPerformed
-
-    private void BotaoRprodutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotaoRprodutoActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_BotaoRprodutoActionPerformed
 
     private void BotaoRprofessorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotaoRprofessorActionPerformed
         // TODO add your handling code here:
@@ -434,11 +396,6 @@ public class Relatorios extends javax.swing.JInternalFrame {
         getBotaoRcaixa().setForeground(new Color(255, 255, 255)); // cor da letra quando aparece
     }//GEN-LAST:event_BotaoRcaixaMouseEntered
 
-    private void BotaoRprodutoMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BotaoRprodutoMouseEntered
-        getBotaoRproduto().setBackground(new Color(204, 204, 204)); // cor de fundo quando aparece
-        getBotaoRproduto().setForeground(new Color(255, 255, 255)); // cor da letra quando aparece
-    }//GEN-LAST:event_BotaoRprodutoMouseEntered
-
     private void BotaoSairMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BotaoSairMouseEntered
         getBotaoSair().setBackground(new Color(204, 204, 204)); // cor de fundo quando aparece
         getBotaoSair().setForeground(new Color(255, 255, 255)); // cor da letra quando aparece
@@ -479,11 +436,6 @@ public class Relatorios extends javax.swing.JInternalFrame {
         getBotaoRcaixa().setForeground(new Color(0, 102, 102));// letra quando solta cor
     }//GEN-LAST:event_BotaoRcaixaMouseExited
 
-    private void BotaoRprodutoMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BotaoRprodutoMouseExited
-        getBotaoRproduto().setBackground(new Color(255, 255, 255));// Fundo Quando Solta
-        getBotaoRproduto().setForeground(new Color(0, 102, 102));// letra quando solta cor
-    }//GEN-LAST:event_BotaoRprodutoMouseExited
-
     private void BotaoSairMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BotaoSairMouseExited
         getBotaoSair().setBackground(new Color(255, 255, 255));// Fundo Quando Solta
         getBotaoSair().setForeground(new Color(0, 102, 102));// letra quando solta cor
@@ -502,11 +454,9 @@ public class Relatorios extends javax.swing.JInternalFrame {
     private javax.swing.JButton BotaoRexercicio;
     private javax.swing.JButton BotaoRfornecedor;
     private javax.swing.JButton BotaoRfuncionario;
-    private javax.swing.JButton BotaoRproduto;
     private javax.swing.JButton BotaoRprofessor;
     private javax.swing.JButton BotaoSair;
     private javax.swing.JPanel PanelPrincipal;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
     // End of variables declaration//GEN-END:variables
@@ -522,6 +472,8 @@ public class Relatorios extends javax.swing.JInternalFrame {
             cp.setEnabled(false);
         }
     }
+     
+     
 
     /**
      * @return the relatorioAluno
@@ -692,20 +644,6 @@ public class Relatorios extends javax.swing.JInternalFrame {
     }
 
     /**
-     * @return the BotaoRproduto
-     */
-    public javax.swing.JButton getBotaoRproduto() {
-        return BotaoRproduto;
-    }
-
-    /**
-     * @param BotaoRproduto the BotaoRproduto to set
-     */
-    public void setBotaoRproduto(javax.swing.JButton BotaoRproduto) {
-        this.BotaoRproduto = BotaoRproduto;
-    }
-
-    /**
      * @return the BotaoRprofessor
      */
     public javax.swing.JButton getBotaoRprofessor() {
@@ -759,6 +697,34 @@ public class Relatorios extends javax.swing.JInternalFrame {
      */
     public void setjPanel1(javax.swing.JPanel jPanel1) {
         this.jPanel1 = jPanel1;
+    }
+
+    /**
+     * @return the relatorioExercicio
+     */
+    public RelatorioExercicio getRelatorioExercicio() {
+        return relatorioExercicio;
+    }
+
+    /**
+     * @param relatorioExercicio the relatorioExercicio to set
+     */
+    public void setRelatorioExercicio(RelatorioExercicio relatorioExercicio) {
+        this.relatorioExercicio = relatorioExercicio;
+    }
+
+    /**
+     * @return the relatorioVenda
+     */
+    public RelatorioVenda getRelatorioVenda() {
+        return relatorioVenda;
+    }
+
+    /**
+     * @param relatorioVenda the relatorioVenda to set
+     */
+    public void setRelatorioVenda(RelatorioVenda relatorioVenda) {
+        this.relatorioVenda = relatorioVenda;
     }
 
    
