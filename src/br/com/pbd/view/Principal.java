@@ -123,7 +123,7 @@ public class Principal extends javax.swing.JFrame implements ActionListener {
         botaoProfessor = new javax.swing.JButton();
         botaoAgenda = new javax.swing.JButton();
         botaoSair = new javax.swing.JButton();
-        botaoSobre = new javax.swing.JButton();
+        botaoAcesso = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         labelnome = new java.awt.Label();
         labelfuncao = new java.awt.Label();
@@ -478,25 +478,25 @@ public class Principal extends javax.swing.JFrame implements ActionListener {
             }
         });
 
-        botaoSobre.setBackground(new java.awt.Color(255, 255, 255));
-        botaoSobre.setFont(new java.awt.Font("Agency FB", 0, 24)); // NOI18N
-        botaoSobre.setForeground(new java.awt.Color(0, 102, 102));
-        botaoSobre.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/pbd/resource/vision.png"))); // NOI18N
-        botaoSobre.setText("Acesso");
-        botaoSobre.setBorderPainted(false);
-        botaoSobre.setFocusPainted(false);
-        botaoSobre.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
-        botaoSobre.addMouseListener(new java.awt.event.MouseAdapter() {
+        botaoAcesso.setBackground(new java.awt.Color(255, 255, 255));
+        botaoAcesso.setFont(new java.awt.Font("Agency FB", 0, 24)); // NOI18N
+        botaoAcesso.setForeground(new java.awt.Color(0, 102, 102));
+        botaoAcesso.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/pbd/resource/vision.png"))); // NOI18N
+        botaoAcesso.setText("Acesso");
+        botaoAcesso.setBorderPainted(false);
+        botaoAcesso.setFocusPainted(false);
+        botaoAcesso.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
+        botaoAcesso.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
-                botaoSobreMouseEntered(evt);
+                botaoAcessoMouseEntered(evt);
             }
             public void mouseExited(java.awt.event.MouseEvent evt) {
-                botaoSobreMouseExited(evt);
+                botaoAcessoMouseExited(evt);
             }
         });
-        botaoSobre.addActionListener(new java.awt.event.ActionListener() {
+        botaoAcesso.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                botaoSobreActionPerformed(evt);
+                botaoAcessoActionPerformed(evt);
             }
         });
 
@@ -532,7 +532,7 @@ public class Principal extends javax.swing.JFrame implements ActionListener {
                         .addGap(0, 0, Short.MAX_VALUE))
                     .addComponent(botaologoff, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(botaoExercicio, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(botaoSobre, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(botaoAcesso, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGroup(painelMenuPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(botaoAcademia, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 193, Short.MAX_VALUE)
                     .addComponent(botaoDespesas, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -585,7 +585,7 @@ public class Principal extends javax.swing.JFrame implements ActionListener {
                     .addComponent(botaoDespesas, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(painelMenuPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(botaoSobre, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(botaoAcesso, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(botaoAcademia, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(painelMenuPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -864,23 +864,19 @@ public class Principal extends javax.swing.JFrame implements ActionListener {
         
     }//GEN-LAST:event_botaoVendaActionPerformed
 
-    private void botaoSobreMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_botaoSobreMouseEntered
-        getBotaoSobre().setBackground(new Color(204, 204, 204)); // cor de fundo quando aparece
-        getBotaoSobre().setForeground(new Color(255, 255, 255)); // cor da letra quando aparece
-    }//GEN-LAST:event_botaoSobreMouseEntered
+    private void botaoAcessoMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_botaoAcessoMouseEntered
+        getBotaoAcesso().setBackground(new Color(204, 204, 204)); // cor de fundo quando aparece
+        getBotaoAcesso().setForeground(new Color(255, 255, 255)); // cor da letra quando aparece
+    }//GEN-LAST:event_botaoAcessoMouseEntered
 
-    private void botaoSobreMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_botaoSobreMouseExited
-        getBotaoSobre().setBackground(new Color(255, 255, 255));// Fundo Quando Solta
-        getBotaoSobre().setForeground(new Color(0, 102, 102));// letra quando solta cor
-    }//GEN-LAST:event_botaoSobreMouseExited
+    private void botaoAcessoMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_botaoAcessoMouseExited
+        getBotaoAcesso().setBackground(new Color(255, 255, 255));// Fundo Quando Solta
+        getBotaoAcesso().setForeground(new Color(0, 102, 102));// letra quando solta cor
+    }//GEN-LAST:event_botaoAcessoMouseExited
 
-    private void botaoSobreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoSobreActionPerformed
+    private void botaoAcessoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoAcessoActionPerformed
         
-//        getTelaSobre().setVisible(true);
-//        for (Component cp : getPainelMenuPrincipal().getComponents()) {
-//            cp.setEnabled(false);
-//        }
-    }//GEN-LAST:event_botaoSobreActionPerformed
+    }//GEN-LAST:event_botaoAcessoActionPerformed
 
     private void botaoRelatoriosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoRelatoriosActionPerformed
         getRelatorios().setVisible(true);
@@ -931,6 +927,7 @@ public class Principal extends javax.swing.JFrame implements ActionListener {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JDesktopPane areaPanel;
     private javax.swing.JButton botaoAcademia;
+    private javax.swing.JButton botaoAcesso;
     private javax.swing.JButton botaoAgenda;
     private javax.swing.JButton botaoAluno;
     private javax.swing.JButton botaoCaixa;
@@ -942,7 +939,6 @@ public class Principal extends javax.swing.JFrame implements ActionListener {
     private javax.swing.JButton botaoProfessor;
     private javax.swing.JButton botaoRelatorios;
     private javax.swing.JButton botaoSair;
-    private javax.swing.JButton botaoSobre;
     private javax.swing.JButton botaoTarefa;
     private javax.swing.JButton botaoVenda;
     private javax.swing.JButton botaologoff;
@@ -985,18 +981,18 @@ public class Principal extends javax.swing.JFrame implements ActionListener {
         for (Component cp : getPainelMenuPrincipal().getComponents()) {
             cp.setEnabled(true);
         }
-         jLabel1.setEnabled(true);
-         labelfuncao.setEnabled(true);
-         labelnome.setEnabled(true);
+         getjLabel1().setEnabled(true);
+         getLabelfuncao().setEnabled(true);
+         getLabelnome().setEnabled(true);
     }
     
     public void Desativar() {
         for (Component cp : getPainelMenuPrincipal().getComponents()) {
             cp.setEnabled(false);
         }
-         jLabel1.setEnabled(true);
-         labelfuncao.setEnabled(true);
-         labelnome.setEnabled(true);
+         getjLabel1().setEnabled(true);
+         getLabelfuncao().setEnabled(true);
+         getLabelnome().setEnabled(true);
     }
     
     public void AtivarP() {
@@ -1006,7 +1002,7 @@ public class Principal extends javax.swing.JFrame implements ActionListener {
         getBotaoAgenda().setEnabled(true);
         getBotaologoff().setEnabled(true);
         getBotaoSair().setEnabled(true);
-        getBotaoSobre().setEnabled(true);
+        getBotaoAcesso().setEnabled(true);
         getBotaoExercicio().setEnabled(true);
         
     }
@@ -1420,6 +1416,20 @@ public class Principal extends javax.swing.JFrame implements ActionListener {
     }
 
     /**
+     * @return the relatorios
+     */
+    public Relatorios getRelatorios() {
+        return relatorios;
+    }
+
+    /**
+     * @param relatorios the relatorios to set
+     */
+    public void setRelatorios(Relatorios relatorios) {
+        this.relatorios = relatorios;
+    }
+
+    /**
      * @return the areaPanel
      */
     public javax.swing.JDesktopPane getAreaPanel() {
@@ -1445,6 +1455,20 @@ public class Principal extends javax.swing.JFrame implements ActionListener {
      */
     public void setBotaoAcademia(javax.swing.JButton botaoAcademia) {
         this.botaoAcademia = botaoAcademia;
+    }
+
+    /**
+     * @return the botaoAcesso
+     */
+    public javax.swing.JButton getBotaoAcesso() {
+        return botaoAcesso;
+    }
+
+    /**
+     * @param botaoAcesso the botaoAcesso to set
+     */
+    public void setBotaoAcesso(javax.swing.JButton botaoAcesso) {
+        this.botaoAcesso = botaoAcesso;
     }
 
     /**
@@ -1602,20 +1626,6 @@ public class Principal extends javax.swing.JFrame implements ActionListener {
     }
 
     /**
-     * @return the botaoSobre
-     */
-    public javax.swing.JButton getBotaoSobre() {
-        return botaoSobre;
-    }
-
-    /**
-     * @param botaoSobre the botaoSobre to set
-     */
-    public void setBotaoSobre(javax.swing.JButton botaoSobre) {
-        this.botaoSobre = botaoSobre;
-    }
-
-    /**
      * @return the botaoTarefa
      */
     public javax.swing.JButton getBotaoTarefa() {
@@ -1741,20 +1751,6 @@ public class Principal extends javax.swing.JFrame implements ActionListener {
         this.painelMenuPrincipal = painelMenuPrincipal;
     }
 
-    /**
-     * @return the relatorios
-     */
-    public Relatorios getRelatorios() {
-        return relatorios;
-    }
-
-    /**
-     * @param relatorios the relatorios to set
-     */
-    public void setRelatorios(Relatorios relatorios) {
-        this.relatorios = relatorios;
-    }
-
-  
+   
     
 }

@@ -6,40 +6,25 @@
 package br.com.pbd.view;
 
 import java.awt.Color;
-import javax.swing.Icon;
-import javax.swing.ImageIcon;
-import javax.swing.JButton;
+import java.text.ParseException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JPasswordField;
-import javax.swing.JTextField;
 
 /**
  *
  * @author Glenda Alves de Lima
  */
-public class Acesso extends javax.swing.JDialog {
-
-    private JButton btnRe, btnEd;
-    private Icon IconRes, IconEditar;
+public class NovaSenha extends javax.swing.JDialog {
 
     /**
-     * Creates new form Acesso
+     * Creates new form NovaSenha
      */
-    public Acesso(java.awt.Frame parent, boolean modal) {
+    public NovaSenha(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
-        
-        IconEditar = new ImageIcon(getClass().getResource("/br/com/pbd/resource/editarr.png"));
-        IconRes = new ImageIcon(getClass().getResource("/br/com/pbd/resource/Exclui.png"));
-        
-        btnRe = new JButton(getIconRes());
-        btnRe.setName("reset");
-        btnRe.setBorder(null);
-        btnRe.setContentAreaFilled(false);
-
-        btnEd = new JButton(getIconEditar());
-        btnEd.setName("editar");
-        btnEd.setBorder(null);
-        btnEd.setContentAreaFilled(false);
+        grupo.add(funcionariobox);
+        grupo.add(professorbox);
     }
 
     /**
@@ -51,24 +36,25 @@ public class Acesso extends javax.swing.JDialog {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        grupo = new javax.swing.ButtonGroup();
         jPanel1 = new javax.swing.JPanel();
         label1 = new java.awt.Label();
-        txtnome = new javax.swing.JTextField();
         label2 = new java.awt.Label();
         label3 = new java.awt.Label();
         senha = new br.com.pbd.modelos.JPassWordFieldHint(new JPasswordField(), "p", "Senha");  ;
         confirmar = new br.com.pbd.modelos.JPassWordFieldHint(new JPasswordField(), "p", "Senha");  ;
         botaosalvar = new javax.swing.JButton();
+        TxtCpf = new javax.swing.JFormattedTextField();
+        funcionariobox = new javax.swing.JCheckBox();
+        professorbox = new javax.swing.JCheckBox();
+        label4 = new java.awt.Label();
         jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
-        jPanel1.setPreferredSize(new java.awt.Dimension(399, 422));
 
-        label1.setText("Usuario :");
-
-        txtnome.setEnabled(false);
+        label1.setText("Cpf :");
 
         label2.setText("Nova Senha :");
 
@@ -94,6 +80,31 @@ public class Acesso extends javax.swing.JDialog {
             }
         });
 
+        try {
+            TxtCpf.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("###.###.###-##")));
+        } catch (java.text.ParseException ex) {
+            ex.printStackTrace();
+        }
+
+        funcionariobox.setBackground(new java.awt.Color(255, 255, 255));
+        funcionariobox.setSelected(true);
+        funcionariobox.setText("Funcionario");
+        funcionariobox.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                funcionarioboxActionPerformed(evt);
+            }
+        });
+
+        professorbox.setBackground(new java.awt.Color(255, 255, 255));
+        professorbox.setText("Professor");
+        professorbox.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                professorboxActionPerformed(evt);
+            }
+        });
+
+        label4.setText("Voce é ?");
+
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/pbd/resource/585e4beacb11b227491c3399.png"))); // NOI18N
 
@@ -102,81 +113,104 @@ public class Acesso extends javax.swing.JDialog {
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(botaosalvar, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(123, 123, 123))
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
+                .addContainerGap(20, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(label1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGroup(jPanel1Layout.createSequentialGroup()
-                                        .addComponent(label2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(15, 15, 15)))
-                                .addGap(12, 12, 12)
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(txtnome, javax.swing.GroupLayout.PREFERRED_SIZE, 209, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(senha, javax.swing.GroupLayout.PREFERRED_SIZE, 209, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 404, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(label3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(label1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(confirmar, javax.swing.GroupLayout.PREFERRED_SIZE, 209, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addContainerGap(66, Short.MAX_VALUE))
-                    .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                                .addComponent(TxtCpf, javax.swing.GroupLayout.PREFERRED_SIZE, 244, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(label4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(funcionariobox, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(professorbox, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(61, 61, 61)))
+                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                .addGroup(jPanel1Layout.createSequentialGroup()
+                                    .addComponent(label3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addComponent(confirmar, javax.swing.GroupLayout.PREFERRED_SIZE, 242, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGroup(jPanel1Layout.createSequentialGroup()
+                                    .addComponent(label2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addComponent(senha, javax.swing.GroupLayout.PREFERRED_SIZE, 242, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addGap(48, 48, 48))
+                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                            .addComponent(botaosalvar, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGap(133, 133, 133)))))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(34, 34, 34)
+                .addContainerGap()
                 .addComponent(jLabel1)
-                .addGap(38, 38, 38)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 31, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(label4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(professorbox)
+                        .addComponent(funcionariobox)))
+                .addGap(28, 28, 28)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(label1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtnome, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(30, 30, 30)
+                    .addComponent(TxtCpf, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(26, 26, 26)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(label2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(senha, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(31, 31, 31)
+                .addGap(27, 27, 27)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(confirmar, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(label3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 41, Short.MAX_VALUE)
+                .addGap(44, 44, 44)
                 .addComponent(botaosalvar, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(44, 44, 44))
+                .addGap(33, 33, 33))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(0, 0, 0)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, 0))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 417, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
-        setBounds(650, 220, 415, 456);
+        pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void botaosalvarMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_botaosalvarMouseEntered
-        getBotaosalvar().setBackground(new Color(204, 204, 204)); // cor de fundo quando aparece
-        getBotaosalvar().setForeground(new Color(255, 255, 255)); // cor da letra quando aparece
-    }//GEN-LAST:event_botaosalvarMouseEntered
+    private void botaosalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaosalvarActionPerformed
+
+    }//GEN-LAST:event_botaosalvarActionPerformed
 
     private void botaosalvarMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_botaosalvarMouseExited
         getBotaosalvar().setBackground(new Color(255, 255, 255));// Fundo Quando Solta
         getBotaosalvar().setForeground(new Color(0, 102, 102));// letra quando solta cor
     }//GEN-LAST:event_botaosalvarMouseExited
 
-    private void botaosalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaosalvarActionPerformed
+    private void botaosalvarMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_botaosalvarMouseEntered
+        getBotaosalvar().setBackground(new Color(204, 204, 204)); // cor de fundo quando aparece
+        getBotaosalvar().setForeground(new Color(255, 255, 255)); // cor da letra quando aparece
+    }//GEN-LAST:event_botaosalvarMouseEntered
 
-    }//GEN-LAST:event_botaosalvarActionPerformed
+    private void funcionarioboxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_funcionarioboxActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_funcionarioboxActionPerformed
+
+    private void professorboxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_professorboxActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_professorboxActionPerformed
 
     /**
      * @param args the command line arguments
@@ -195,20 +229,20 @@ public class Acesso extends javax.swing.JDialog {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Acesso.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(NovaSenha.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Acesso.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(NovaSenha.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Acesso.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(NovaSenha.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Acesso.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(NovaSenha.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
         /* Create and display the dialog */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                Acesso dialog = new Acesso(new javax.swing.JFrame(), true);
+                NovaSenha dialog = new NovaSenha(new javax.swing.JFrame(), true);
                 dialog.addWindowListener(new java.awt.event.WindowAdapter() {
                     @Override
                     public void windowClosing(java.awt.event.WindowEvent e) {
@@ -221,75 +255,39 @@ public class Acesso extends javax.swing.JDialog {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JFormattedTextField TxtCpf;
     private javax.swing.JButton botaosalvar;
     private javax.swing.JTextField confirmar;
+    private javax.swing.JCheckBox funcionariobox;
+    private javax.swing.ButtonGroup grupo;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private java.awt.Label label1;
     private java.awt.Label label2;
     private java.awt.Label label3;
+    private java.awt.Label label4;
+    private javax.swing.JCheckBox professorbox;
     private javax.swing.JTextField senha;
-    private javax.swing.JTextField txtnome;
     // End of variables declaration//GEN-END:variables
 
-    public void limpa(){
+    public void limpar(){
+        funcionariobox.setSelected(true);
+        TxtCpf.setText("");
         senha.setText("");
         confirmar.setText("");
     }
     /**
-     * @return the btnRe
+     * @return the TxtCpf
      */
-    public JButton getBtnRe() {
-        return btnRe;
+    public javax.swing.JFormattedTextField getTxtCpf() {
+        return TxtCpf;
     }
 
     /**
-     * @param btnRe the btnRe to set
+     * @param TxtCpf the TxtCpf to set
      */
-    public void setBtnRe(JButton btnRe) {
-        this.btnRe = btnRe;
-    }
-
-    /**
-     * @return the btnEd
-     */
-    public JButton getBtnEd() {
-        return btnEd;
-    }
-
-    /**
-     * @param btnEd the btnEd to set
-     */
-    public void setBtnEd(JButton btnEd) {
-        this.btnEd = btnEd;
-    }
-
-    /**
-     * @return the IconRes
-     */
-    public Icon getIconRes() {
-        return IconRes;
-    }
-
-    /**
-     * @param IconRes the IconRes to set
-     */
-    public void setIconRes(Icon IconRes) {
-        this.IconRes = IconRes;
-    }
-
-    /**
-     * @return the IconEditar
-     */
-    public Icon getIconEditar() {
-        return IconEditar;
-    }
-
-    /**
-     * @param IconEditar the IconEditar to set
-     */
-    public void setIconEditar(Icon IconEditar) {
-        this.IconEditar = IconEditar;
+    public void setTxtCpf(javax.swing.JFormattedTextField TxtCpf) {
+        this.TxtCpf = TxtCpf;
     }
 
     /**
@@ -391,18 +389,19 @@ public class Acesso extends javax.swing.JDialog {
     }
 
     /**
-     * @return the txtnome
+     * @return the funcionariobox
      */
-    public javax.swing.JTextField getTxtnome() {
-        return txtnome;
+    public javax.swing.JCheckBox getFuncionariobox() {
+        return funcionariobox;
     }
 
     /**
-     * @param txtnome the txtnome to set
+     * @return the professorbox
      */
-    public void setTxtnome(javax.swing.JTextField txtnome) {
-        this.txtnome = txtnome;
+    public javax.swing.JCheckBox getProfessorbox() {
+        return professorbox;
     }
+
 
 
 }

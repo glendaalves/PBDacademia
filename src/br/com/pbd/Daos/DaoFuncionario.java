@@ -29,5 +29,15 @@ public class DaoFuncionario {
         }
         return query.getResultList();
     }
+        public Funcionario BuscaPorCpf(String cpf) {
+        Query query = null;
+        try {
+            query = manager.createQuery("SELECT  funcionario FROM Funcionario funcionario where funcionario.cpf =:obj");
+ query.setParameter("obj", cpf);
+        } catch (IllegalStateException e) {
+            System.out.println("erro ao realizar a buscar");
+        }
+        return (Funcionario) query.getSingleResult();
+    }
 
 }

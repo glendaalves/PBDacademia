@@ -58,7 +58,7 @@ public class ControleAcademia extends MouseAdapter implements ActionListener {
 
         principal.getAcademia().getBotaoSalvar().addActionListener(this);
         principal.getAcademia().getBotaoCancelar().addActionListener(this);
-        principal.getBotaoSobre().addActionListener(this);
+        principal.getBotaoAcesso().addActionListener(this);
         principal.getBotaoAcademia().addActionListener(this);
         principal.getTelaSobre().getBotaoCancelar().addActionListener(this);
         mensagems = new Mensagens(principal, true);
@@ -73,19 +73,6 @@ public class ControleAcademia extends MouseAdapter implements ActionListener {
         if (e.getSource() == principal.getGerencia().getTabelausuario()) {
             int ro = retornaIndice(principal.getGerencia().getTabelausuario(), e);
 
-//            if (escolha == editar) {
-//
-//                if (opcao == func) {
-//                    funcionario = funcionarios.get(ro);
-//                    acesso.getTxtnome().setText(funcionario.getLogin().getUsuario());
-//                    acesso.setVisible(true);
-//
-//                } else if (opcao == pro) {
-//                    professor = professors.get(ro);
-//                    acesso.getTxtnome().setText(professor.getLogin().getUsuario());
-//                    acesso.setVisible(true);
-//                }
-//            }
             if (escolha == resetar) {
                 if (opcao == func) {
                     funcionario = funcionarios.get(ro);
@@ -115,13 +102,26 @@ public class ControleAcademia extends MouseAdapter implements ActionListener {
         if (e.getSource() == principal.getGerencia().getBotaoFechar()) {
             principal.Ativar();
         }
-        if (e.getSource() == principal.getBotaoSobre()) {
-            if (controleLogin.getProfessor() == null && controleLogin.getFuncionario() == null) {
+        if (e.getSource() == principal.getBotaoAcesso()) {
+
+            if (controleLogin.getProfessor() != null) {
+                opcao = pro;
+               acesso.getTxtnome().setText(controleLogin.getProfessor().getLogin().getUsuario());
+               acesso.limpa();
+                acesso.setVisible(true);
+                
+               
+            } else if (controleLogin.getFuncionario() != null) {
+               
+                  acesso.getTxtnome().setText(controleLogin.getFuncionario().getLogin().getUsuario()); 
+                  acesso.limpa();
+                  acesso.setVisible(true);
+                  opcao = func;
+                  
+            } else {
                 escolherUsuario();
                 principal.getGerencia().setVisible(true);
                 principal.Desativar();
-            } else {
-                mensagems.mensagens("Voce Não tem Acesso !", "advertencia");
             }
 
         }
@@ -256,7 +256,7 @@ public class ControleAcademia extends MouseAdapter implements ActionListener {
                 dados[i][1] = professor.getCpf();
                 dados[i][2] = professor.getRg();
                 dados[i][3] = professor.getCarteira_trabalho();
-                dados[i][4] = acesso.getBtnEd();
+                dados[i][4] = acesso.getBtnRe();
 
             }
             DefaultTableModel dataModel = new DefaultTableModel(dados, colunas) {
@@ -369,8 +369,10 @@ public class ControleAcademia extends MouseAdapter implements ActionListener {
             senhaHex = ab.toString();
 
             if (confirmar.equals(pwd)) {
-                professor.getLogin().setSenha(senhaHex);
-                fachada.salvar(professor);
+                controleLogin.getProfessor().getLogin().setSenha(senhaHex);
+                fachada.salvar(controleLogin.getProfessor());
+                
+            mensagems.mensagens("Senha alterada com Sucesso", "info");
                 acesso.setVisible(false);
             } else {
                 mensagems.mensagens("Senhas Diferentes", "advertencia");
@@ -410,8 +412,9 @@ public class ControleAcademia extends MouseAdapter implements ActionListener {
             senhaHex = ab.toString();
 
             if (confirmar.equals(pwd)) {
-                funcionario.getLogin().setSenha(senhaHex);
-                fachada.salvar(funcionario);
+                controleLogin.getFuncionario().getLogin().setSenha(senhaHex);
+                fachada.salvar(controleLogin.getFuncionario());
+                mensagems.mensagens("Senha alterada com Sucesso", "info");
                 acesso.setVisible(false);
             } else {
                 mensagems.mensagens("Senhas Diferentes", "advertencia");

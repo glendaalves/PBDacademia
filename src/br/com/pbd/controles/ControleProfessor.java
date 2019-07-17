@@ -56,7 +56,7 @@ public class ControleProfessor extends MouseAdapter implements ActionListener {
 
     private Mensagens mensagens;
 
-    public ControleProfessor(Principal principal, Fachada fachada) {
+    public ControleProfessor (Principal principal, Fachada fachada) {
         this.principal = principal;
         this.fachada = fachada;
 

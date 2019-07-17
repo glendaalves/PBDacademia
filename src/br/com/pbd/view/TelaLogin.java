@@ -39,6 +39,7 @@ public class TelaLogin extends javax.swing.JFrame {
         usuarioField = new br.com.pbd.modelos.JTextFieldHint(new JTextField(), "u", " Nome do Usuario");
         SenhaField = new br.com.pbd.modelos.JPassWordFieldHint(new JPasswordField(), "p", "Senha");
         ;
+        esqueceusenha = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
 
@@ -50,7 +51,7 @@ public class TelaLogin extends javax.swing.JFrame {
         jLabel2.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(102, 102, 102));
         jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel2.setText("Entre com suas credências");
+        jLabel2.setText("Entre com suas credênciais");
 
         BotaoEntrar.setBackground(new java.awt.Color(58, 65, 84));
         BotaoEntrar.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
@@ -104,23 +105,38 @@ public class TelaLogin extends javax.swing.JFrame {
             }
         });
 
+        esqueceusenha.setBackground(new java.awt.Color(255, 255, 255));
+        esqueceusenha.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        esqueceusenha.setForeground(new java.awt.Color(0, 102, 102));
+        esqueceusenha.setText("Esqueceu senha");
+        esqueceusenha.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(0, 0, 0)));
+        esqueceusenha.setBorderPainted(false);
+        esqueceusenha.setFocusPainted(false);
+        esqueceusenha.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                esqueceusenhaMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                esqueceusenhaMouseExited(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, 400, Short.MAX_VALUE)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGap(18, 18, 18)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(SenhaField, javax.swing.GroupLayout.PREFERRED_SIZE, 360, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(usuarioField, javax.swing.GroupLayout.PREFERRED_SIZE, 360, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(BotaoSair, javax.swing.GroupLayout.PREFERRED_SIZE, 360, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(BotaoEntrar, javax.swing.GroupLayout.PREFERRED_SIZE, 360, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(22, Short.MAX_VALUE))
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addComponent(BotaoSair, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(BotaoEntrar, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(SenhaField, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 360, Short.MAX_VALUE)
+                        .addComponent(usuarioField, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 360, Short.MAX_VALUE))
+                    .addComponent(esqueceusenha, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
-
-        jPanel2Layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {BotaoEntrar, BotaoSair});
-
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
@@ -130,11 +146,13 @@ public class TelaLogin extends javax.swing.JFrame {
                 .addComponent(usuarioField, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(SenhaField, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(55, 55, 55)
+                .addGap(33, 33, 33)
                 .addComponent(BotaoEntrar, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(BotaoSair, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(40, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addComponent(esqueceusenha, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         jPanel1.setBackground(new java.awt.Color(153, 153, 153));
@@ -149,7 +167,7 @@ public class TelaLogin extends javax.swing.JFrame {
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 400, Short.MAX_VALUE)
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -217,6 +235,16 @@ public class TelaLogin extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_usuarioFieldActionPerformed
 
+    private void esqueceusenhaMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_esqueceusenhaMouseEntered
+        getEsqueceusenha().setBackground(new Color(204, 204, 204)); // cor de fundo quando aparece
+        getEsqueceusenha().setForeground(new Color(255, 255, 255)); // cor da letra quando aparece
+    }//GEN-LAST:event_esqueceusenhaMouseEntered
+
+    private void esqueceusenhaMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_esqueceusenhaMouseExited
+         getEsqueceusenha().setBackground(new Color(255, 255, 255));// Fundo Quando Solta
+        getEsqueceusenha().setForeground(new Color(0, 102, 102));// letra quando solta cor
+    }//GEN-LAST:event_esqueceusenhaMouseExited
+
     /**
      * @param args the command line arguments
      */
@@ -256,6 +284,7 @@ public class TelaLogin extends javax.swing.JFrame {
     private javax.swing.JButton BotaoEntrar;
     private javax.swing.JButton BotaoSair;
     private javax.swing.JPasswordField SenhaField;
+    private javax.swing.JButton esqueceusenha;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
@@ -263,6 +292,8 @@ public class TelaLogin extends javax.swing.JFrame {
     private javax.swing.JTextField usuarioField;
     // End of variables declaration//GEN-END:variables
 
+    
+    
     /**
      * @return the BotaoEntrar
      */
@@ -373,6 +404,20 @@ public class TelaLogin extends javax.swing.JFrame {
      */
     public void setUsuarioField(javax.swing.JTextField usuarioField) {
         this.usuarioField = usuarioField;
+    }
+
+    /**
+     * @return the esqueceusenha
+     */
+    public javax.swing.JButton getEsqueceusenha() {
+        return esqueceusenha;
+    }
+
+    /**
+     * @param esqueceusenha the esqueceusenha to set
+     */
+    public void setEsqueceusenha(javax.swing.JButton esqueceusenha) {
+        this.esqueceusenha = esqueceusenha;
     }
 
 

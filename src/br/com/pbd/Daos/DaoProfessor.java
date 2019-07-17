@@ -1,4 +1,4 @@
- /*
+/*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
@@ -30,6 +30,17 @@ public class DaoProfessor {
             System.out.println("erro ao realizar a buscar");
         }
         return query.getResultList();
+    }
+
+    public Professor BuscaPorCpf(String cpf) {
+        Query query = null;
+        try {
+            query = manager.createQuery("SELECT  professor FROM Professor professor where professor.cpf =:obj");
+            query.setParameter("obj", cpf);
+        } catch (IllegalStateException e) {
+            System.out.println("erro ao realizar a buscar");
+        }
+        return (Professor) query.getSingleResult();
     }
 
 }

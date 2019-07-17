@@ -147,7 +147,7 @@
                               </Group>
                               <Component id="botaologoff" alignment="0" max="32767" attributes="0"/>
                               <Component id="botaoExercicio" alignment="0" max="32767" attributes="0"/>
-                              <Component id="botaoSobre" alignment="0" max="32767" attributes="0"/>
+                              <Component id="botaoAcesso" alignment="0" max="32767" attributes="0"/>
                           </Group>
                           <Group type="103" groupAlignment="1" attributes="0">
                               <Component id="botaoAcademia" alignment="0" pref="193" max="32767" attributes="0"/>
@@ -214,7 +214,7 @@
                           </Group>
                           <EmptySpace max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="3" attributes="0">
-                              <Component id="botaoSobre" alignment="3" min="-2" pref="70" max="-2" attributes="0"/>
+                              <Component id="botaoAcesso" alignment="3" min="-2" pref="70" max="-2" attributes="0"/>
                               <Component id="botaoAcademia" alignment="3" min="-2" pref="70" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace max="-2" attributes="0"/>
@@ -613,7 +613,7 @@
                     <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="botaoSairActionPerformed"/>
                   </Events>
                 </Component>
-                <Component class="javax.swing.JButton" name="botaoSobre">
+                <Component class="javax.swing.JButton" name="botaoAcesso">
                   <Properties>
                     <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                       <Color blue="ff" green="ff" red="ff" type="rgb"/>
@@ -633,9 +633,9 @@
                     <Property name="horizontalTextPosition" type="int" value="4"/>
                   </Properties>
                   <Events>
-                    <EventHandler event="mouseEntered" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="botaoSobreMouseEntered"/>
-                    <EventHandler event="mouseExited" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="botaoSobreMouseExited"/>
-                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="botaoSobreActionPerformed"/>
+                    <EventHandler event="mouseEntered" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="botaoAcessoMouseEntered"/>
+                    <EventHandler event="mouseExited" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="botaoAcessoMouseExited"/>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="botaoAcessoActionPerformed"/>
                   </Events>
                 </Component>
                 <Component class="javax.swing.JLabel" name="jLabel1">
