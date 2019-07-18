@@ -55,7 +55,7 @@ public class ControleAcademia extends MouseAdapter implements ActionListener {
         this.fachada = fachada;
 
         acesso = new Acesso(principal, true);
-
+        acesso.getBotaosalvar().addActionListener(this);
         principal.getAcademia().getBotaoSalvar().addActionListener(this);
         principal.getAcademia().getBotaoCancelar().addActionListener(this);
         principal.getBotaoAcesso().addActionListener(this);
@@ -65,7 +65,7 @@ public class ControleAcademia extends MouseAdapter implements ActionListener {
         principal.getGerencia().getConbousuario().addActionListener(this);
         principal.getGerencia().getTabelausuario().addMouseListener(this);
         principal.getGerencia().getBotaoFechar().addActionListener(this);
-        acesso.getBotaosalvar().addActionListener(this);
+      
 
     }
 
@@ -106,18 +106,17 @@ public class ControleAcademia extends MouseAdapter implements ActionListener {
 
             if (controleLogin.getProfessor() != null) {
                 opcao = pro;
-               acesso.getTxtnome().setText(controleLogin.getProfessor().getLogin().getUsuario());
-               acesso.limpa();
+                acesso.getTxtnome().setText(controleLogin.getProfessor().getLogin().getUsuario());
+                acesso.limpa();
+                acesso.setVisible(true);
+
+            } else if (controleLogin.getFuncionario() != null) {
+                opcao = func;
+                acesso.getTxtnome().setText(controleLogin.getFuncionario().getLogin().getUsuario());
+                acesso.limpa();
                 acesso.setVisible(true);
                 
-               
-            } else if (controleLogin.getFuncionario() != null) {
-               
-                  acesso.getTxtnome().setText(controleLogin.getFuncionario().getLogin().getUsuario()); 
-                  acesso.limpa();
-                  acesso.setVisible(true);
-                  opcao = func;
-                  
+
             } else {
                 escolherUsuario();
                 principal.getGerencia().setVisible(true);
@@ -371,8 +370,7 @@ public class ControleAcademia extends MouseAdapter implements ActionListener {
             if (confirmar.equals(pwd)) {
                 controleLogin.getProfessor().getLogin().setSenha(senhaHex);
                 fachada.salvar(controleLogin.getProfessor());
-                
-            mensagems.mensagens("Senha alterada com Sucesso", "info");
+                mensagems.mensagens("Senha alterada com Sucesso", "info");
                 acesso.setVisible(false);
             } else {
                 mensagems.mensagens("Senhas Diferentes", "advertencia");

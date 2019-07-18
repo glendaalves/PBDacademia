@@ -47,10 +47,10 @@ public class ControleCaixa implements ActionListener {
         this.principal = principal;
         this.fachada = fachada;
         caixa = new Caixa();
-        abrirCaixa();
         principal.getBotaoCaixa().addActionListener(this);
         principal.getCaixa().getBotaofechar().addActionListener(this);
         principal.getCaixa().getBotaoFecharcaixa().addActionListener(this);
+        principal.getCaixa().getBotaoAbrirCaixa().addActionListener(this);
         mensagens = new Mensagens(principal, true);
 
         principal.getCaixa().getCalendario().getDateEditor().getUiComponent().addPropertyChangeListener(new PropertyChangeListener() {
@@ -86,6 +86,10 @@ public class ControleCaixa implements ActionListener {
             preencherTabelaConta(contaaPagars);
             dinhiroNoCaixa();
             principal.getCaixa().getTxtlucro().setText(caixa.getValor_fechamento() - caixa.getValor_abertura() + "");
+        }
+        if (e.getSource() == principal.getCaixa().getBotaoAbrirCaixa()) {
+            abrirCaixa();
+            mensagens.mensagens("Caixa Aberto", "info");
         }
         if (e.getSource() == principal.getCaixa().getBotaofechar()) {
             principal.Ativar();
@@ -236,9 +240,6 @@ public class ControleCaixa implements ActionListener {
     public void fecharCaixa() {
         double lucro = caixa.getValor_fechamento() - caixa.getValor_abertura();
         caixa.setLucro(lucro);
-//        java.util.Date d = new java.util.Date();
-//        caixa = new DaoCaixa().BuscarCaixa(ConverterData(d));
-//        new DaoCaixa().Busca(caixa.getId());
         caixa.setStatus(false);
         fachada.salvar(caixa);
         mensagens.mensagens("Caixa Fechado", "info");

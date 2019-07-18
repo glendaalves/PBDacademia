@@ -67,8 +67,7 @@ public class ControleLogin implements ActionListener, KeyListener {
         keyEventos = new HashMap<Integer, Boolean>();
         verificar();
         mensagems = new Mensagens(login, true);
-      
-
+        novaSenha.getBotaosalvar().addActionListener(this);
 
     }
 
@@ -77,7 +76,6 @@ public class ControleLogin implements ActionListener, KeyListener {
 
         if (e.getSource() == login.getEsqueceusenha()) {
             novaSenha.limpar();
-        //    novaSenha.setLocationRelativeTo(null);
             novaSenha.setVisible(true);
         }
         if (e.getSource() == novaSenha.getBotaosalvar()) {
@@ -356,7 +354,6 @@ public class ControleLogin implements ActionListener, KeyListener {
                 if (confirmar.equals(pwd)) {
                     getFachada().salvar(f);
                     novaSenha.setVisible(false);
-                   
 
                 } else {
                     getMensagems().setLocationRelativeTo(null);
@@ -364,13 +361,14 @@ public class ControleLogin implements ActionListener, KeyListener {
                 }
 
             } else {
-                getMensagems().mensagens("Solicite o Reset ao Administrador", "info");
+                mensagems.setLocationRelativeTo(null);
+                getMensagems().mensagens("Voce Não tem Permição.Solicite o Reset ao Administrador", "info");
             }
         } catch (NoSuchAlgorithmException ex) {
             Logger.getLogger(ControleLogin.class.getName()).log(Level.SEVERE, null, ex);
         } catch (UnsupportedEncodingException ex) {
             Logger.getLogger(ControleLogin.class.getName()).log(Level.SEVERE, null, ex);
-        }catch (javax.persistence.NoResultException ex) {
+        } catch (javax.persistence.NoResultException ex) {
             getMensagems().mensagens("CPF ou Opção de Usuario Invalida", "info");
         }
 
@@ -400,7 +398,6 @@ public class ControleLogin implements ActionListener, KeyListener {
                 if (confirmar.equals(pwd)) {
                     getFachada().salvar(p);
                     novaSenha.setVisible(false);
-                   
 
                 } else {
                     getMensagems().setLocationRelativeTo(null);
@@ -408,7 +405,8 @@ public class ControleLogin implements ActionListener, KeyListener {
                 }
 
             } else {
-                getMensagems().mensagens("Solicite o Reset ao Administrador", "info");
+                mensagems.setLocationRelativeTo(null);
+                getMensagems().mensagens("Voce Não tem Permição.Solicite o Reset ao Administrador", "info");
             }
         } catch (NoSuchAlgorithmException ex) {
             Logger.getLogger(ControleLogin.class.getName()).log(Level.SEVERE, null, ex);

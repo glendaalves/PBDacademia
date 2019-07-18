@@ -119,12 +119,16 @@ public class ControleDespesas extends MouseAdapter implements ActionListener {
             if (escolha == pagar) {
                 java.util.Date d = new java.util.Date();
                 caixa = new DaoCaixa().BuscarCaixa(ConverterData(d));
-                if (caixa.getValor_fechamento() > contaaPagar.getValor()) {
-                    conta.getLabel14().setVisible(false);
-                    conta.getCombotipo().setVisible(false);
-                    conta.setVisible(true);
+                if (caixa.isStatus()) {
+                    if (caixa.getValor_fechamento() > contaaPagar.getValor()) {
+                        conta.getLabel14().setVisible(false);
+                        conta.getCombotipo().setVisible(false);
+                        conta.setVisible(true);
+                    } else {
+                        mensagens.mensagens("Dinheiro indisponivel ", "advertencia");
+                    }
                 } else {
-                    mensagens.mensagens("Dinheiro indisponivel ", "advertencia");
+                    mensagens.mensagens("Caixa Fechado", "info");
                 }
             }
 

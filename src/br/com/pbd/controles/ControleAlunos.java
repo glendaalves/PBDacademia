@@ -12,9 +12,12 @@ import br.com.pbd.modelos.Aluno;
 import br.com.pbd.modelos.Caixa;
 import br.com.pbd.modelos.Dados;
 import br.com.pbd.modelos.Exercicio;
+import br.com.pbd.modelos.Imagem;
+import br.com.pbd.modelos.ManipularImagem;
 import br.com.pbd.modelos.Mensalidade;
 import br.com.pbd.modelos.Professor;
 import br.com.pbd.modelos.Render;
+import br.com.pbd.view.Imagens;
 import br.com.pbd.view.Mensagens;
 import br.com.pbd.view.Principal;
 import br.com.pbd.view.QuantidadeExercicio;
@@ -74,12 +77,14 @@ public class ControleAlunos extends MouseAdapter implements ActionListener {
     private java.util.Date data2 = new java.util.Date();
     private java.sql.Date dataN;
     private int escolha;
-    private final int salvar = 0, editar = 1, excluir = 2, mensalidade = 3, agende = 4, acompanhamento = 5, pagar = 6, selecionar = 7;
+    private final int salvar = 0, editar = 1, excluir = 2, mensalidade = 3, agende = 4, acompanhamento = 5, pagar = 6, selecionar = 7, Imagem = 8;
     private ControleLogin controleLogin;
     private Mensagens mensagens;
     private final QuantidadeExercicio quantidadeExercicio;
     private List<Professor> professors;
     private Caixa caixa;
+    private List<Imagem> imagens;
+    private Imagens i;
 
     public ControleAlunos(Principal principal, Fachada fachada) {
         this.principal = principal;
@@ -111,9 +116,11 @@ public class ControleAlunos extends MouseAdapter implements ActionListener {
         principal.getAgendaAluno().getTabelaAgenda().addMouseListener(this);
         quantidadeExercicio = new QuantidadeExercicio(principal, true);
         quantidadeExercicio.getBotaook().addActionListener(this);
+        i = new Imagens(principal, true);
 
         mensagens = new Mensagens(principal, true);
         Edicaoexercicio = new ArrayList<Exercicio>();
+        imagens = new ArrayList<Imagem>();
         principal.getBuscarAlunos().getTxtpesquisa().addKeyListener(new KeyAdapter() {
 
             @Override
@@ -150,17 +157,21 @@ public class ControleAlunos extends MouseAdapter implements ActionListener {
                 try {
                     java.util.Date dt = new java.util.Date();
                     caixa = new DaoCaixa().BuscarCaixa(ConverterData(dt));
-                    Date d = new Date(System.currentTimeMillis());
-                    mensalidades.get(ro).setPagamento(d);
-                    mensalidades.get(ro).setStatus("Pago");
-                    double soma = caixa.getValor_fechamento() + mensalidades.get(ro).getValor();
-                    a.setMensalidades(mensalidades);
-                    fachada.salvar(a);
-                    caixa.setValor_fechamento(soma);
-                    fachada.salvar(caixa);
-                    mensagens.mensagens("Pago com Sucesso", "info");
-                    exibirRelatorio(a.getNome(), mensalidades.get(ro).getVencimento(), mensalidades.get(ro).getValor());
-                    preencherTabelaMensalidade();
+                    if (caixa.isStatus()) {
+                        Date d = new Date(System.currentTimeMillis());
+                        mensalidades.get(ro).setPagamento(d);
+                        mensalidades.get(ro).setStatus("Pago");
+                        double soma = caixa.getValor_fechamento() + mensalidades.get(ro).getValor();
+                        a.setMensalidades(mensalidades);
+                        fachada.salvar(a);
+                        caixa.setValor_fechamento(soma);
+                        fachada.salvar(caixa);
+                        mensagens.mensagens("Pago com Sucesso", "info");
+                        exibirRelatorio(a.getNome(), mensalidades.get(ro).getVencimento(), mensalidades.get(ro).getValor());
+                        preencherTabelaMensalidade();
+                    } else {
+                        mensagens.mensagens("Caixa Fechado", "info");
+                    }
                 } catch (java.lang.IllegalStateException n) {
                     mensagens.mensagens("Voce precisa preencher todos os campos !", "advertencia");
                 } catch (javax.persistence.RollbackException roll) {
@@ -182,6 +193,11 @@ public class ControleAlunos extends MouseAdapter implements ActionListener {
                 mensagens.mensagens("Exclusão Realizada", "info");
                 preencherTabelaAcompanhamento();
 
+            }
+            if (escolha == Imagem) {
+                ManipularImagem.exibiImagemLabel(acom.getImagens().get(0).getImagem(), i.getLabelfrente());
+                ManipularImagem.exibiImagemLabel(acom.getImagens().get(1).getImagem(), i.getLabellado());
+                i.setVisible(true);
             }
 
         }
@@ -623,13 +639,26 @@ public class ControleAlunos extends MouseAdapter implements ActionListener {
             acompanhamento.setAntebraco(antebrac);
             acompanhamento.setPeso(pes);
             acompanhamento.setAltura(altur);
+            if (principal.getAcompanhamento().getImagemF() != null && principal.getAcompanhamento().getImagemL() != null) {
+                Imagem m = new Imagem();
+                m.setImagem(ManipularImagem.getImgBytes(principal.getAcompanhamento().getImagemF()));
+                imagens.add(m);
+                Imagem n = new Imagem();
+                n.setImagem(ManipularImagem.getImgBytes(principal.getAcompanhamento().getImagemL()));
+                imagens.add(n);
+                m.setAcompanhamento(acompanhamento);
+                n.setAcompanhamento(acompanhamento);
+                acompanhamento.setImagens(imagens);
 
-            fachada.salvar(acompanhamento);
-            mensagens.mensagens("Cadastrado com Sucesso", "info");
-            principal.getAcompanhamento().setVisible(false);
-            preencherTabelaAcompanhamento();
-            principal.getAcompanhamento().limpar();
-            ExerciciosRecomendados(acompanhamento);
+                fachada.salvar(acompanhamento);
+                mensagens.mensagens("Cadastrado com Sucesso", "info");
+                principal.getAcompanhamento().setVisible(false);
+                preencherTabelaAcompanhamento();
+                principal.getAcompanhamento().limpar();
+                ExerciciosRecomendados(acompanhamento);
+            } else {
+                mensagens.mensagens("Selecione as Imagems", "advertencia");
+            }
 
         } catch (java.lang.IllegalStateException n) {
             mensagens.mensagens("Voce precisa preencher todos os campos ", "advertencia");
@@ -650,8 +679,8 @@ public class ControleAlunos extends MouseAdapter implements ActionListener {
             principal.getListaAcompanhamento().getTabelaAcompanhamento().setDefaultRenderer(Object.class, new Render());
 
             try {
-                String[] colunas = new String[]{"Data", "Peito", "Ombro", "Cintura", "Quadril", "Coxa", "Panturrilha", "Braco", "AnteBraco", "Peso", "altura", "Excluir"};
-                Object[][] dados = new Object[acompanhamentos.size()][12];
+                String[] colunas = new String[]{"Data", "Peito", "Ombro", "Cintura", "Quadril", "Coxa", "Panturrilha", "Braco", "AnteBraco", "Peso", "altura", "Imagens", "Excluir"};
+                Object[][] dados = new Object[acompanhamentos.size()][13];
                 for (int i = 0; i < acompanhamentos.size(); i++) {
 
                     Acompanhamento acompanhamento = acompanhamentos.get(i);
@@ -666,7 +695,8 @@ public class ControleAlunos extends MouseAdapter implements ActionListener {
                     dados[i][8] = acompanhamento.getAntebraco();
                     dados[i][9] = acompanhamento.getPeso();
                     dados[i][10] = acompanhamento.getAltura();
-                    dados[i][11] = principal.getAcompanhamento().getBtnEx();
+                    dados[i][11] = principal.getAcompanhamento().getBtnIm();
+                    dados[i][12] = principal.getAcompanhamento().getBtnEx();
 
                 }
                 DefaultTableModel dataModel = new DefaultTableModel(dados, colunas) {
@@ -935,6 +965,9 @@ public class ControleAlunos extends MouseAdapter implements ActionListener {
                 if (boton.getName().equals("Selecionar")) {
                     escolha = selecionar;
                 }
+                if (boton.getName().equals("Imagem")) {
+                    escolha = Imagem;
+                }
             }
         }
         return ro;
@@ -1131,4 +1164,5 @@ public class ControleAlunos extends MouseAdapter implements ActionListener {
         };
         tabela.setModel(dataModel);
     }
+
 }

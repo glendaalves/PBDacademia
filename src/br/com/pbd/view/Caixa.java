@@ -53,6 +53,7 @@ public class Caixa extends javax.swing.JInternalFrame {
         jLabel1 = new javax.swing.JLabel();
         txttotal = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
+        botaoAbrirCaixa = new javax.swing.JButton();
 
         setPreferredSize(new java.awt.Dimension(962, 739));
 
@@ -251,7 +252,7 @@ public class Caixa extends javax.swing.JInternalFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel8)
                 .addGap(18, 18, 18)
-                .addComponent(txtlucro, javax.swing.GroupLayout.DEFAULT_SIZE, 103, Short.MAX_VALUE)
+                .addComponent(txtlucro, javax.swing.GroupLayout.DEFAULT_SIZE, 91, Short.MAX_VALUE)
                 .addContainerGap())
         );
         jPanel4Layout.setVerticalGroup(
@@ -286,7 +287,7 @@ public class Caixa extends javax.swing.JInternalFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(txttotal, javax.swing.GroupLayout.DEFAULT_SIZE, 107, Short.MAX_VALUE)
+                .addComponent(txttotal, javax.swing.GroupLayout.DEFAULT_SIZE, 99, Short.MAX_VALUE)
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
@@ -302,6 +303,26 @@ public class Caixa extends javax.swing.JInternalFrame {
                 .addContainerGap())
         );
 
+        botaoAbrirCaixa.setBackground(new java.awt.Color(255, 255, 255));
+        botaoAbrirCaixa.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        botaoAbrirCaixa.setForeground(new java.awt.Color(0, 102, 102));
+        botaoAbrirCaixa.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/pbd/resource/caixa.png"))); // NOI18N
+        botaoAbrirCaixa.setText("Abrir Caixa");
+        botaoAbrirCaixa.setBorderPainted(false);
+        botaoAbrirCaixa.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                botaoAbrirCaixaMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                botaoAbrirCaixaMouseExited(evt);
+            }
+        });
+        botaoAbrirCaixa.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botaoAbrirCaixaActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -309,33 +330,33 @@ public class Caixa extends javax.swing.JInternalFrame {
             .addComponent(jPanel9, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jScrollPane4)
-                    .addComponent(jScrollPane3, javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel2Layout.createSequentialGroup()
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel6)
+                    .addComponent(labelcadastro2)
+                    .addComponent(jLabel5)
+                    .addComponent(jLabel4)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(30, 30, 30)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(31, 31, 31)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addComponent(botaoFecharcaixa, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(29, 29, 29)
-                                .addComponent(botaofechar, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(botaoFecharcaixa, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(botaoAbrirCaixa)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(botaofechar))
                             .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addGap(60, 60, 60)
                                 .addComponent(label6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(29, 29, 29)
-                                .addComponent(calendario, javax.swing.GroupLayout.PREFERRED_SIZE, 204, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(0, 33, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel2Layout.createSequentialGroup()
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jLabel6, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(labelcadastro2, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel5, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel4, javax.swing.GroupLayout.Alignment.LEADING))
-                        .addGap(12, 12, 12)))
-                .addContainerGap(16, Short.MAX_VALUE))
+                                .addGap(22, 22, 22)
+                                .addComponent(calendario, javax.swing.GroupLayout.PREFERRED_SIZE, 204, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addComponent(jScrollPane3, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 923, Short.MAX_VALUE)
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.LEADING))
+                    .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 923, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(26, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -345,21 +366,23 @@ public class Caixa extends javax.swing.JInternalFrame {
                 .addGap(0, 0, 0)
                 .addComponent(jPanel9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                             .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                            .addComponent(jPanel4, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(30, 30, 30)
                         .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(botaoFecharcaixa)
-                            .addComponent(botaofechar))
-                        .addGap(32, 32, 32)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(label6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(calendario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addComponent(botaofechar)
+                            .addComponent(botaoAbrirCaixa))
+                        .addGap(24, 24, 24)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(calendario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(label6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -396,11 +419,13 @@ public class Caixa extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_botaofecharActionPerformed
 
     private void botaofecharMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_botaofecharMouseExited
-        // TODO add your handling code here:
+        getBotaofechar().setBackground(new Color(255, 255, 255));// Fundo Quando Solta
+        getBotaofechar().setForeground(new Color(0, 102, 102));// letra quando solta cor
     }//GEN-LAST:event_botaofecharMouseExited
 
     private void botaofecharMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_botaofecharMouseEntered
-        // TODO add your handling code here:
+        getBotaofechar().setBackground(new Color(204, 204, 204)); // cor de fundo quando aparece
+        getBotaofechar().setForeground(new Color(255, 255, 255)); // cor da letra quando aparece
     }//GEN-LAST:event_botaofecharMouseEntered
 
     private void botaoFecharcaixaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoFecharcaixaActionPerformed
@@ -408,15 +433,32 @@ public class Caixa extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_botaoFecharcaixaActionPerformed
 
     private void botaoFecharcaixaMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_botaoFecharcaixaMouseExited
-        // TODO add your handling code here:
+        getBotaoFecharcaixa().setBackground(new Color(255, 255, 255));// Fundo Quando Solta
+        getBotaoFecharcaixa().setForeground(new Color(0, 102, 102));// letra quando solta cor
     }//GEN-LAST:event_botaoFecharcaixaMouseExited
 
     private void botaoFecharcaixaMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_botaoFecharcaixaMouseEntered
-        // TODO add your handling code here:
+        getBotaoFecharcaixa().setBackground(new Color(204, 204, 204)); // cor de fundo quando aparece
+        getBotaoFecharcaixa().setForeground(new Color(255, 255, 255)); // cor da letra quando aparece
     }//GEN-LAST:event_botaoFecharcaixaMouseEntered
+
+    private void botaoAbrirCaixaMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_botaoAbrirCaixaMouseEntered
+        getBotaoAbrirCaixa().setBackground(new Color(204, 204, 204)); // cor de fundo quando aparece
+        getBotaoAbrirCaixa().setForeground(new Color(255, 255, 255)); // cor da letra quando aparece
+    }//GEN-LAST:event_botaoAbrirCaixaMouseEntered
+
+    private void botaoAbrirCaixaMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_botaoAbrirCaixaMouseExited
+        getBotaoAbrirCaixa().setBackground(new Color(255, 255, 255));// Fundo Quando Solta
+        getBotaoAbrirCaixa().setForeground(new Color(0, 102, 102));// letra quando solta cor
+    }//GEN-LAST:event_botaoAbrirCaixaMouseExited
+
+    private void botaoAbrirCaixaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoAbrirCaixaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_botaoAbrirCaixaActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton botaoAbrirCaixa;
     private javax.swing.JButton botaoFecharcaixa;
     private javax.swing.JButton botaofechar;
     private com.toedter.calendar.JDateChooser calendario;
@@ -779,7 +821,18 @@ public class Caixa extends javax.swing.JInternalFrame {
         this.txttotal = txttotal;
     }
 
- 
-   
+    /**
+     * @return the botaoAbrirCaixa
+     */
+    public javax.swing.JButton getBotaoAbrirCaixa() {
+        return botaoAbrirCaixa;
+    }
+
+    /**
+     * @param botaoAbrirCaixa the botaoAbrirCaixa to set
+     */
+    public void setBotaoAbrirCaixa(javax.swing.JButton botaoAbrirCaixa) {
+        this.botaoAbrirCaixa = botaoAbrirCaixa;
+    }
 
 }

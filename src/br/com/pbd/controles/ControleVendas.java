@@ -191,13 +191,7 @@ public class ControleVendas extends MouseAdapter implements ActionListener, KeyL
         if (e.getSource() == pagamento.getBotaocomfirmar()) {
             salvarVenda();
             saidaProduto(itensVenda);
-            try {
-                exibirNota(venda.getId());
-            } catch (SQLException ex) {
-                Logger.getLogger(ControleVendas.class.getName()).log(Level.SEVERE, null, ex);
-            } catch (JRException ex) {
-                Logger.getLogger(ControleVendas.class.getName()).log(Level.SEVERE, null, ex);
-            }
+
             zeraValores();
 
         }
@@ -235,19 +229,34 @@ public class ControleVendas extends MouseAdapter implements ActionListener, KeyL
 
             java.util.Date dt = new java.util.Date();
             caixa = new DaoCaixa().BuscarCaixa(ConverterData(dt));
-            venda.setForma_pagamento(forma);
-            venda.setItemVendas(itensVenda);
-            venda.setFuncionario(ControleLogin.getFuncionario());
-            venda.setCaixa(buscarCaixar());
-            venda.setDesconto(desconto);
-            venda.setSubtotal(subtotal);
-            venda.setTotal(valortotal);
-            double soma = caixa.getValor_fechamento() + venda.getTotal();
-            caixa.setValor_fechamento(soma);
-            Date d = new Date(System.currentTimeMillis());
-            venda.setData_venda(d);
-            fachada.salvar(venda);
-            fachada.salvar(caixa);
+            if (caixa.isStatus()) {
+                venda.setForma_pagamento(forma);
+                venda.setItemVendas(itensVenda);
+                venda.setFuncionario(ControleLogin.getFuncionario());
+                venda.setCaixa(buscarCaixar());
+                venda.setDesconto(desconto);
+                venda.setSubtotal(subtotal);
+                venda.setTotal(valortotal);
+                double soma = caixa.getValor_fechamento() + venda.getTotal();
+                caixa.setValor_fechamento(soma);
+                Date d = new Date(System.currentTimeMillis());
+                venda.setData_venda(d);
+                fachada.salvar(venda);
+                fachada.salvar(caixa);
+                pagamento.setVisible(false);
+                try {
+                    exibirNota(venda.getId());
+                } catch (SQLException ex) {
+                    Logger.getLogger(ControleVendas.class.getName()).log(Level.SEVERE, null, ex);
+                } catch (JRException ex) {
+                    Logger.getLogger(ControleVendas.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            } else {
+                mensagens.mensagens("Caixa Fechado", "info");
+                zeraValores();
+                pagamento.setVisible(false);
+
+            }
             pagamento.setVisible(false);
         } catch (java.lang.IllegalStateException n) {
             mensagens.mensagens("voce precisa preencher todos os campos!", "advertencia");
